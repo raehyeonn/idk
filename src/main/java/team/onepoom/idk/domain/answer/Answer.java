@@ -12,12 +12,14 @@ import jakarta.persistence.Table;
 import java.time.ZonedDateTime;
 import lombok.AccessLevel;
 import lombok.Builder;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 import team.onepoom.idk.domain.BaseEntity;
 import team.onepoom.idk.domain.Provider;
 import team.onepoom.idk.domain.Question;
 import team.onepoom.idk.domain.user.User;
 
+@Getter
 @Table(name = "answers")
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
