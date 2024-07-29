@@ -17,6 +17,7 @@ import lombok.NoArgsConstructor;
 import team.onepoom.idk.domain.BaseEntity;
 import team.onepoom.idk.domain.Provider;
 import team.onepoom.idk.domain.Question;
+import team.onepoom.idk.domain.user.Role;
 import team.onepoom.idk.domain.user.User;
 
 @Getter
@@ -63,10 +64,11 @@ public class Answer extends BaseEntity {
         this.isSelected = true;
     }
 
-//    게시글 상태변경
-//    public void hide(Provider provider) {
-//        if(!provider.roles().contains(Role.ADMIN)) throw new RuntimeException("Forbidden");
-//    }
+    //신고
+    public void report(Provider provider) {
+        if(!provider.roles().contains(Role.ADMIN)) throw new RuntimeException("Forbidden");
+        reportedAt = ZonedDateTime.now();
+    }
 
     //질문작성자 체크
     public boolean isOwner(Provider provider) {
