@@ -16,7 +16,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import team.onepoom.idk.domain.BaseEntity;
 import team.onepoom.idk.domain.Provider;
-import team.onepoom.idk.domain.Question;
+import team.onepoom.idk.domain.question.Question;
 import team.onepoom.idk.domain.user.Role;
 import team.onepoom.idk.domain.user.User;
 

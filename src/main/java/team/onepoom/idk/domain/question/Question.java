@@ -45,6 +45,10 @@ public class Question extends BaseEntity {
 
     private ZonedDateTime reportedAt;
 
+    public Question(Long id) {
+        this.id = id;
+    }
+
     //생성 메서드
     @Builder
     public Question(User writer, String title, String content) {
