@@ -1,0 +1,30 @@
+### Create Answer
+POST http://localhost:8080/api/answers
+Authorization: Basic gusckd57@naver.com as661899
+Content-Type: application/json
+
+{
+  "questionId": 1,
+  "content": "이것은 테스트 답변입니다."
+}
+
+### Modify Answer
+PUT http://localhost:8080/api/answers/2
+Authorization: Basic gusckd57@naver.com as661899
+Content-Type: application/json
+
+{
+  "content": "이것은 수정된 답변입니다."
+}
+
+### Delete Answer
+DELETE http://localhost:8080/api/answers/1
+Authorization: Basic gusckd57@naver.com as661899
+
+### Select Answer
+POST http://localhost:8080/api/answers/1/selections
+Authorization: Basic gusckd57@naver.com as661899
+
+### Get My Answers
+GET http://localhost:8080/api/answers/me?page=0&size=10&sort=createdAt,desc
+Authorization: Basic gusckd57@naver.com as661899
