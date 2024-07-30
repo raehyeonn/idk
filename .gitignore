@@ -46,3 +46,6 @@ out/
 application*.yml
 application*.yaml
 application*.properties
+
+# Spring Boot application sql
+data.sql
