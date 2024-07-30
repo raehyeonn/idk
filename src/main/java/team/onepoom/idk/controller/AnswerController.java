@@ -29,39 +29,38 @@ public class AnswerController {
 
     private final AnswerService answerService;
 
-
     @PostMapping
-    @RolesAllowed({"ROLE_USER"})
+    @RolesAllowed({"USER"})
     @ResponseStatus(HttpStatus.CREATED)
     public void create(@AuthenticationPrincipal Provider provider,
         @RequestBody CreateAnswerRequest request) {
         answerService.create(request.toEntity(provider));
     }
 
-    @RolesAllowed({"ROLE_USER", "ROLE_ADMIN"})
+    @RolesAllowed({"USER", "ADMIN"})
     @PutMapping("{id}")
     public void modify(@AuthenticationPrincipal Provider provider, @Positive @PathVariable long id,
         @RequestBody ModifyAnswerRequest request) {
         answerService.modify(provider, id, request);
     }
 
-    @RolesAllowed({"ROLE_USER"})
+    @RolesAllowed({"USER"})
     @DeleteMapping("{id}")
     public void delete(@AuthenticationPrincipal Provider provider, @PathVariable long id) {
         answerService.delete(provider, id);
     }
 
-    @RolesAllowed({"ROLE_USER"})
+    @RolesAllowed({"USER"})
     @PostMapping("{id}/selections")
     public void select(@AuthenticationPrincipal Provider provider, @PathVariable long id) {
         answerService.select(provider, id);
     }
 
-    @RolesAllowed({"ROLE_USER", "ROLE_ADMIN"})
+    @RolesAllowed({"USER", "ADMIN"})
     @GetMapping("/me")
     public Page<MyAnswerResponse> getMyAnswers(@AuthenticationPrincipal Provider provider,
         Pageable pageable) {
-        return answerService.getMyAnswers(provider, pageable).map(MyAnswerResponse::from);
+        return answerService.getMyAnswers(provider, pageable);
     }
 
 }

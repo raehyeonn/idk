@@ -11,6 +11,7 @@ import team.onepoom.idk.domain.Provider;
 import team.onepoom.idk.domain.answer.Answer;
 import team.onepoom.idk.domain.answer.dto.CreateAnswerRequest;
 import team.onepoom.idk.domain.answer.dto.ModifyAnswerRequest;
+import team.onepoom.idk.domain.answer.dto.MyAnswerResponse;
 import team.onepoom.idk.repository.AnswerRepository;
 
 @Service
@@ -18,12 +19,13 @@ import team.onepoom.idk.repository.AnswerRepository;
 public class AnswerService {
 
     private final AnswerRepository answerRepository;
+    private final QuestionService questionService;
 
     @Transactional
     public void create(Answer answer) {
         // 질문 존재하는지 확인하는 로직 필요
         long questionId = answer.getQuestion().getId();
-        //TODO:questionService.findQuestion();
+        questionService.findQuestion(questionId);
         answerRepository.save(answer);
     }
 
@@ -54,14 +56,16 @@ public class AnswerService {
         return answer;
     }
 
+    @Transactional
     public void select(Provider provider, long id) {
         Answer answer = findAnswer(id);
-        //provider, questionid 비교로직
+        answer.getQuestion().checkQuestionOwner(provider);
+        answer.getQuestion().answerSelected();
         answer.select();
-        //question. select 설정
     }
 
-    public Page<Answer> getMyAnswers(Provider provider, Pageable pageable) {
-        return answerRepository.findByWriter_Id(provider.id(), pageable);
+    @Transactional(readOnly = true)
+    public Page<MyAnswerResponse> getMyAnswers(Provider provider, Pageable pageable) {
+        return answerRepository.findByWriter_Id(provider.id(), pageable).map(MyAnswerResponse::from);
     }
 }
