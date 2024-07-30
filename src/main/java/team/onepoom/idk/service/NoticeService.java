@@ -1,15 +1,16 @@
 package team.onepoom.idk.service;
 
-import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import team.onepoom.idk.domain.notice.Notice;
-import team.onepoom.idk.domain.notice.NoticeNotFoundException;
+import team.onepoom.idk.common.exception.NoticeNotFoundException;
+import team.onepoom.idk.domain.notice.dto.DetailNoticeResponse;
 import team.onepoom.idk.repository.NoticeRepository;
 
+@Transactional(readOnly = true)
 @Service
 public class NoticeService {
     private final NoticeRepository noticeRepository;
@@ -40,12 +41,10 @@ public class NoticeService {
         noticeRepository.delete(deleteNotice);
     }
 
-    @Transactional
-    public Notice showDetailNotice(Long id) {
-        return noticeRepository.findById(id).orElseThrow(NoticeNotFoundException::new);
+    public DetailNoticeResponse showDetailNotice(Long id) {
+        return DetailNoticeResponse.from(noticeRepository.findById(id).orElseThrow(NoticeNotFoundException::new));
     }
 
-    @Transactional
     public Page<Notice> showAllNotice(Pageable pageable) {
         return noticeRepository.findAll(pageable);
     }

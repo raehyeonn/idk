@@ -1,9 +1,11 @@
 package team.onepoom.idk.controller;
 
+import jakarta.annotation.security.RolesAllowed;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -21,7 +23,7 @@ import team.onepoom.idk.domain.notice.dto.UpdateNoticeRequest;
 import team.onepoom.idk.service.NoticeService;
 
 @RestController
-@RequestMapping("/notices")
+@RequestMapping("/api/notices")
 public class NoticeController {
     private final NoticeService noticeService;
 
@@ -32,27 +34,32 @@ public class NoticeController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public void createNotice(Provider provider, @RequestBody CreateNoticeRequest createNoticeRequest) {
+    @RolesAllowed({"ADMIN"})
+    public void createNotice(@AuthenticationPrincipal Provider provider, @RequestBody CreateNoticeRequest createNoticeRequest) {
         noticeService.create(createNoticeRequest.toEntity(provider));
     }
 
-    @PutMapping("{/id}")
+    @PutMapping("/{id}")
+    @RolesAllowed({"ADMIN"})
     public void updateNotice(@PathVariable long id, @RequestBody UpdateNoticeRequest updateNoticeRequest) {
         noticeService.update(id, updateNoticeRequest.toEntity());
     }
 
-    @DeleteMapping("{/id}")
+    @DeleteMapping("/{id}")
+    @RolesAllowed({"ADMIN"})
     public void deleteNotice(@PathVariable long id) {
         noticeService.delete(id);
     }
 
-    @GetMapping("{/id}")
+    @GetMapping("/{id}")
     public DetailNoticeResponse detailNotice(@PathVariable long id) {
-        return DetailNoticeResponse.from(noticeService.showDetailNotice(id));
+        return noticeService.showDetailNotice(id);
     }
 
     @GetMapping
     public Page<AllNoticeResponse> allNotice(Pageable pageable) {
         return noticeService.showAllNotice(pageable).map(AllNoticeResponse::from);
     }
+
+
 }

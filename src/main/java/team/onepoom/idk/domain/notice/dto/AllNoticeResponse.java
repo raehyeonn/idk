@@ -1,9 +1,15 @@
 package team.onepoom.idk.domain.notice.dto;
 
 import java.time.ZonedDateTime;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 import team.onepoom.idk.domain.Provider;
 import team.onepoom.idk.domain.notice.Notice;
 
+// 필수 2개 꼭 붙여라..
+@Getter
+@NoArgsConstructor
 public class AllNoticeResponse {
     private Provider writer;
     private String title;
