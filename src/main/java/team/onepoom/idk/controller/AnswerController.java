@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import team.onepoom.idk.domain.Provider;
 import team.onepoom.idk.domain.answer.dto.CreateAnswerRequest;
+import team.onepoom.idk.domain.answer.dto.ModifyAnswerRequest;
 import team.onepoom.idk.domain.answer.dto.MyAnswerResponse;
 import team.onepoom.idk.service.AnswerService;
 
@@ -40,7 +41,7 @@ public class AnswerController {
     @RolesAllowed({"ROLE_USER", "ROLE_ADMIN"})
     @PutMapping("{id}")
     public void modify(@AuthenticationPrincipal Provider provider, @Positive @PathVariable long id,
-        @RequestBody CreateAnswerRequest request) {
+        @RequestBody ModifyAnswerRequest request) {
         answerService.modify(provider, id, request);
     }
 
