@@ -66,15 +66,16 @@ public class Answer extends BaseEntity {
 
     //신고
     public void report(Provider provider) {
-        if(!provider.roles().contains(Role.ADMIN)) throw new RuntimeException("Forbidden");
+        if (!provider.roles().contains(Role.ADMIN)) {
+            throw new RuntimeException("Forbidden");
+        }
         reportedAt = ZonedDateTime.now();
     }
 
     //질문작성자 체크
-    public boolean isOwner(Provider provider) {
+    public void checkAnswerOwner(Provider provider) {
         if (provider.id() != writer.getId()) {
             throw new RuntimeException("Forbidden");
         }
-        return true;
     }
 }
