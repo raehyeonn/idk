@@ -9,15 +9,18 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import team.onepoom.idk.domain.BaseEntity;
+import team.onepoom.idk.domain.Provider;
 import team.onepoom.idk.domain.user.User;
 
 @Entity
 @Table(name = "notices")
 @NoArgsConstructor
 @Getter
+@AllArgsConstructor
 public class Notice extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -36,10 +39,21 @@ public class Notice extends BaseEntity {
     @Column(nullable = false)
     private int views;
 
-    public Notice(User writer, String title, String content) {
-        this.writer = writer;
+    public Notice(Provider provider, String title, String content) {
+        this.writer = new User(provider.id());
         this.title = title;
         this.content = content;
         this.views = 0;
     }
+
+    public Notice(String title, String content) {
+        this.title = title;
+        this.content = content;
+    }
+
+    public void update(String title, String content) {
+        this.title = title;
+        this.content = content;
+    }
+
 }
