@@ -14,6 +14,7 @@ import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import team.onepoom.idk.common.exception.AnswerForbiddenException;
 import team.onepoom.idk.domain.BaseEntity;
 import team.onepoom.idk.domain.Provider;
 import team.onepoom.idk.domain.question.Question;
@@ -67,7 +68,7 @@ public class Answer extends BaseEntity {
     //신고
     public void report(Provider provider) {
         if (!provider.roles().contains(Role.ADMIN)) {
-            throw new RuntimeException("Forbidden");
+            throw new AnswerForbiddenException(provider.id());
         }
         reportedAt = ZonedDateTime.now();
     }
@@ -75,7 +76,7 @@ public class Answer extends BaseEntity {
     //질문작성자 체크
     public void checkAnswerOwner(Provider provider) {
         if (provider.id() != writer.getId()) {
-            throw new RuntimeException("Forbidden");
+            throw new AnswerForbiddenException(provider.id());
         }
     }
 }

@@ -5,9 +5,12 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import team.onepoom.idk.common.exception.AnswerNotFoundException;
+import team.onepoom.idk.common.exception.SelectedAnswerForbiddenException;
 import team.onepoom.idk.domain.Provider;
 import team.onepoom.idk.domain.answer.Answer;
 import team.onepoom.idk.domain.answer.dto.CreateAnswerRequest;
+import team.onepoom.idk.domain.answer.dto.ModifyAnswerRequest;
 import team.onepoom.idk.repository.AnswerRepository;
 
 @Service
@@ -25,7 +28,7 @@ public class AnswerService {
     }
 
     @Transactional
-    public void modify(Provider provider, long id, CreateAnswerRequest request) {
+    public void modify(Provider provider, long id, ModifyAnswerRequest request) {
         Answer answer = getValidatedAnswer(id, provider);
         answer.updateAnswer(request.content());
     }
@@ -39,14 +42,14 @@ public class AnswerService {
     @Transactional(readOnly = true)
     public Answer findAnswer(long id) {
         return answerRepository.findById(id)
-            .orElseThrow(() -> new RuntimeException("Answer not found"));
+            .orElseThrow(() -> new AnswerNotFoundException(id));
     }
 
     private Answer getValidatedAnswer(long id, Provider provider) {
         Answer answer = findAnswer(id);
         answer.checkAnswerOwner(provider);
         if (answer.isSelected()) {
-            throw new RuntimeException("채택된 답변은 수정 또는 삭제할 수 없습니다.");
+            throw new SelectedAnswerForbiddenException();
         }
         return answer;
     }
