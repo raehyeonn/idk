@@ -21,7 +21,7 @@ POST localhost:8080/api/users/2/roles
 Authorization: Basic qwer@gmail.com qweqwe123
 
 ### unsuspend user
-POST localhost:8080/api/users/2/roles
+DELETE localhost:8080/api/users/2/roles
 Authorization: Basic qwer@gmail.com qweqwe123
 
 ### suspend user (에러 떠야합니다) --> 결과 403
