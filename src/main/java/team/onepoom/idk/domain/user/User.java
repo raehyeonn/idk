@@ -24,7 +24,10 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import team.onepoom.idk.common.exception.ConflictException;
 import team.onepoom.idk.common.exception.UserForbiddenException;
+import team.onepoom.idk.common.exception.UserRoleConflictException;
+import team.onepoom.idk.common.exception.UserRoleNotFoundException;
 import team.onepoom.idk.domain.BaseEntity;
 import team.onepoom.idk.domain.Provider;
 
@@ -65,7 +68,6 @@ public class User extends BaseEntity implements UserDetails {
     }
 
     public Provider toProvider() {
-//        nickname = deletedAt == null ? nickname : "탈퇴한 사용자 입니다.";
         return new Provider(id, email, nickname,
             roles.stream().map(UserRole::toRole).collect(Collectors.toSet()));
     }
@@ -81,42 +83,34 @@ public class User extends BaseEntity implements UserDetails {
         return email;
     }
 
-    //탈퇴 시점의 시간
-    public void delete(Provider provider) {
-        checkValidUser(provider);
+    public void delete() {
         this.deletedAt = ZonedDateTime.now();
-        //모든 권한 제거, anonymous 만 등록
         this.roles.clear();
-        this.roles.add(new UserRole(this, ANONYMOUS));
+        addRole(Role.ANONYMOUS);
     }
 
-    //정지 시키기
-    public void suspend(Provider provider) {
-        checkAdmin(provider);
-        deleteUserRole(USER);
-        this.roles.add(new UserRole(this, SUSPEND));
+    public void suspend() {
+        removeRole(Role.USER);
+        addRole(Role.SUSPEND);
     }
 
-    //정지 풀기
-    public void unsuspend(Provider provider) {
-        checkAdmin(provider);
-        deleteUserRole(SUSPEND);
-        this.roles.add(new UserRole(this, USER));
+    public void unsuspend() {
+        removeRole(Role.SUSPEND);
+        addRole(Role.USER);
     }
 
-    private void checkAdmin(Provider provider) {
-        if (!provider.roles().contains(ADMIN)) {
-            throw new UserForbiddenException();
-        }
+    private void addRole(Role role) {
+        if(hasRole(role)) throw new UserRoleConflictException(role);
+        this.roles.add(new UserRole(this, role));
     }
 
-    private void deleteUserRole(Role role) {
+    private void removeRole(Role role) {
+        if(!hasRole(role)) throw new UserRoleNotFoundException(role);
         this.roles.removeIf(userRole -> userRole.toRole() == role);
     }
 
-    private void checkValidUser(Provider provider) {
-        if (provider.id() != this.id) {
-            throw new UserForbiddenException();
-        }
+    private boolean hasRole(Role role) {
+        return this.roles.stream().anyMatch(userRole -> userRole.toRole() == role);
     }
+
 }
