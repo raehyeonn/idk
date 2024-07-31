@@ -1,5 +1,6 @@
 package team.onepoom.idk.controller;
 
+import jakarta.annotation.security.RolesAllowed;
 import lombok.RequiredArgsConstructor;
 
 import org.springframework.data.domain.Page;
@@ -22,25 +23,30 @@ import team.onepoom.idk.service.UserService;
 @RequestMapping("api/users")
 @RequiredArgsConstructor
 public class UserController {
+
     private final UserService userService;
+
     @PostMapping("join")
     public void join(@RequestBody CreateUserRequest request) {
         userService.create(request.toDomain());
     }
 
+    @RolesAllowed({"USER"})
     @DeleteMapping("me")
     public void resign(@AuthenticationPrincipal Provider provider) {
         userService.delete(provider);
     }
 
+    @RolesAllowed({"ADMIN"})
     @PostMapping("{id}/roles")
     public void suspend(@AuthenticationPrincipal Provider provider, @PathVariable long id) {
         userService.suspend(provider, id);
     }
 
+    @RolesAllowed({"ADMIN"})
     @DeleteMapping("{id}/roles")
-    public void unsuspend(Provider provider, @PathVariable long id) {
-
+    public void unsuspend(@AuthenticationPrincipal Provider provider, @PathVariable long id) {
+        userService.unsuspend(provider, id);
     }
 
     @GetMapping
@@ -48,6 +54,7 @@ public class UserController {
         return null;
     }
 
+    @RolesAllowed({"USER"})
     @GetMapping("me")
     public Provider getMe(@AuthenticationPrincipal Provider provider) {
         return provider;

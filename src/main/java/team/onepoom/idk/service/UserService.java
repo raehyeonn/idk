@@ -40,7 +40,13 @@ public class UserService implements UserDetailsService {
             .orElseThrow(() -> new team.onepoom.idk.common.exception.UserNotFoundException(id));
     }
 
+    @Transactional
     public void suspend(Provider provider, long id) {
+        findUser(id).suspend(provider);
+    }
 
+    @Transactional
+    public void unsuspend(Provider provider, long id) {
+        findUser(id).unsuspend(provider);
     }
 }

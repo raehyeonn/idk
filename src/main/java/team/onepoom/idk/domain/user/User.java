@@ -82,37 +82,40 @@ public class User extends BaseEntity implements UserDetails {
     }
 
     //탈퇴 시점의 시간
-    public void delete(Provider provider){
+    public void delete(Provider provider) {
         checkValidUser(provider);
         this.deletedAt = ZonedDateTime.now();
-        deleteUserRole(USER);
+        //모든 권한 제거, anonymous 만 등록
+        this.roles.clear();
         this.roles.add(new UserRole(this, ANONYMOUS));
     }
 
     //정지 시키기
-    public void suspend(Provider provider){
+    public void suspend(Provider provider) {
         checkAdmin(provider);
         deleteUserRole(USER);
         this.roles.add(new UserRole(this, SUSPEND));
     }
 
     //정지 풀기
-    public void unsuspend(Provider provider){
+    public void unsuspend(Provider provider) {
         checkAdmin(provider);
         deleteUserRole(SUSPEND);
         this.roles.add(new UserRole(this, USER));
     }
 
     private void checkAdmin(Provider provider) {
-        if(!provider.roles().contains(ADMIN)) throw new UserForbiddenException();
+        if (!provider.roles().contains(ADMIN)) {
+            throw new UserForbiddenException();
+        }
     }
 
     private void deleteUserRole(Role role) {
-        this.roles.removeIf(userRole -> userRole.toRole()==role);
+        this.roles.removeIf(userRole -> userRole.toRole() == role);
     }
 
     private void checkValidUser(Provider provider) {
-        if(provider.id()!=this.id) {
+        if (provider.id() != this.id) {
             throw new UserForbiddenException();
         }
     }
