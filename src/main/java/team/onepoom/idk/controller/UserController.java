@@ -29,13 +29,13 @@ public class UserController {
     }
 
     @DeleteMapping("me")
-    public void resign(Provider provider) {
-
+    public void resign(@AuthenticationPrincipal Provider provider) {
+        userService.delete(provider);
     }
 
     @PostMapping("{id}/roles")
-    public void suspend(Provider provider, @PathVariable long id) {
-
+    public void suspend(@AuthenticationPrincipal Provider provider, @PathVariable long id) {
+        userService.suspend(provider, id);
     }
 
     @DeleteMapping("{id}/roles")
@@ -47,6 +47,7 @@ public class UserController {
     public Page<FindUserResponse> findUsers(Provider provider, Pageable pageable) {
         return null;
     }
+
     @GetMapping("me")
     public Provider getMe(@AuthenticationPrincipal Provider provider) {
         return provider;
