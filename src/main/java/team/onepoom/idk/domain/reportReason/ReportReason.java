@@ -23,8 +23,7 @@ public class ReportReason {
     @Column(nullable = false)
     private String content;
 
-    public ReportReason(Long id) {
-        this.id = id;
+    public ReportReason(String content) {
+        this.content = content;
     }
 }
-
