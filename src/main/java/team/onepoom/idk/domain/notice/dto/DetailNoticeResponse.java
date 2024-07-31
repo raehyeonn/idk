@@ -1,14 +1,13 @@
 package team.onepoom.idk.domain.notice.dto;
 
 import java.time.ZonedDateTime;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import team.onepoom.idk.domain.Provider;
 import team.onepoom.idk.domain.notice.Notice;
 
-@NoArgsConstructor
 @Getter
+@NoArgsConstructor
 public class DetailNoticeResponse {
     private long id;
     private Provider writer;

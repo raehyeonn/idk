@@ -39,6 +39,7 @@ public class Notice extends BaseEntity {
     @Column(nullable = false)
     private int views;
 
+    // 공지사항 생성
     public Notice(Provider provider, String title, String content) {
         this.writer = new User(provider.id());
         this.title = title;
@@ -46,6 +47,7 @@ public class Notice extends BaseEntity {
         this.views = 0;
     }
 
+    // 공지사항 수정
     public Notice(String title, String content) {
         this.title = title;
         this.content = content;
@@ -56,4 +58,8 @@ public class Notice extends BaseEntity {
         this.content = content;
     }
 
+    // 조회수 증가
+    public void incrementViews() {
+        this.views++;
+    }
 }

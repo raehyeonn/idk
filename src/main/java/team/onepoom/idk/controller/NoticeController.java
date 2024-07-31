@@ -3,7 +3,9 @@ package team.onepoom.idk.controller;
 import jakarta.annotation.security.RolesAllowed;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -19,6 +21,7 @@ import team.onepoom.idk.domain.Provider;
 import team.onepoom.idk.domain.notice.dto.AllNoticeResponse;
 import team.onepoom.idk.domain.notice.dto.CreateNoticeRequest;
 import team.onepoom.idk.domain.notice.dto.DetailNoticeResponse;
+import team.onepoom.idk.domain.notice.dto.FiveNoticeResponse;
 import team.onepoom.idk.domain.notice.dto.UpdateNoticeRequest;
 import team.onepoom.idk.service.NoticeService;
 
@@ -58,8 +61,11 @@ public class NoticeController {
 
     @GetMapping
     public Page<AllNoticeResponse> allNotice(Pageable pageable) {
-        return noticeService.showAllNotice(pageable).map(AllNoticeResponse::from);
+        return noticeService.showAllNotice(pageable);
     }
 
-
+    @GetMapping("/five")
+    public Page<FiveNoticeResponse> fiveNotice(Pageable pageable) {
+        return noticeService.getFiveNotices(PageRequest.of(0, 5, Sort.by(Sort.Direction.DESC, "createdAt")));
+    }
 }
