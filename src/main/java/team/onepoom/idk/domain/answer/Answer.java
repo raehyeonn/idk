@@ -48,6 +48,10 @@ public class Answer extends BaseEntity {
     @Column(nullable = false)
     private boolean isSelected;
 
+    public Answer(Long id) {
+        this.id = id;
+    }
+
     @Builder
     Answer(Provider provider, long questionId, String content) {
         this.writer = new User(provider.id());
@@ -78,5 +82,9 @@ public class Answer extends BaseEntity {
         if (provider.id() != writer.getId()) {
             throw new AnswerForbiddenException(provider.id());
         }
+    }
+
+    public void reported() {
+        this.reportedAt = ZonedDateTime.now();
     }
 }

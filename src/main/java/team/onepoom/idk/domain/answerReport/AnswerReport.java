@@ -13,6 +13,8 @@ import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import team.onepoom.idk.domain.BaseEntity;
+import team.onepoom.idk.domain.Provider;
 import team.onepoom.idk.domain.answer.Answer;
 import team.onepoom.idk.domain.reportReason.ReportReason;
 import team.onepoom.idk.domain.user.User;
@@ -21,7 +23,7 @@ import team.onepoom.idk.domain.user.User;
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Table(name = "answer_reports")
-public class AnswerReport {
+public class AnswerReport extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -39,13 +41,16 @@ public class AnswerReport {
     @JoinColumn(name = "answer_id")
     private Answer answer;
 
-    private ZonedDateTime completedAt;
+    private ZonedDateTime completedAt; // 처리 일자
 
     //생성 메서드
-    @Builder
-    public AnswerReport(User reporter, ReportReason reportReason, Answer answer) {
-        this.reporter = reporter;
+    public AnswerReport(Provider provider, ReportReason reportReason, Answer answer) {
+        this.reporter = new User(provider.id());
         this.reportReason = reportReason;
         this.answer = answer;
+    }
+
+    public void completed() {
+        this.completedAt = ZonedDateTime.now();
     }
 }
