@@ -1,7 +1,9 @@
 package team.onepoom.idk.service;
 
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -51,8 +53,8 @@ public class NoticeService {
         return noticePage.map(AllNoticeResponse::from);
     }
 
-    public Page<FiveNoticeResponse> getFiveNotices(Pageable pageable) {
-        Page<Notice> noticePage = noticeRepository.findAllByOrderByCreatedAtDesc(pageable);
-        return noticePage.map(FiveNoticeResponse::from);
+    public List<FiveNoticeResponse> getFiveNotices(Pageable pageable) {
+        List<Notice> noticePage = noticeRepository.findAllByOrderByCreatedAtDesc(pageable);
+        return noticePage.stream().map(FiveNoticeResponse::from).toList();
     }
 }

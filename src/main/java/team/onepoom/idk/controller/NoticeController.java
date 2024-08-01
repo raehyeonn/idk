@@ -1,6 +1,7 @@
 package team.onepoom.idk.controller;
 
 import jakarta.annotation.security.RolesAllowed;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -28,6 +29,7 @@ import team.onepoom.idk.service.NoticeService;
 @RestController
 @RequestMapping("/api/notices")
 public class NoticeController {
+
     private final NoticeService noticeService;
 
     @Autowired
@@ -38,13 +40,15 @@ public class NoticeController {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     @RolesAllowed({"ADMIN"})
-    public void createNotice(@AuthenticationPrincipal Provider provider, @RequestBody CreateNoticeRequest createNoticeRequest) {
+    public void createNotice(@AuthenticationPrincipal Provider provider,
+        @RequestBody CreateNoticeRequest createNoticeRequest) {
         noticeService.create(createNoticeRequest.toEntity(provider));
     }
 
     @PutMapping("/{id}")
     @RolesAllowed({"ADMIN"})
-    public void updateNotice(@PathVariable long id, @RequestBody UpdateNoticeRequest updateNoticeRequest) {
+    public void updateNotice(@PathVariable long id,
+        @RequestBody UpdateNoticeRequest updateNoticeRequest) {
         noticeService.update(id, updateNoticeRequest.toEntity());
     }
 
@@ -65,7 +69,8 @@ public class NoticeController {
     }
 
     @GetMapping("/five")
-    public Page<FiveNoticeResponse> fiveNotice(Pageable pageable) {
-        return noticeService.getFiveNotices(PageRequest.of(0, 5, Sort.by(Sort.Direction.DESC, "createdAt")));
+    public List<FiveNoticeResponse> fiveNotice() {
+        return noticeService.getFiveNotices(
+            PageRequest.of(0, 5, Sort.by(Sort.Direction.DESC, "createdAt")));
     }
 }
