@@ -28,8 +28,8 @@ public class GetQuestionResponse {
     public GetQuestionResponse(Question question, Long answerCount) {
         this.id = question.getId();
         this.writer = new WriterDTO(question.getWriter());
-        this.title = question.getTitle();
-        this.content = question.getContent();
+        this.title = question.getReportedAt() == null ? question.getTitle() : "신고된 게시물입니다." ;
+        this.content = question.getReportedAt() == null ? question.getContent() : "신고된 게시물입니다.";
         this.selected = question.isSelected();
         this.answerCount = answerCount;
         this.views = question.getViews();
