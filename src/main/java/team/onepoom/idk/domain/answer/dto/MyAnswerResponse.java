@@ -5,10 +5,11 @@ import java.time.ZonedDateTime;
 import team.onepoom.idk.domain.Provider;
 import team.onepoom.idk.domain.answer.Answer;
 import team.onepoom.idk.domain.question.Question;
+import team.onepoom.idk.domain.user.dto.WriterDTO;
 
 public record MyAnswerResponse(
     long questionId,
-    Provider writer,
+    WriterDTO writer,
     String title,
     String content,
     @JsonProperty("isSelected") boolean selected,
@@ -22,12 +23,11 @@ public record MyAnswerResponse(
         Question question = answer.getQuestion();
         return new MyAnswerResponse(
             question.getId(),
-            question.getWriter().toProvider(),
+            new WriterDTO(question.getWriter()),
             question.getTitle(),
             question.getContent(),
             question.isSelected(),
-            0,
-//            question.getAnswers().size(), 추후 적용
+            question.getAnswers().size(),
             AnswerResponse.from(answer),
             question.getCreatedAt(),
             answer.getUpdatedAt()

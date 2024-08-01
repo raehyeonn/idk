@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import team.onepoom.idk.common.exception.AnswerNotFoundException;
 import team.onepoom.idk.common.exception.SelectedAnswerForbiddenException;
+import team.onepoom.idk.common.exception.SelectionConflictException;
 import team.onepoom.idk.domain.Provider;
 import team.onepoom.idk.domain.answer.Answer;
 import team.onepoom.idk.domain.answer.dto.ModifyAnswerRequest;
@@ -57,6 +58,9 @@ public class AnswerService {
     @Transactional
     public void select(Provider provider, long id) {
         Answer answer = findAnswer(id);
+        //중복 채택 제한
+        if(answer.getQuestion().isSelected()) throw new SelectionConflictException();
+        //채택 권한 확인
         answer.getQuestion().checkQuestionOwner(provider);
         answer.getQuestion().answerSelected();
         answer.select();
