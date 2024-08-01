@@ -1,21 +1,21 @@
-### Create QuestionReports
-POST localhost:8080/api/questions/reports
+### Create AnswerReports
+POST localhost:8080/api/reports/answers
 Authorization: Basic asdf@gmail.com qweqwe123
 content-type: application/json
 
 {
-  "questionId": 5,
-  "reportReasonId": 1
+  "reportReasonId": 1,
+  "answerId": 2
 }
 
 ### get question reports
-GET localhost:8080/api/questions/reports
+GET localhost:8080/api/reports/answers
 Authorization: Basic qwer@gmail.com qweqwe123
 
 ### handle question reports
-POST localhost:8080/api/questions/reports/handle/3
+POST localhost:8080/api/reports/answers/2
 Authorization: Basic qwer@gmail.com qweqwe123
 
 ### delete question reports
-DELETE localhost:8080/api/questions/reports/1
+DELETE localhost:8080/api/reports/answers/1
 Authorization: Basic qwer@gmail.com qweqwe123
