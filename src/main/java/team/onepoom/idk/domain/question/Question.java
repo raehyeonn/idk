@@ -86,4 +86,8 @@ public class Question extends BaseEntity {
     public void validateDeleteCondition(Question question) {
         //질문의 답변이 존재할 시 Exception
     }
+
+    public void reported() {
+        this.reportedAt = ZonedDateTime.now();
+    }
 }

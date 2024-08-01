@@ -50,5 +50,9 @@ public class QuestionReport extends BaseEntity {
         this.reportReason = reportReason;
         this.question = question;
     }
+
+    public void completed(){
+        this.completedAt = ZonedDateTime.now();
+    }
 }
 
