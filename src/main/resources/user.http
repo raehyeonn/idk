@@ -12,3 +12,18 @@ content-type: application/json
 GET localhost:8080/api/users/me
 Authorization: Basic gusckd57@naver.com as661899
 
+### delete me
+DELETE localhost:8080/api/users/me
+Authorization: Basic gusckd57@naver.com as661899
+
+### suspend user
+POST localhost:8080/api/users/2/roles
+Authorization: Basic qwer@gmail.com qweqwe123
+
+### unsuspend user
+DELETE localhost:8080/api/users/2/roles
+Authorization: Basic qwer@gmail.com qweqwe123
+
+### suspend user (에러 떠야합니다) --> 결과 403
+POST localhost:8080/api/users/1/roles
+Authorization: Basic gusckd57@naver.com as661899
