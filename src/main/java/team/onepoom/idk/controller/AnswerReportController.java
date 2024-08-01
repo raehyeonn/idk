@@ -20,7 +20,7 @@ import team.onepoom.idk.domain.answerReport.dto.GetAnswerReportResponse;
 import team.onepoom.idk.service.AnswerReportService;
 
 @RestController
-@RequestMapping("/api/reports/answer")
+@RequestMapping("/api/reports/answers")
 public class AnswerReportController {
     private final AnswerReportService answerReportService;
 
