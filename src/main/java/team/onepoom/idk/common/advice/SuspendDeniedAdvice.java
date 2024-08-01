@@ -1,7 +1,5 @@
 package team.onepoom.idk.common.advice;
 
-import java.util.Optional;
-import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.springframework.security.core.Authentication;
