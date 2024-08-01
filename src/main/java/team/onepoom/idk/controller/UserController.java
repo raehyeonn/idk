@@ -39,14 +39,14 @@ public class UserController {
 
     @RolesAllowed({"ADMIN"})
     @PostMapping("{id}/roles")
-    public void suspend(@AuthenticationPrincipal Provider provider, @PathVariable long id) {
-        userService.suspend(provider, id);
+    public void suspend(@PathVariable long id) {
+        userService.suspend(id);
     }
 
     @RolesAllowed({"ADMIN"})
     @DeleteMapping("{id}/roles")
-    public void unsuspend(@AuthenticationPrincipal Provider provider, @PathVariable long id) {
-        userService.unsuspend(provider, id);
+    public void unsuspend(@PathVariable long id) {
+        userService.unsuspend(id);
     }
 
     @GetMapping
