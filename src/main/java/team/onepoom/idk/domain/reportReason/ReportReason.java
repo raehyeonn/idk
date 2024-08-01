@@ -26,4 +26,8 @@ public class ReportReason {
     public ReportReason(String content) {
         this.content = content;
     }
+
+    public ReportReason(Long id) {
+        this.id = id;
+    }
 }

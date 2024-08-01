@@ -100,4 +100,8 @@ public class Question extends BaseEntity {
     public void increaseViews() {
         this.views += 1;
     }
+
+    public void reported() {
+        this.reportedAt = ZonedDateTime.now();
+    }
 }

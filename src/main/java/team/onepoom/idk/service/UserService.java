@@ -41,27 +41,25 @@ public class UserService implements UserDetailsService {
         findUser(provider.id()).delete();
     }
 
-    private User findUser(long id) {
+    public User findUser(long id) {
         return repository.findById(id)
             .orElseThrow(() -> new UserNotFoundException(id));
     }
 
     //관리자 -> 유저 정지
     @Transactional
-    public void suspend(Provider provider, long id) {
-        checkAdminAuthority(provider);
+    public void suspend(long id) {
         findUser(id).suspend();
     }
 
     //관리자 -> 유저 정지해제
     @Transactional
-    public void unsuspend(Provider provider, long id) {
-        checkAdminAuthority(provider);
+    public void unsuspend(long id) {
         findUser(id).unsuspend();
     }
 
     //관리자 권한 확인
-    private void checkAdminAuthority(Provider provider) {
+    public void checkAdminAuthority(Provider provider) {
         if (!provider.roles().contains(ADMIN)) {
             throw new UserForbiddenException();
         }
