@@ -9,7 +9,6 @@ import team.onepoom.idk.common.exception.AnswerNotFoundException;
 import team.onepoom.idk.common.exception.SelectedAnswerForbiddenException;
 import team.onepoom.idk.domain.Provider;
 import team.onepoom.idk.domain.answer.Answer;
-import team.onepoom.idk.domain.answer.dto.CreateAnswerRequest;
 import team.onepoom.idk.domain.answer.dto.ModifyAnswerRequest;
 import team.onepoom.idk.domain.answer.dto.MyAnswerResponse;
 import team.onepoom.idk.repository.AnswerRepository;
@@ -23,7 +22,6 @@ public class AnswerService {
 
     @Transactional
     public void create(Answer answer) {
-        // 질문 존재하는지 확인하는 로직 필요
         long questionId = answer.getQuestion().getId();
         questionService.findQuestion(questionId);
         answerRepository.save(answer);
