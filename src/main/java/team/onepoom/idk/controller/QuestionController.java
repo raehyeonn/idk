@@ -49,6 +49,7 @@ class QuestionController {
         questionService.deleteQuestion(provider, id);
     }
 
+    @SuspendDenied
     @GetMapping("/{id}")
     public GetQuestionDetailResponse getQuestion(@PathVariable long id) {
         return questionService.getOneQuestion(id);
