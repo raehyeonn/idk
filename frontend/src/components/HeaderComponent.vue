@@ -23,8 +23,8 @@ const goMy = function () {
 
 const logout = function () {
     sessionStorage.removeItem('authHeader');
-    sessionStorage.removeItem('roles');
-    // window.location.reload();
+    sessionStorage.removeItem('userId');
+    sessionStorage.setItem('roles', 'ANONYMOUS');
     isAuthenticated.value = false;
 }
 
