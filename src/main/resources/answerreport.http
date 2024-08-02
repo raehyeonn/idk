@@ -5,17 +5,17 @@ content-type: application/json
 
 {
   "reportReasonId": 1,
-  "answerId": 2
+  "answerId": 1
 }
 
-### get question reports
+### GET AnswerReports
 GET localhost:8080/api/reports/answers
 Authorization: Basic qwer@gmail.com qweqwe123
 
-### handle question reports
-POST localhost:8080/api/reports/answers/2
+### handle AnswerReports
+POST localhost:8080/api/reports/answers/1
 Authorization: Basic qwer@gmail.com qweqwe123
 
-### delete question reports
+### delete AnswerReports
 DELETE localhost:8080/api/reports/answers/1
 Authorization: Basic qwer@gmail.com qweqwe123

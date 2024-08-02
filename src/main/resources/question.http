@@ -21,7 +21,7 @@ content-type: application/json
 }
 
 ### Get Detail Question
-GET localhost:8080/api/questions/3
+GET localhost:8080/api/questions/1
 Authorization: Basic gusckd57@naver.com as661899
 
 ### Get Questions

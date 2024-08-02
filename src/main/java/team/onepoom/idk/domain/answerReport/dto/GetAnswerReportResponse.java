@@ -11,6 +11,7 @@ import team.onepoom.idk.domain.answerReport.AnswerReport;
 @NoArgsConstructor
 @AllArgsConstructor
 public class GetAnswerReportResponse {
+    private long answerReportId;
     private long answerId;
     private Provider writer;
     private String content;
@@ -20,6 +21,7 @@ public class GetAnswerReportResponse {
     public static GetAnswerReportResponse from(AnswerReport answerReport) {
         GetAnswerReportResponse dto = new GetAnswerReportResponse();
 
+        dto.answerReportId = answerReport.getId();
         dto.answerId = answerReport.getAnswer().getId();
         dto.writer = answerReport.getAnswer().getWriter().toProvider();
         dto.content = answerReport.getAnswer().getContent();

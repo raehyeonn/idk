@@ -25,7 +25,11 @@ public class AnswerDTO {
     public AnswerDTO(Answer answer) {
         this.id = answer.getId();
         this.writer = new WriterDTO(answer.getWriter());
-        this.content = answer.getContent();
+        if(answer.getReportedAt() != null) {
+            this.content = "처리된 답변입니다.";
+        } else {
+            this.content = answer.getContent();
+        }
         this.isSelected = answer.isSelected();
         this.createdAt = answer.getCreatedAt();
         this.updatedAt = answer.getUpdatedAt();

@@ -6,9 +6,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import team.onepoom.idk.common.exception.AnswerReportNotFoundException;
-import team.onepoom.idk.domain.Provider;
 import team.onepoom.idk.domain.answerReport.AnswerReport;
-import team.onepoom.idk.domain.answerReport.dto.CreateAnswerReportRequest;
 import team.onepoom.idk.domain.answerReport.dto.GetAnswerReportResponse;
 import team.onepoom.idk.repository.AnswerReportRepository;
 
@@ -16,14 +14,11 @@ import team.onepoom.idk.repository.AnswerReportRepository;
 @Transactional(readOnly = true)
 public class AnswerReportService {
     private final AnswerReportRepository answerReportRepository;
-    private final AnswerService answerService;
     private final UserService userService;
 
     @Autowired
-    public AnswerReportService(AnswerReportRepository answerReportRepository, AnswerService answerService,
-        UserService userService) {
+    public AnswerReportService(AnswerReportRepository answerReportRepository, UserService userService) {
         this.answerReportRepository = answerReportRepository;
-        this.answerService = answerService;
         this.userService = userService;
     }
 
