@@ -31,69 +31,56 @@ onMounted(async () => {
   <div class="question-wrap" v-if="question">
     <div>
       <h2>궁금해요</h2>
-    <div v-if="question">
-        <p>작성자: {{question.writer.nickName}}</p>
-        <p>제목: {{question.title}}</p>
-        <pre>내용: {{question.content}}</pre>
-        <hr>
-        <ul v-for="answer in question.answers" :key="answer.id">
-            <li>
-                <div>
-                    <p>{{answer.writer.nickName}}</p>
-                    <pre>{{answer.content}}</pre>
-                </div>
-            </li>
-        </ul>
-    </div>
-    <div class="question-top">
-      <img src="@/assets/Q.png" alt="">
-      <div class="contents-text">
-        <span class="contents-title">{{ question.title }}</span>
-        <div>
+      <div class="question-top">
+        <img src="@/assets/Q.png" alt="">
+        <div class="contents-text">
+          <span class="contents-title">{{ question.title }}</span>
+          <div>
           <span class="question-info">
             {{ question.writer.nickName }} | {{ formatCreatedAt }} | 조회수 {{ question.views }}
           </span>
+          </div>
         </div>
       </div>
-    </div>
-    <p class="question-contents">{{ question.content }}</p>
-    <div class="question-button">
-      <button class="go-edit-button">수정하기</button>
-      <button class="blue-button">삭제하기</button>
-    </div>
-    <hr>
-
-    <div class="answer-top">
-      <img src="@/assets/A.png" alt="">
-      <div class="contents-text">
-        <span class="contents-title">총 {{ question.answerCount }}개의 답변이 작성되었습니다.</span>
+      <p class="question-contents">{{ question.content }}</p>
+      <div class="question-button">
+        <button class="go-edit-button">수정하기</button>
+        <button class="blue-button">삭제하기</button>
       </div>
-    </div>
-    <div class="write-wrap">
-      <div class="write-answer">
+      <hr>
+
+      <div class="answer-top">
+        <img src="@/assets/A.png" alt="">
+        <div class="contents-text">
+          <span class="contents-title">총 {{ question.answerCount }}개의 답변이 작성되었습니다.</span>
+        </div>
+      </div>
+      <div class="write-wrap">
+        <div class="write-answer">
         <textarea name="answer-content" v-model="content" placeholder="내용을 입력해 주세요."
                   maxlength="1000"></textarea>
-        <div>
-          <strong>저작권 등 다른 사람의 권리를 침해하거나 명예를 훼손하는 게시물은 관리자에 의해 제재를 받으실 수 있습니다.</strong>
-          <button class="blue-button">등록하기</button>
+          <div>
+            <strong>저작권 등 다른 사람의 권리를 침해하거나 명예를 훼손하는 게시물은 관리자에 의해 제재를 받으실 수 있습니다.</strong>
+            <button class="blue-button">등록하기</button>
+          </div>
         </div>
       </div>
-    </div>
-    <ul v-for="answer in question.answers" :key="answer.id">
-      <li :class="{ 'selected-answer': answer.selected }">
-        <div class="contents-text">
-          <div>
+      <ul v-for="answer in question.answers" :key="answer.id">
+        <li :class="{ 'selected-answer': answer.selected }">
+          <div class="contents-text">
+            <div>
             <span class="answer-info">
             {{ answer.writer.nickName }} | {{ formatDate(answer.createdAt) }}
           </span>
-            <button class="report-button" aria-label="신고하기">
-              <img src="@/assets/report.png" alt="신고 아이콘">
-            </button>
+              <button class="report-button" aria-label="신고하기">
+                <img src="@/assets/report.png" alt="신고 아이콘">
+              </button>
+            </div>
+            <p class="answer-contents">{{ answer.content }}</p>
           </div>
-          <p class="answer-contents">{{ answer.content }}</p>
-        </div>
-      </li>
-    </ul>
+        </li>
+      </ul>
+    </div>
   </div>
 </template>
 
