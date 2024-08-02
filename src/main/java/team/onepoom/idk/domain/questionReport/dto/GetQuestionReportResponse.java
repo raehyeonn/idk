@@ -6,6 +6,7 @@ import team.onepoom.idk.domain.question.Question;
 import team.onepoom.idk.domain.questionReport.QuestionReport;
 
 public record GetQuestionReportResponse(
+    long questionReportId,
     long questionId,
     String title,
     String content,
@@ -19,7 +20,7 @@ public record GetQuestionReportResponse(
     public static GetQuestionReportResponse from(QuestionReport questionReport) {
         Question question = questionReport.getQuestion();
         return new GetQuestionReportResponse(
-            question.getId(), question.getTitle(), question.getContent(),
+            questionReport.getId(), question.getId(), question.getTitle(), question.getContent(),
             question.getWriter().toProvider(),
             questionReport.getCreatedAt(), questionReport.getReportReason().getContent()
         );

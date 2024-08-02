@@ -10,9 +10,9 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import java.time.ZonedDateTime;
 import lombok.AccessLevel;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import team.onepoom.idk.common.exception.CompletedReportException;
 import team.onepoom.idk.domain.BaseEntity;
 import team.onepoom.idk.domain.Provider;
 import team.onepoom.idk.domain.answer.Answer;
@@ -51,6 +51,9 @@ public class AnswerReport extends BaseEntity {
     }
 
     public void completed() {
+        if(this.completedAt != null) {
+            throw new CompletedReportException();
+        }
         this.completedAt = ZonedDateTime.now();
     }
 }
