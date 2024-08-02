@@ -1,6 +1,7 @@
 package team.onepoom.idk.controller;
 
 import jakarta.annotation.security.RolesAllowed;
+import jakarta.validation.Valid;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -19,6 +20,7 @@ import team.onepoom.idk.service.ReportReasonService;
 @RestController
 @RequestMapping("/api/report-reasons")
 public class ReportReasonController {
+
     private final ReportReasonService reportReasonService;
 
     @Autowired
@@ -29,7 +31,8 @@ public class ReportReasonController {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     @RolesAllowed({"ADMIN"})
-    public void createReportReason(@RequestBody CreateReportReasonRequest createReportReasonRequest) {
+    public void createReportReason(
+        @Valid @RequestBody CreateReportReasonRequest createReportReasonRequest) {
         reportReasonService.create(createReportReasonRequest.toEntity());
     }
 

@@ -1,6 +1,7 @@
 package team.onepoom.idk.controller;
 
 import jakarta.annotation.security.RolesAllowed;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 
 import org.springframework.data.domain.Page;
@@ -27,7 +28,7 @@ public class UserController {
     private final UserService userService;
 
     @PostMapping("join")
-    public void join(@RequestBody CreateUserRequest request) {
+    public void join(@Valid @RequestBody CreateUserRequest request) {
         userService.create(request.toDomain());
     }
 
