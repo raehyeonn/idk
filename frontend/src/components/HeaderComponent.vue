@@ -23,7 +23,9 @@ const goMy = function () {
 
 const logout = function () {
     sessionStorage.removeItem('authHeader');
-    window.location.reload();
+    sessionStorage.removeItem('roles');
+    // window.location.reload();
+    isAuthenticated.value = false;
 }
 
 const goQuestions = function () {
