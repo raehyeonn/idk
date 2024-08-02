@@ -1,6 +1,7 @@
 package team.onepoom.idk.controller;
 
 import jakarta.annotation.security.RolesAllowed;
+import jakarta.validation.Valid;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -49,7 +50,7 @@ public class NoticeController {
     @PutMapping("/{id}")
     @RolesAllowed({"ADMIN"})
     public void updateNotice(@PathVariable long id,
-        @RequestBody UpdateNoticeRequest updateNoticeRequest) {
+        @Valid @RequestBody UpdateNoticeRequest updateNoticeRequest) {
         noticeService.update(id, updateNoticeRequest.toEntity());
     }
 
