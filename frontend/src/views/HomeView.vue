@@ -8,12 +8,28 @@ const route = useRoute();
 const questions = ref([]);
 let isLoading = ref(false);
 
+// 날짜 yyyy-MM-dd 형식 출력
+const formatDate = (dateString) => {
+  if (!dateString) return '';
+  const date = new Date(dateString);
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, '0');
+  const day = String(date.getDate()).padStart(2, '0');
+  return `${year}-${month}-${day}`;
+};
+
 const goQuestion = function (id) {
     router.push(`/question/${id}`);
 }
-const goNotice = function () {
-    router.push("/notice/1");
+
+const goNoticeList = function () {
+    router.push("/notice");
 }
+
+const goNoticeDetail = function (id) {
+  router.push(`/notice/${id}`);
+}
+
 const getQuestions = async function (query) {
     if (isLoading.value) return;
     isLoading.value = true;
@@ -41,25 +57,163 @@ watch(async () => route.query.search, (newTitle) => {
 </script>
 
 <template>
-    <div>
-        메인 페이지(첫 화면)
-        <button @click="goNotice()">공지사항 상세</button>
-        <div>
-            <ul v-for="question in questions" :key="question.id">
-                <li>
-                    <div @click="goQuestion(question.id)">
-                        {{question.writer.nickName}}
-                        {{question.title}}
-                        {{question.content}}
-                    </div>
-                </li>
-            </ul>
-        </div>
+
+  <div class="wrap">
+
+    <div class="question">
+      <div class="question-write">
+        <span>지금 이 순간 게시글</span>
+        <a class="move" @click="goNoticeList()">질문하러 가기 ></a>
+      </div>
+
+      <ul class="question-list" v-for="question in questions" :key="question.id">
+        <li>
+          <div class="question-wrap">
+            <div class="question-writer">
+              <span>{{question.writer.nickName}}</span>
+              <span>{{formatDate(question.createdAt)}} | 조회수 {{question.views}}</span>
+            </div>
+            <div class="question-title">
+              <span class="move" @click="goQuestion(question.id)">{{question.title}}</span>
+              <span>{{question.title}}</span>
+            </div>
+            <hr>
+          </div>
+        </li>
+      </ul>
     </div>
+
+    <div class="notice">
+      <div class="notice-more">
+        <p>공지사항</p>
+        <a class="move" @click="goNoticeList()">더보기 ></a>
+      </div>
+
+      <ul class="notice-list" v-for="notice in notices" :key="notice.id">
+        <li>
+          <div class="notice-wrap">
+            <img src="@/assets/yellow-dot.svg" alt="" class="dot">
+            <div>
+              <p class="notice-title" @click="goNoticeDetail(notice.id)">{{notice.title}}</p>
+              <p class="notice-date">{{formatDate(notice.createdAt)}}</p>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div>
+
+  </div>
+
 </template>
 
 <style scoped>
-li div {
-    cursor: pointer;
+.move {
+  cursor: pointer;
+}
+
+.wrap {
+  display: flex;
+  justify-content: space-between;
+
+  width: 100%;
+}
+
+.question {
+  width: 65%;
+}
+
+.notice {
+  width: 30%;
+}
+
+.question-write {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  height: 50px;
+  margin-bottom: 15px;
+  padding: 0 15px;
+  background-color: #333A73;
+  border: none;
+  border-radius: 15px;
+
+  font-family: 'Nexon Bold', sans-serif;
+  color: #FFFFFF;
+  font-size: 20px;
+}
+
+.question-list {
+  list-style: none;
+  margin-bottom: 15px;
+}
+
+.question-writer {
+  display: flex;
+  justify-content: space-between;
+
+  padding: 0 15px 15px 15px;
+}
+
+.question-writer span {
+  font-family: 'Nexon Light', sans-serif;
+  font-size: 15px;
+}
+
+.question-title {
+  display: flex;
+  justify-content: space-between;
+
+  padding: 0 15px 15px 15px;
+}
+
+.question-title span {
+  font-family: 'Nexon Regular', sans-serif;
+  font-size: 20px;
+}
+
+.notice-more {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  height: 50px;
+  margin-bottom: 15px;
+  padding: 0 15px;
+  background-color: #FBA834;
+  border: none;
+  border-radius: 15px;
+
+  font-family: 'Nexon Bold', sans-serif;
+  color: #000000;
+  font-size: 20px;
+}
+
+.notice-list {
+  list-style: none;
+  margin-bottom: 15px;
+}
+
+.notice-wrap {
+  display: flex;
+
+}
+
+.dot {
+  width: 10px;
+  height: 10px;
+  margin: 10px 10px 0 0;
+}
+
+.notice-title {
+  cursor: pointer;
+  margin: 0 0 10px 0;
+  font-family: 'Nexon Regular', sans-serif;
+  font-size: 20px;
+}
+
+.notice-date {
+  font-family: 'Nexon Light', sans-serif;
+  font-size: 15px;
 }
 </style>
