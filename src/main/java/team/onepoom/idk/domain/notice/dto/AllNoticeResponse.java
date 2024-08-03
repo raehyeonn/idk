@@ -10,6 +10,7 @@ import team.onepoom.idk.domain.notice.Notice;
 @Getter
 @NoArgsConstructor
 public class AllNoticeResponse {
+    private long id;
     private Provider writer;
     private String title;
     private ZonedDateTime createdAt;
@@ -17,6 +18,7 @@ public class AllNoticeResponse {
 
     public static AllNoticeResponse from(Notice notice) {
         AllNoticeResponse dto = new AllNoticeResponse();
+        dto.id = notice.getId();
         dto.writer = notice.getWriter().toProvider();
         dto.title = notice.getTitle();
         dto.createdAt = notice.getCreatedAt();
