@@ -1,4 +1,5 @@
 ### GET request to example server
 GET localhost:8080/api/notices/five
 
-###
+###### GET all notices
+GET localhost:8080/api/notices
