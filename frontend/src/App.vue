@@ -77,7 +77,7 @@ button {
 
 .body {
     flex: 1;
-    width: 70vw;
+    width: 60vw;
     height: auto;
     display: flex;
     justify-content: center;
