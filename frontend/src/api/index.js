@@ -104,6 +104,15 @@ const getReportedAnswerAPI = function () {
     return authInstance.get(`/api/reports/answers`)
 }
 
+const handleReportedAnswerAPI = function (id) {
+    return authInstance.post(`api/reports/answers/${id}`)
+}
+
+const deleteReportedAnswerAPI = function (id) {
+    return authInstance.delete(`api/reports/answers/${id}`)
+}
+
+
 
 
 
@@ -127,5 +136,7 @@ export {
     getReportedQuestionAPI,
     getReportedAnswerAPI,
     handleReportedQuestionAPI,
-    deleteReportedQuestionAPI
+    deleteReportedQuestionAPI,
+    handleReportedAnswerAPI,
+    deleteReportedAnswerAPI
 }

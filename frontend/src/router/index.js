@@ -12,6 +12,7 @@ import NoticeWriteView from "@/views/NoticeWriteView.vue";
 import NoticeEditView from "@/views/NoticeEditView.vue";
 import QuestionEditView from "@/views/QuestionEditView.vue";
 import ReportedQuestionsView from "@/views/ReportedQuestionsView.vue";
+import ReportedAnswersView from "@/views/ReportedAnswersView.vue";
 
 const routes = [
     {
@@ -78,6 +79,11 @@ const routes = [
         path: "/report/question",
         name: "ReportedQuestion",
         component: ReportedQuestionsView
+    },
+    {
+        path: "/report/answer",
+        name: "ReportedAnswer",
+        component: ReportedAnswersView
     },
 ]
 

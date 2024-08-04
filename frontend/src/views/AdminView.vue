@@ -3,7 +3,7 @@
 import {ref} from 'vue';
 import NoticeWriteView from "@/views/NoticeWriteView.vue";
 import ReportedQuestionsView from "@/views/ReportedQuestionsView.vue";
-// import ReportedAnswersView from "@/views/ReportedAnswersView.vue";
+import ReportedAnswersView from "@/views/ReportedAnswersView.vue";
 
 const selectedCategory = ref('notice'); // 'notice', 'questions', 'answers'
 
