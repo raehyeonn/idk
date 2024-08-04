@@ -13,6 +13,7 @@ import NoticeEditView from "@/views/NoticeEditView.vue";
 import QuestionEditView from "@/views/QuestionEditView.vue";
 import ReportedQuestionsView from "@/views/ReportedQuestionsView.vue";
 import ReportedAnswersView from "@/views/ReportedAnswersView.vue";
+import ReportQuestionModal from "@/views/ReportQuestionModal.vue";
 
 const routes = [
     {
@@ -84,6 +85,11 @@ const routes = [
         path: "/report/answer",
         name: "ReportedAnswer",
         component: ReportedAnswersView
+    },
+    {
+        path: "/report/question/modal",
+        name: "ReportQuestionModal",
+        component: ReportQuestionModal
     },
 ]
 
