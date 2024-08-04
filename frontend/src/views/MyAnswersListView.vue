@@ -3,7 +3,7 @@
 </script>
 
 <template>
-<div class="wrap">
+  <div class="wrap">
 
     <div class="my-page-left">
       <p class="my-nickname">홍길동</p>
@@ -30,21 +30,24 @@
 
 
     <div class="my-page-right">
-      <p class="my-question-list">나의 질문 목록(15)</p>
+      <p class="my-answer-list">나의 답변 목록(4)</p>
 
-      <ul class="question-list">
+      <ul class="answer-list">
         <li>
 
-          <div class="question-wrap">
+          <div class="answer-wrap">
 
-            <div class="question-information-top">
-              <span>나의 질문</span>
-              <span>2024-08-04 | 조회수 80</span>
+            <div class="question-information">
+              <p class="question-information-top">질문</p>
+              <p class="question-information-bottom">오리 종류 알려주세요!!!!!!!!</p>
             </div>
 
-            <div class="question-information-bottom">
-              <span class="move">제목</span>
-              <span>n개의 답변</span>
+            <div class="answer-information">
+              <div class="answer-information-left">
+                <p class="answer-information-top">나의 답변</p>
+                <p class="answer-information-bottom">오리 종류는 집오리, 청둥오리 등이 있습니다.</p>
+              </div>
+              <div class="answer-selected"><span>채택</span></div>
             </div>
 
           </div>
@@ -53,13 +56,19 @@
       </ul>
 
     </div>
-</div>
+  </div>
 </template>
 
 <style scoped>
 .wrap {
   display: flex;
   width: 100%;
+}
+
+.wrap * {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
 }
 
 .my-page-left {
@@ -107,6 +116,7 @@
 
   font-family: 'Nexon Regular', sans-serif;
   font-size: 20px;
+  color: #C5CCD2;
 }
 
 .my-answers {
@@ -116,7 +126,6 @@
 
   font-family: 'Nexon Regular', sans-serif;
   font-size: 20px;
-  color: #C5CCD2;
 }
 
 .my-page-right {
@@ -124,7 +133,7 @@
   padding-left: 15px;
 }
 
-.my-question-list {
+.my-answer-list {
   margin-bottom: 15px;
   padding: 0 15px 30px 15px;
   border-bottom: 3px solid #000000;
@@ -133,39 +142,67 @@
   font-size: 40px;
 }
 
-.question-list {
-  padding: 0 15px;
+.answer-list {
   list-style: none;
+  margin-bottom: 15px;
+  padding: 0 15px;
   border-bottom: 1px solid #C5CCD2;
+}
+
+.answer-list li {
   margin-bottom: 15px;
 }
 
-.question-list li {
-  margin-bottom: 15px;
+.question-information {
+  margin-bottom: 20px;
 }
 
 .question-information-top {
-  display: flex;
-  justify-content: space-between;
   margin-bottom: 10px;
-}
 
-.question-information-bottom {
-  display: flex;
-  justify-content: space-between;
-}
-
-.question-information-top span {
-  font-family: 'Nexon Regular', sans-serif;
+  font-family: 'Nexon Light', sans-serif;
   font-size: 15px;
 }
 
-.question-information-bottom span {
+.question-information-bottom {
+  cursor: pointer;
+
   font-family: 'Nexon Regular', sans-serif;
   font-size: 20px;
 }
 
-.move {
+.answer-information {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.answer-information-top {
+  margin-bottom: 10px;
+
+  font-family: 'Nexon Light', sans-serif;
+  font-size: 15px;
+}
+
+.answer-information-bottom {
   cursor: pointer;
+  font-family: 'Nexon Regular', sans-serif;
+  font-size: 20px;
+}
+
+.answer-selected {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 70px;
+  height: 45px;
+  border-radius: 50px;
+  background-color: #FBA834;
+}
+
+.answer-selected span {
+  font-family: 'Nexon Regular', sans-serif;
+  font-size: 20px;
 }
 </style>
