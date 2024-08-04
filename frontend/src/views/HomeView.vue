@@ -152,7 +152,7 @@ watch(async () => route.query.search, (newTitle) => {
   display: flex;
   justify-content: space-between;
 
-  padding: 0 15px 15px 15px;
+  padding: 0 15px 10px 15px;
 }
 
 .question-writer span {
