@@ -16,7 +16,7 @@ const fetchReportReasons = async () => {
 }
 onMounted(() => {
   fetchReportReasons();
-});
+ });
 </script>
 
 <template>
