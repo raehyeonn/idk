@@ -74,7 +74,8 @@ const confirmDeleteAccount = async () => {
       sessionStorage.removeItem('userId');
       sessionStorage.setItem('roles', 'ANONYMOUS');
       // 홈페이지로 리다이렉트
-      router.push('/')
+      await router.push('/')
+      location.reload();
     } catch (error) {
       console.error("계정 삭제 실패:", error);
       alert("계정 삭제에 실패했습니다. 다시 시도해주세요.");
