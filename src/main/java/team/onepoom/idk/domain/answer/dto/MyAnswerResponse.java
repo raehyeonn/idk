@@ -24,8 +24,8 @@ public record MyAnswerResponse(
         return new MyAnswerResponse(
             question.getId(),
             new WriterDTO(question.getWriter()),
-            question.getTitle(),
-            question.getContent(),
+            question.getReportedAt() == null ? question.getTitle() : "신고된 게시물입니다.",
+            question.getReportedAt() == null ? question.getContent() : "신고된 게시물입니다.",
             question.isSelected(),
             question.getAnswers().size(),
             AnswerResponse.from(answer),
