@@ -134,12 +134,12 @@ li {
 }
 
 .reason {
-  font-family: 'Nexon Regular', sans-serif;
+  font-family: 'Nexon Medium', sans-serif;
   font-size: 20px;
 }
 
 .reason-delete {
-  font-family: 'Nexon Regular', sans-serif;
+  font-family: 'Nexon Medium', sans-serif;
   font-size: 20px;
   cursor: pointer;
 }

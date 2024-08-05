@@ -98,7 +98,7 @@
 }
 
 .count-questions, .count-answers {
-  font-family: 'Nexon Regular', sans-serif;
+  font-family: 'Nexon Medium', sans-serif;
   font-size: 20px;
   margin-bottom: 10px;
 }
@@ -114,7 +114,7 @@
   margin-bottom: 15px;
   list-style-position: inside;
 
-  font-family: 'Nexon Regular', sans-serif;
+  font-family: 'Nexon Medium', sans-serif;
   font-size: 20px;
   color: #C5CCD2;
 }
@@ -124,7 +124,7 @@
 
   list-style-position: inside;
 
-  font-family: 'Nexon Regular', sans-serif;
+  font-family: 'Nexon Medium', sans-serif;
   font-size: 20px;
 }
 
@@ -167,7 +167,7 @@
 .question-information-bottom {
   cursor: pointer;
 
-  font-family: 'Nexon Regular', sans-serif;
+  font-family: 'Nexon Medium', sans-serif;
   font-size: 20px;
 }
 
@@ -186,7 +186,7 @@
 
 .answer-information-bottom {
   cursor: pointer;
-  font-family: 'Nexon Regular', sans-serif;
+  font-family: 'Nexon Medium', sans-serif;
   font-size: 20px;
 }
 
@@ -202,7 +202,7 @@
 }
 
 .answer-selected span {
-  font-family: 'Nexon Regular', sans-serif;
+  font-family: 'Nexon Medium', sans-serif;
   font-size: 20px;
 }
 </style>

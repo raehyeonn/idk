@@ -208,7 +208,7 @@ onMounted(async () => {
 }
 
 .count-questions, .count-answers {
-  font-family: 'Nexon Regular', sans-serif;
+  font-family: 'Nexon Medium', sans-serif;
   font-size: 20px;
   margin-bottom: 10px;
 }
@@ -224,7 +224,7 @@ onMounted(async () => {
   margin-bottom: 15px;
   list-style-position: inside;
 
-  font-family: 'Nexon Regular', sans-serif;
+  font-family: 'Nexon Medium', sans-serif;
   font-size: 20px;
 }
 
@@ -233,7 +233,7 @@ onMounted(async () => {
 
   list-style-position: inside;
 
-  font-family: 'Nexon Regular', sans-serif;
+  font-family: 'Nexon Medium', sans-serif;
   font-size: 20px;
   color: #C5CCD2;
 }
@@ -280,7 +280,7 @@ onMounted(async () => {
 }
 
 .question-information-bottom p {
-  font-family: 'Nexon Regular', sans-serif;
+  font-family: 'Nexon Medium', sans-serif;
   font-size: 20px;
 }
 
@@ -332,7 +332,7 @@ onMounted(async () => {
 
 .answer-content, .answer-question-content {
     cursor: pointer;
-    font-family: 'Nexon Regular', sans-serif;
+    font-family: 'Nexon Medium', sans-serif;
     font-size: 20px;
 }
 
@@ -362,7 +362,7 @@ onMounted(async () => {
   margin-top: auto;
   padding: 5px 20px;
   border-radius: 5px;
-  font-family: 'Nexon Regular', sans-serif;
+  font-family: 'Nexon Medium', sans-serif;
   font-size: 16px;
   cursor: pointer;
   transition: background-color 0.3s;

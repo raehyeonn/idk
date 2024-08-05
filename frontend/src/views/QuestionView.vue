@@ -340,7 +340,7 @@ img {
 }
 
 .question-contents {
-  font-family: 'Nexon Regular', sans-serif;
+  font-family: 'Nexon Medium', sans-serif;
   font-size: 30px;
   color: #000000;
   margin-block: 80px;
