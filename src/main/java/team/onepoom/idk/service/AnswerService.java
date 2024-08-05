@@ -41,9 +41,10 @@ public class AnswerService {
     }
 
     @Transactional
-    public void modify(Provider provider, long id, ModifyAnswerRequest request) {
+    public AnswerDTO modify(Provider provider, long id, ModifyAnswerRequest request) {
         Answer answer = getValidatedAnswer(id, provider);
         answer.updateAnswer(request.content());
+        return new AnswerDTO(answer);
     }
 
     @Transactional

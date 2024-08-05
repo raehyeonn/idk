@@ -2,7 +2,6 @@ package team.onepoom.idk.domain.answer.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.time.ZonedDateTime;
-import team.onepoom.idk.domain.Provider;
 import team.onepoom.idk.domain.answer.Answer;
 import team.onepoom.idk.domain.question.Question;
 import team.onepoom.idk.domain.user.dto.WriterDTO;

@@ -43,9 +43,9 @@ public class AnswerController {
 
     @RolesAllowed({"USER", "ADMIN"})
     @PutMapping("{id}")
-    public void modify(@AuthenticationPrincipal Provider provider, @Positive @PathVariable long id,
+    public AnswerDTO modify(@AuthenticationPrincipal Provider provider, @Positive @PathVariable long id,
         @Valid @RequestBody ModifyAnswerRequest request) {
-        answerService.modify(provider, id, request);
+        return answerService.modify(provider, id, request);
     }
 
     @RolesAllowed({"USER"})
