@@ -22,12 +22,19 @@ public class HttpConfiguration {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http, DaoAuthenticationProvider provider)
         throws Exception {
-        AuthenticationManager authenticationManager = http.getSharedObject(AuthenticationManager.class);
-        http.csrf(AbstractHttpConfigurer::disable).cors(AbstractHttpConfigurer::disable)
-            .authorizeHttpRequests(api -> api.requestMatchers("/**").permitAll()).formLogin(
-                builder -> builder.usernameParameter("email").loginProcessingUrl("/api/users/login")
+        AuthenticationManager authenticationManager = http
+            .getSharedObject(AuthenticationManager.class);
+        http.csrf(AbstractHttpConfigurer::disable)
+            .cors(AbstractHttpConfigurer::disable)
+            .authorizeHttpRequests(api -> api
+                .requestMatchers("/**").permitAll())
+            .formLogin(
+                builder -> builder
+                    .usernameParameter("email")
+                    .loginProcessingUrl("/api/users/login")
                     .disable()).authenticationProvider(provider)
-            .headers(headers -> headers.frameOptions(FrameOptionsConfig::sameOrigin))
+            .headers(headers -> headers
+                .frameOptions(FrameOptionsConfig::sameOrigin))
             .with(new MyCustomDsl(), myCustomDsl -> {
                 try {
                     myCustomDsl.init(http);
@@ -48,12 +55,15 @@ public class HttpConfiguration {
     }
 
     public class MyCustomDsl extends AbstractHttpConfigurer<MyCustomDsl, HttpSecurity> {
+
         @Override
         public void configure(HttpSecurity http) {
-            AuthenticationManager authenticationManager = http.getSharedObject(AuthenticationManager.class);
+            AuthenticationManager authenticationManager = http.getSharedObject(
+                AuthenticationManager.class);
             http
                 .addFilterBefore(
-                    new ProviderBasicAuthenticationFilter(authenticationManager), BasicAuthenticationFilter.class);
+                    new ProviderBasicAuthenticationFilter(authenticationManager),
+                    BasicAuthenticationFilter.class);
         }
     }
 }
