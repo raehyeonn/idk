@@ -31,6 +31,13 @@ const isQuestionAuthor = computed(() => {
   return question.value && question.value.writer.id === currentUserId.value;
 });
 
+const userRoles = computed(() => {
+    const rolesString = sessionStorage.getItem('roles');
+    return rolesString ? rolesString.split(' ') : [];
+});
+
+const isAdmin = computed(() => userRoles.value.includes('ADMIN'));
+
 const openReportQuestionModal = () => {
   questionInfo.value = {
     writer: question.value.writer.nickName,
@@ -219,7 +226,7 @@ onMounted(async () => {
         </div>
       </div>
       <div class="write-wrap">
-        <div class="write-answer">
+        <div class="write-answer" v-if="!isAdmin">
         <textarea name="answer-content" v-model="content" placeholder="내용을 입력해 주세요."
                   maxlength="1000" @input="autoResize"></textarea>
           <div>
@@ -338,8 +345,10 @@ img {
   color: #000000;
   margin-block: 80px;
   margin-left: 40px;
-}
+    white-space: pre-wrap; /* 줄바꿈을 자동으로 처리 */
+    overflow-wrap: break-word; /* 긴 단어가 넘어가지 않도록 자동으로 줄바꿈 */
 
+}
 .question-button {
   display: flex;
   justify-content: end;
@@ -416,6 +425,8 @@ li {
   font-family: "NEXON Lv1 Gothic OTF", sans-serif;
   font-size: 30px;
   color: #000000;
+    white-space: pre-wrap; /* 줄바꿈을 자동으로 처리 */
+    overflow-wrap: break-word; /* 긴 단어가 넘어가지 않도록 자동으로 줄바꿈 */
 }
 
 .contents-text div {

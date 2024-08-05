@@ -88,6 +88,15 @@ button {
     display: flex;
     justify-content: center;
 }
+@media (max-width: 1024px) {
+    .body {
+        flex: 1;
+        width: 90vw;
+        height: auto;
+        display: flex;
+        justify-content: center;
+    }
+}
 </style>
 
 

@@ -8,6 +8,8 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import team.onepoom.idk.common.exception.DuplicateEmailException;
+import team.onepoom.idk.common.exception.DuplicateNicknameException;
 import team.onepoom.idk.common.exception.UserForbiddenException;
 import team.onepoom.idk.common.exception.UserNotFoundException;
 import team.onepoom.idk.domain.Provider;
@@ -25,6 +27,13 @@ public class UserService implements UserDetailsService {
 
     @Transactional
     public void create(CreateUser user) {
+        if (repository.existsUserByEmail(user.email())) {
+            throw new DuplicateEmailException();
+        }
+        if (repository.existsByNickname(user.nickname())) {
+            throw new DuplicateNicknameException();
+        }
+
         String encoded = encoder.encode(user.password());
         repository.save(new User(user.insertEncodedPassword(encoded)));
     }

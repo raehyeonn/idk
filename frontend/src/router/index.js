@@ -110,26 +110,6 @@ const router = createRouter({
     routes
 })
 
-// router.beforeEach(async (to, from, next) => {
-//     try {
-//         if (to.path === '/login' || to.path === '/' || to.path === '/signup') {
-//             next();
-//         } else if (to.path === '/admin') {
-//             const response = await axios.post('/api/users/login', null);
-//             if (response.data.roles[0] === "ADMIN") {
-//                 console.log(response.data.roles[0]);
-//                 next();
-//             } else {
-//                 next('/login');
-//             }
-//         } else {
-//             next('/');
-//         }
-//     } catch (error) {
-//         console.log(error);
-//     }
-//
-// })
 
 
 export default router;

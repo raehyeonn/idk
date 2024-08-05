@@ -118,6 +118,7 @@ pre {
     font-size: 25px;
     color: #000000;
     min-height: 400px;
+    white-space: pre-wrap;
 }
 .notice-button {
     display: flex;
