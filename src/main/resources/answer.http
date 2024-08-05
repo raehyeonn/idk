@@ -4,17 +4,18 @@ Authorization: Basic gusckd57@naver.com as661899
 Content-Type: application/json
 
 {
-  "questionId": 4,
+  "questionId": 1,
   "content": "이것은 테스트 답변입니다."
 }
 
 ### Modify Answer
-PUT http://localhost:8080/api/answers/1
-Authorization: Basic gusckd57@naver.com as661899
+POST http://localhost:8080/api/answers
+Authorization: Basic hyezuu@naver.com as661899
 Content-Type: application/json
 
 {
-  "content": "이것은 수정된 답변입니다."
+  "questionId": 2,
+  "content": "이것은 테스트 답변입니다."
 }
 
 ### Delete Answer

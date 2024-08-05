@@ -206,7 +206,7 @@ onMounted(async () => {
         </div>
       </div>
       <pre class="question-contents">{{ question.content }}</pre>
-      <div class="question-button" v-if="isQuestionAuthor">
+      <div class="question-button" v-if="isQuestionAuthor && !question.answers.length">
         <button class="go-edit-button" @click="goEditQuestion">수정하기</button>
         <button class="blue-button" @click="deleteQuestion">삭제하기</button>
       </div>

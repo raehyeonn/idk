@@ -17,6 +17,10 @@ const createUserAPI = function (request) {
 const getMeAPI = function () {
     return authInstance.get(`/api/users/me`);
 };
+
+const deleteMeAPI = function () {
+    return authInstance.delete(`/api/users/me`);
+}
 /**
  * QuestionAPI
  */
@@ -178,6 +182,7 @@ export {
     getReportReasonAPI,
     getNoticesTop5API,
     getMeAPI,
+    deleteMeAPI,
     getMyQuestionsAPI,
     getMyAnswersAPI,
     postQuestionReportAPI,

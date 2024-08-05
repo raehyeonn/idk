@@ -1,6 +1,6 @@
 <script setup>
 import {onMounted, ref} from "vue";
-import {getMeAPI, getMyAnswersAPI, getMyQuestionsAPI} from "@/api";
+import {deleteMeAPI, getMeAPI, getMyAnswersAPI, getMyQuestionsAPI} from "@/api";
 import router from "@/router";
 
 const me = ref({});
@@ -65,6 +65,23 @@ const getMyAnswers = async function () {
     }
 };
 
+const confirmDeleteAccount = async () => {
+  if (confirm("정말로 탈퇴하시겠습니까? 이 작업은 취소할 수 없습니다.")) {
+    try {
+      await deleteMeAPI(); // API 호출
+      // 로그아웃 처리
+      sessionStorage.removeItem('authHeader');
+      sessionStorage.removeItem('userId');
+      sessionStorage.setItem('roles', 'ANONYMOUS');
+      // 홈페이지로 리다이렉트
+      router.push('/')
+    } catch (error) {
+      console.error("계정 삭제 실패:", error);
+      alert("계정 삭제에 실패했습니다. 다시 시도해주세요.");
+    }
+  }
+};
+
 const goQuestion = function (id) {
     router.push(`/question/${id}`);
 };
@@ -84,26 +101,30 @@ onMounted(async () => {
 <div class="wrap">
 
     <div class="my-page-left">
-      <p class="my-nickname">{{ me.nickname }}</p>
+      <div class="left-top">
+        <p class="my-nickname">{{ me.nickname }}</p>
 
-      <div class="my-count">
+        <div class="my-count">
 
-        <div class="my-question-count">
-          <p class="count-questions">나의 질문</p>
-          <p class="count">{{questions.totalElements}}</p>
+          <div class="my-question-count">
+            <p class="count-questions">나의 질문</p>
+            <p class="count">{{questions.totalElements}}</p>
+          </div>
+
+          <div class="my-answer-count">
+            <p class="count-answers">나의 답변</p>
+            <p class="count">{{ answers.totalElements }}</p>
+          </div>
+
         </div>
 
-        <div class="my-answer-count">
-          <p class="count-answers">나의 답변</p>
-          <p class="count">{{ answers.totalElements }}</p>
-        </div>
-
+        <ul>
+          <li class="my-questions" @click="goQuestions">나의 질문</li>
+          <li class="my-answers" @click="goAnswers">나의 답변</li>
+        </ul>
       </div>
 
-      <ul>
-        <li class="my-questions" @click="goQuestions">나의 질문</li>
-        <li class="my-answers" @click="goAnswers">나의 답변</li>
-      </ul>
+      <button class="delete-account" @click="confirmDeleteAccount">탈퇴하기</button>
     </div>
 
 
@@ -156,10 +177,13 @@ onMounted(async () => {
   width: 100%;
 }
 
-.my-page-left {
+.my-page-left{
   width: 25%;
   padding-right: 15px;
   border-right: 1px solid #C5CCD2;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .my-nickname {
@@ -331,5 +355,21 @@ onMounted(async () => {
 }
 .answer-wrap {
     cursor: pointer;
+}
+
+.delete-account {
+  margin-top: auto;
+  padding: 5px 20px;
+  border-radius: 5px;
+  font-family: 'Nexon Regular', sans-serif;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  align-self: end;
+  border: 1px solid #bd200b;
+  box-shadow: 0 0 1px #000000;
+  background-color: #bd200b;
+  color: #FFFFFF;
+  width: 35%;
 }
 </style>
