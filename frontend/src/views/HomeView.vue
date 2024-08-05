@@ -16,6 +16,7 @@ const userRoles = computed(() => {
 
 const isAdmin = computed(() => userRoles.value.includes('ADMIN'));
 const isAnonymous = computed(() => userRoles.value.includes('ANONYMOUS'));
+const isSuspend = computed(() => userRoles.value.includes('SUSPEND'));
 
 // 날짜 yyyy-MM-dd 형식 출력
 const formatDate = (dateString) => {
@@ -105,7 +106,7 @@ watch(() => route.query.search, (newTitle) => {
         <div class="question">
             <div class="question-write">
                 <span>지금 이 순간 게시글</span>
-                <a class="move" @click="goQuestionWrite" v-if="!isAdmin">질문하러 가기 ></a>
+                <a class="move" @click="goQuestionWrite" v-if="!isAdmin && !isSuspend">질문하러 가기 ></a>
             </div>
 
             <ul class="question-list" v-for="question in questions" :key="question.id">
@@ -224,7 +225,7 @@ watch(() => route.query.search, (newTitle) => {
 }
 
 .question-title span {
-    font-family: 'Nexon Regular', sans-serif;
+    font-family: 'Nexon Medium', sans-serif;
     font-size: 20px;
 }
 
@@ -264,7 +265,7 @@ watch(() => route.query.search, (newTitle) => {
 .notice-title {
     cursor: pointer;
     margin: 0 0 10px 0;
-    font-family: 'Nexon Regular', sans-serif;
+    font-family: 'Nexon Medium', sans-serif;
     font-size: 20px;
 }
 
@@ -290,7 +291,7 @@ watch(() => route.query.search, (newTitle) => {
   background-color: #FFFFFF;
   color: #333A73;
   cursor: pointer;
-  font-family: 'Nexon Regular', sans-serif;
+  font-family: 'Nexon Medium', sans-serif;
 }
 
 .pagination button.active {
