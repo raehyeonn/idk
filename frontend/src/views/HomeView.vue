@@ -1,7 +1,7 @@
 <script setup>
 import router from "@/router";
 import {getNoticesTop5API, getQuestionsAPI} from "@/api";
-import {onMounted, ref, watch} from "vue";
+import {computed, onMounted, ref, watch} from "vue";
 import {useRoute} from "vue-router";
 
 const route = useRoute();
@@ -31,26 +31,41 @@ const goNoticeDetail = function (id) {
     router.push(`/notice/${id}`);
 }
 
-const getQuestions = async function (query) {
-    if (isLoading.value) {
-        return;
+const currentPage = ref(0);
+const totalPages = ref(0);
+const pageSize = 10;
+
+const getQuestions = async function (query = '', page = 0) {
+  if (isLoading.value) return;
+  isLoading.value = true;
+  try {
+    const getQuestionsRequest = {
+      title: query,
+      size: pageSize,
+      page: page
     }
-    isLoading.value = true;
-    try {
-        if (query === undefined) {
-            query = '';
-        }
-        const getQuestionsRequest = {
-            title: query,
-            size: 10,
-            page: 0
-        }
-        const response = await getQuestionsAPI(getQuestionsRequest);
-        questions.value = response.data.content;
-    } catch (error) {
-        console.log(error);
-    }
+    const response = await getQuestionsAPI(getQuestionsRequest);
+    questions.value = response.data.content;
+    totalPages.value = response.data.totalPages;
+    currentPage.value = page;
+  } catch (error) {
+    console.log(error);
+  } finally {
+    isLoading.value = false;
+  }
 }
+
+const changePage = (page) => {
+  getQuestions(route.query.search, page);
+}
+
+const pageNumbers = computed(() => {
+  const pages = [];
+  for (let i = 0; i < totalPages.value; i++) {
+    pages.push(i);
+  }
+  return pages;
+});
 
 const getNoticesTop5 = async function () {
     try {
@@ -62,12 +77,12 @@ const getNoticesTop5 = async function () {
 };
 
 onMounted(() => {
-    getQuestions(route.query.search);
-    getNoticesTop5()
+  getQuestions(route.query.search || ''); // 검색어가 없으면 빈 문자열 전달
+  getNoticesTop5();
 })
 
-watch(async () => route.query.search, (newTitle) => {
-    getQuestions(newTitle);
+watch(() => route.query.search, (newTitle) => {
+  getQuestions(newTitle || ''); // 검색어가 없으면 빈 문자열 전달
 })
 </script>
 
@@ -98,6 +113,16 @@ watch(async () => route.query.search, (newTitle) => {
                     </div>
                 </li>
             </ul>
+          <div class="pagination">
+            <button
+                v-for="page in pageNumbers"
+                :key="page"
+                @click="changePage(page)"
+                :class="{ active: currentPage === page }"
+            >
+              {{ page + 1 }}
+            </button>
+          </div>
         </div>
 
         <div class="notice">
@@ -239,5 +264,25 @@ watch(async () => route.query.search, (newTitle) => {
 .go-notice {
     cursor: pointer;
     width: 100%;
+}
+.pagination {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.pagination button {
+  margin: 0 5px;
+  padding: 5px 10px;
+  border: 1px solid #333A73;
+  background-color: #FFFFFF;
+  color: #333A73;
+  cursor: pointer;
+  font-family: 'Nexon Regular', sans-serif;
+}
+
+.pagination button.active {
+  background-color: #333A73;
+  color: #FFFFFF;
 }
 </style>

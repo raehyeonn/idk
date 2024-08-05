@@ -1,7 +1,9 @@
 <script setup>
 import router from "@/router";
-import {computed, ref} from "vue";
+import {computed, ref, watch} from "vue";
+import {useRoute} from "vue-router";
 
+const route = useRoute();
 const search = ref("");
 const isAuthenticated = ref(!!sessionStorage.getItem('authHeader'));
 
@@ -13,7 +15,7 @@ const userRoles = computed(() => {
 const isAdmin = computed(() => userRoles.value.includes('ADMIN'));
 
 const goHome = function () {
-    router.push("/");
+  router.push({name: 'Home', query: {}}); // 쿼리 파라미터 제거
 }
 
 const goLogin = function () {
@@ -32,16 +34,25 @@ const goAdmin = function () {
   router.push("/admin")
 }
 
+const goQuestions = function () {
+  if (search.value.trim()) {
+    router.push({name: 'Home', query: {search: search.value.trim()}});
+  } else {
+    router.push({name: 'Home', query: {}}); // 검색어가 없으면 쿼리 파라미터 제거
+  }
+}
+
 const logout = function () {
     sessionStorage.removeItem('authHeader');
     sessionStorage.removeItem('userId');
     sessionStorage.setItem('roles', 'ANONYMOUS');
     isAuthenticated.value = false;
+    router.push('/');
 }
 
-const goQuestions = function () {
-    router.push({name: 'Home', query: {search: search.value}})
-}
+watch(() => route.query.search, (newSearch) => {
+  search.value = newSearch || '';
+}, { immediate: true });
 
 </script>
 
