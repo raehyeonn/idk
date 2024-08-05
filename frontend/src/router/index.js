@@ -14,6 +14,7 @@ import QuestionEditView from "@/views/QuestionEditView.vue";
 import ReportedQuestionsView from "@/views/ReportedQuestionsView.vue";
 import ReportedAnswersView from "@/views/ReportedAnswersView.vue";
 import ReportQuestionModal from "@/views/ReportQuestionModal.vue";
+import ReportAnswerModal from "@/views/ReportAnswerModal.vue";
 
 const routes = [
     {
@@ -87,10 +88,15 @@ const routes = [
         component: ReportedAnswersView
     },
     {
-        path: "/report/question/modal",
+        path: "/report/question-modal",
         name: "ReportQuestionModal",
         component: ReportQuestionModal
     },
+    {
+        path: "/report/answer-modal",
+        name: "ReportAnswerModal",
+        component: ReportAnswerModal
+    }
 ]
 
 const router = createRouter({
