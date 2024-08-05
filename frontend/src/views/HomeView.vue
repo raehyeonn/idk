@@ -146,6 +146,9 @@ watch(async () => route.query.search, (newTitle) => {
 .notice {
     width: 30%;
 }
+.move {
+    cursor: pointer;
+}
 .question-wrap {
     cursor: pointer;
 }
