@@ -99,6 +99,18 @@ const getNoticesAPI = function () {
 /**
  * ReportReasonAPI
  */
+const getReportReasonAPI = function (){
+    return authInstance.get(`/api/report-reasons`)
+}
+
+const postReportReasonAPI = function (request){
+    return authInstance.post(`/api/report-reasons`, request)
+}
+
+const deleteReportReasonAPI = function (id){
+    return authInstance.delete(`/api/report-reasons/${id}`)
+}
+
 
 
 /**
@@ -126,10 +138,6 @@ const handleReportedAnswerAPI = function (id) {
 
 const deleteReportedAnswerAPI = function (id) {
     return authInstance.delete(`/api/reports/answers/${id}`)
-}
-
-const getReportReasonAPI = function (){
-    return authInstance.get(`/api/report-reasons`)
 }
 
 const postQuestionReportAPI = function (request){
@@ -173,5 +181,7 @@ export {
     getMyQuestionsAPI,
     getMyAnswersAPI,
     postQuestionReportAPI,
-    postAnswerReportAPI
+    postAnswerReportAPI,
+    postReportReasonAPI,
+    deleteReportReasonAPI
 }

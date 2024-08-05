@@ -1,4 +1,44 @@
 <script setup>
+import {deleteReportReasonAPI, getReportReasonAPI, postReportReasonAPI} from "@/api";
+import {onMounted, ref} from "vue";
+
+const content = ref("");
+const reportReasons = ref([]);
+
+const createReportReasons = async function() {
+  try {
+    const createReportReasonRequest = {
+      content: content.value
+    };
+    await postReportReasonAPI(createReportReasonRequest);
+    await fetchReportReasons();
+    content.value = "";
+  } catch (error) {
+    console.log(error)
+  }
+}
+const deleteReportReason = async function(id) {
+  try {
+    if(confirm("정말 삭제하시겠습니까?")) {
+      await deleteReportReasonAPI(id);
+      await fetchReportReasons();
+    }
+  }catch (error) {
+    console.log(error);
+  }
+}
+
+const fetchReportReasons = async () => {
+  try {
+    const response = await getReportReasonAPI();
+    reportReasons.value = response.data;
+  } catch (error) {
+    console.log(error);
+  }
+}
+onMounted(() => {
+  fetchReportReasons();
+});
 
 </script>
 
@@ -6,17 +46,17 @@
   <div class="wrap">
     <div class="add-wrap">
       <h2>신고 사유 추가</h2>
-      <textarea name="report-reason" placeholder="신고 사유를 입력해 주세요." maxlength="100"></textarea>
+      <textarea name="report-reason" placeholder="신고 사유를 입력해 주세요." maxlength="100" v-model="content"></textarea>
       <div class="action-button">
-        <button class="submit-button">추가</button>
+        <button class="submit-button" @click="createReportReasons()">추가</button>
       </div>
     </div>
     <h2>신고 사유 목록</h2>
-    <ul>
+    <ul v-for="reportReason in reportReasons" :key="reportReason.id">
       <li>
         <div class="reason-wrap">
-          <span class="reason">불법 정보를 포함하고 있습니다.</span>
-          <span class="reason-delete">삭제</span>
+          <span class="reason">{{reportReason.content}}</span>
+          <span class="reason-delete" @click="deleteReportReason(reportReason.id)">삭제</span>
         </div>
       </li>
     </ul>
@@ -101,5 +141,6 @@ li {
 .reason-delete {
   font-family: 'Nexon Regular', sans-serif;
   font-size: 20px;
+  cursor: pointer;
 }
 </style>
