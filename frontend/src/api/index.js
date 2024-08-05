@@ -77,6 +77,10 @@ const getNoticeAPI = function (id) {
     return authInstance.get(`/api/notices/${id}`)
 }
 
+const getNoticesTop5API = function () {
+    return authInstance.get(`/api/notices/five`)
+}
+
 const getNoticesAPI = function () {
     return authInstance.get(`/api/notices`)
 }
@@ -144,4 +148,5 @@ export {
     handleReportedAnswerAPI,
     deleteReportedAnswerAPI,
     getReportReasonAPI,
+    getNoticesTop5API
 }
