@@ -338,8 +338,10 @@ img {
   color: #000000;
   margin-block: 80px;
   margin-left: 40px;
-}
+    white-space: pre-wrap; /* 줄바꿈을 자동으로 처리 */
+    overflow-wrap: break-word; /* 긴 단어가 넘어가지 않도록 자동으로 줄바꿈 */
 
+}
 .question-button {
   display: flex;
   justify-content: end;
@@ -416,6 +418,8 @@ li {
   font-family: "NEXON Lv1 Gothic OTF", sans-serif;
   font-size: 30px;
   color: #000000;
+    white-space: pre-wrap; /* 줄바꿈을 자동으로 처리 */
+    overflow-wrap: break-word; /* 긴 단어가 넘어가지 않도록 자동으로 줄바꿈 */
 }
 
 .contents-text div {
