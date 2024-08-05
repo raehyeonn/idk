@@ -90,12 +90,21 @@ watch(() => route.query.search, (newSearch) => {
     display: flex;
     align-items: center;
     width: 850px;
+    margin-right: 20px;
 }
+
 
 .header-left a{
     display: flex;
     align-items: center;
+    margin-right: 20px;
+
 }
+img {
+    max-width: 290px;
+    width: 100%;
+}
+
 
 /*숨기기*/
 h1 {
@@ -155,5 +164,13 @@ h1 {
     font-family: 'Nexon Medium', sans-serif;
     font-size: 16px;
     margin-left: 20px;
+}
+@media (max-width: 1024px) {
+    .header-wrap {
+        width: 90vw;
+        height: 100px;
+        display: flex;
+        align-items: center;
+    }
 }
 </style>

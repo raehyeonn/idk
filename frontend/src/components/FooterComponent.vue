@@ -21,4 +21,13 @@
     font-size: 48px;
     color: #788D9F;
 }
+@media (max-width: 1024px) {
+    .footer-wrap {
+        width: 90vw;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        color: #788D9F;
+    }
+}
 </style>
