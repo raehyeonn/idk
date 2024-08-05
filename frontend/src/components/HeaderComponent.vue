@@ -48,6 +48,7 @@ const logout = function () {
     sessionStorage.setItem('roles', 'ANONYMOUS');
     isAuthenticated.value = false;
     router.push('/');
+    location.reload();
 }
 
 watch(() => route.query.search, (newSearch) => {
