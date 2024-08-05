@@ -2,6 +2,12 @@
 
 import HeaderComponent from "@/components/HeaderComponent.vue";
 import FooterComponent from "@/components/FooterComponent.vue";
+import {onMounted} from "vue";
+onMounted(() => {
+    if (!sessionStorage.getItem('roles')) {
+        sessionStorage.setItem('roles', 'ANONYMOUS');
+    }
+})
 </script>
 
 <template>

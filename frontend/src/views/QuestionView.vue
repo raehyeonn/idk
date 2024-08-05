@@ -6,11 +6,13 @@ import router from "@/router";
 
 const question = ref(null);
 const content = ref("");
+const route = useRoute();
 
 const getQuestion = async function () {
   try {
-    const response = await getQuestionAPI(useRoute().params.questionId);
+    const response = await getQuestionAPI(route.params.questionId);
     return response.data;
+
 
   } catch (error) {
     console.log(error);
@@ -18,10 +20,14 @@ const getQuestion = async function () {
 }
 
 const autoResize = function () {
-  const textarea = document.querySelector('textarea');
-  textarea.style.height = 'auto';
-  textarea.style.height = textarea.scrollHeight + 'px';
-};
+    nextTick(() => {
+        const textarea = document.querySelector('textarea');
+        if (textarea) {
+            textarea.style.height = 'auto';
+            textarea.style.height = textarea.scrollHeight + 'px';
+        }
+    })
+
 watch(content, () => {
   nextTick(() => {
     autoResize();
@@ -53,20 +59,17 @@ const formatCreatedAt = computed(() => {
 });
 
 const createAnswer = async function (questionId) {
-  try {
-    const createAnswerRequest = {
-      questionId: questionId,
-      content: content.value
-    };
-    const response = await createAnswerAPI(createAnswerRequest);
-
-    if (response.data) {
-      question.value.answers.push(response.data);
-      content.value = '';
+    try {
+        const createAnswerRequest = {
+            questionId: questionId,
+            content: content.value
+        };
+        await createAnswerAPI(createAnswerRequest);
+        question.value = await getQuestion();
+        content.value = '';
+    } catch (error) {
+        console.log(error);
     }
-  } catch (error) {
-    console.log(error);
-  }
 };
 
 onMounted(async () => {
@@ -94,8 +97,8 @@ onMounted(async () => {
       </div>
       <pre class="question-contents">{{ question.content }}</pre>
       <div class="question-button">
-        <button class="go-edit-button" @click="goEditQuestion">수정하기</button>
-        <button class="blue-button" @click="deleteQuestion">삭제하기</button>
+        <button class="go-edit-button" @click="goEditQuestion" >수정하기</button>
+        <button class="blue-button" @click="deleteQuestion" >삭제하기</button>
       </div>
       <hr>
 
