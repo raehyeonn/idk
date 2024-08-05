@@ -76,6 +76,7 @@ li {
   list-style-type: none;
   border-bottom: 1px solid #000000;
   padding-block: 20px;
+  cursor: pointer;
 }
 
 .notice-title {
