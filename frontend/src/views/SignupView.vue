@@ -57,7 +57,10 @@ const signup = async function () {
         alert("가입이 완료되었습니다.");
         await router.replace('/login');
     } catch (error) {
-        console.log(error);
+        console.log(error.response.data);
+        if (error.response.data.status == 409) {
+            alert(error.response.data.message);
+        }
     }
 }
 
