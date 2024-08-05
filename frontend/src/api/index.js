@@ -14,6 +14,9 @@ const createUserAPI = function (request) {
     return authInstance.post(`/api/users/join`, request);
 }
 
+const getMeAPI = function () {
+    return authInstance.get(`/api/users/me`);
+};
 /**
  * QuestionAPI
  */
@@ -38,6 +41,10 @@ const getQuestionsAPI = function (request) {
         `/api/questions?title=${request.title}&size=${request.size}&page=${request.page}`);
 }
 
+const getMyQuestionsAPI = function (request) {
+    return authInstance.get(`/api/questions/me?size=${request.size}&page=${request.page}`);
+};
+
 /**
  * AnswerAPI
  */
@@ -55,6 +62,11 @@ const deleteAnswerAPI = function (id) {
 
 const selectAnswerAPI = function (id) {
     return authInstance.post(`/api/answers/${id}/selections`);
+};
+
+const getMyAnswersAPI = function (request) {
+    return authInstance.get(
+        `/api/answers/me?size=${request.size}&page=${request.page}`);
 };
 
 
@@ -75,6 +87,10 @@ const deleteNoticeAPI = function (id) {
 
 const getNoticeAPI = function (id) {
     return authInstance.get(`/api/notices/${id}`)
+}
+
+const getNoticesTop5API = function () {
+    return authInstance.get(`/api/notices/five`)
 }
 
 const getNoticesAPI = function () {
@@ -144,4 +160,8 @@ export {
     handleReportedAnswerAPI,
     deleteReportedAnswerAPI,
     getReportReasonAPI,
+    getNoticesTop5API,
+    getMeAPI,
+    getMyQuestionsAPI,
+    getMyAnswersAPI
 }

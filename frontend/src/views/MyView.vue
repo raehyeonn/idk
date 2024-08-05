@@ -1,56 +1,155 @@
 <script setup>
+import {onMounted, ref} from "vue";
+import {getMeAPI, getMyAnswersAPI, getMyQuestionsAPI} from "@/api";
+import router from "@/router";
 
+const me = ref({});
+const questions = ref([]);
+const answers = ref([]);
+const page = ref(0);
+const isQuestions = ref(true);
+const isAnswers = ref(false);
+
+const getMe = async function () {
+    try {
+        const response = await getMeAPI();
+        me.value = response.data;
+    } catch (error) {
+        console.log(error);
+    }
+};
+const formatDate = (dateString) => {
+    if (!dateString) {
+        return '';
+    }
+    const date = new Date(dateString);
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const day = String(date.getDate()).padStart(2, '0');
+    return `${year}-${month}-${day}`;
+};
+
+
+const goQuestions = function () {
+    isQuestions.value = true;
+    isAnswers.value = false;
+    document.querySelector('.my-questions').style.color = '#000000';
+    document.querySelector('.my-answers').style.color = '#C5CCD2';
+};
+
+const goAnswers = function () {
+    isQuestions.value = false;
+    isAnswers.value = true;
+    document.querySelector('.my-answers').style.color = '#000000';
+    document.querySelector('.my-questions').style.color = '#C5CCD2';
+};
+
+const getMyQuestions = async function () {
+    try {
+        const getMyQuestionsRequest = {
+            size: 10,
+            page: page.value
+        }
+        const response = await getMyQuestionsAPI(getMyQuestionsRequest);
+        questions.value = response.data;
+    } catch (error) {
+        console.log(error);
+    }
+};
+
+const getMyAnswers = async function () {
+    try {
+        const getMyAnswersRequest = {
+            size: 10,
+            page: page.value
+        }
+        const response = await getMyAnswersAPI(getMyAnswersRequest);
+        answers.value = response.data;
+    } catch (error) {
+        console.log(error);
+    }
+};
+
+const goQuestion = function (id) {
+    router.push(`/question/${id}`);
+};
+
+const goQuestionByAnswer = function (id) {
+    router.push(`/question/${id}`);
+};
+
+onMounted(async () => {
+    await getMe();
+    await getMyQuestions();
+    await getMyAnswers();
+})
 </script>
 
 <template>
 <div class="wrap">
 
     <div class="my-page-left">
-      <p class="my-nickname">홍길동</p>
+      <p class="my-nickname">{{ me.nickname }}</p>
 
       <div class="my-count">
 
         <div class="my-question-count">
           <p class="count-questions">나의 질문</p>
-          <p class="count">15</p>
+          <p class="count">{{questions.totalElements}}</p>
         </div>
 
         <div class="my-answer-count">
           <p class="count-answers">나의 답변</p>
-          <p class="count">4</p>
+          <p class="count">{{ answers.totalElements }}</p>
         </div>
 
       </div>
 
       <ul>
-        <li class="my-questions">나의 질문</li>
-        <li class="my-answers">나의 답변</li>
+        <li class="my-questions" @click="goQuestions">나의 질문</li>
+        <li class="my-answers" @click="goAnswers">나의 답변</li>
       </ul>
     </div>
 
 
-    <div class="my-page-right">
-      <p class="my-question-list">나의 질문 목록(15)</p>
+    <div class="my-page-right" v-show="isQuestions">
+      <p class="my-question-list">나의 질문 목록({{questions.totalElements}})</p>
 
-      <ul class="question-list">
+      <ul class="question-list" v-for="question in questions.content" :key="question.id">
         <li>
-
-          <div class="question-wrap">
-
+          <div class="question-wrap" @click="goQuestion(question.id)">
             <div class="question-information-top">
-              <span>나의 질문</span>
-              <span>2024-08-04 | 조회수 80</span>
+                <b class="move">{{question.title}}</b>
             </div>
-
             <div class="question-information-bottom">
-              <span class="move">제목</span>
-              <span>n개의 답변</span>
+                <span>{{ formatDate(question.createdAt) }} | 조회수 {{ question.views }}</span>
+              <span>{{ question.answerCount }}개의 답변</span>
             </div>
-
           </div>
-
         </li>
       </ul>
+
+    </div>
+    <div class="my-page-right" v-show="isAnswers">
+        <p class="my-question-list">나의 답변 목록({{answers.totalElements}})</p>
+
+        <ul class="answer-list" v-for="answer in answers.content" :key="answer.id">
+            <li>
+                <div class="answer-wrap" @click="goQuestionByAnswer(answer.questionId)">
+                    <div class="question-information">
+                        <p class="answer-question">질문</p>
+                        <p class="answer-question-content">{{answer.title}}</p>
+                    </div>
+                    <div class="answer-information">
+                        <div class="answer-information-left">
+                            <p class="answer">나의 답변</p>
+                            <p class="answer-content">{{answer.myAnswer.content}}</p>
+                        </div>
+                        <div class="answer-selected" v-if="answer.myAnswer.isSelected"><span>채택</span></div>
+                    </div>
+                </div>
+            </li>
+        </ul>
 
     </div>
 </div>
@@ -146,7 +245,7 @@
 
 .question-information-top {
   display: flex;
-  justify-content: space-between;
+  justify-content: start;
   margin-bottom: 10px;
 }
 
@@ -155,17 +254,87 @@
   justify-content: space-between;
 }
 
-.question-information-top span {
-  font-family: 'Nexon Regular', sans-serif;
+.question-information-top p {
+  font-family: 'Nexon Light', sans-serif;
   font-size: 15px;
 }
 
-.question-information-bottom span {
+.question-information-bottom p {
   font-family: 'Nexon Regular', sans-serif;
   font-size: 20px;
 }
 
 .move {
   cursor: pointer;
+}
+
+.answer-list {
+    list-style: none;
+    margin-bottom: 15px;
+    padding: 0 15px;
+    border-bottom: 1px solid #C5CCD2;
+}
+
+.answer-list li {
+    margin-bottom: 15px;
+}
+
+.question-information {
+    margin-bottom: 20px;
+}
+
+.question-information-top b {
+    margin-bottom: 10px;
+
+    font-family: 'Nexon Medium', sans-serif;
+    font-size: 15px;
+}
+
+.question-information-bottom span {
+    cursor: pointer;
+
+    font-family: 'Nexon Light', sans-serif;
+    font-size: 15px;
+}
+
+.answer-information {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.answer, .answer-question {
+    margin-bottom: 10px;
+
+    font-family: 'Nexon Light', sans-serif;
+    font-size: 15px;
+}
+
+.answer-content, .answer-question-content {
+    cursor: pointer;
+    font-family: 'Nexon Regular', sans-serif;
+    font-size: 20px;
+}
+
+.answer-selected {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 70px;
+    height: 45px;
+    border-radius: 50px;
+    background-color: #FBA834;
+}
+
+.answer-selected span {
+    font-family: 'Nexon Medium', sans-serif;
+    font-size: 20px;
+}
+.question-wrap {
+    cursor: pointer;
+}
+.answer-wrap {
+    cursor: pointer;
 }
 </style>
