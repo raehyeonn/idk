@@ -9,6 +9,14 @@ const questions = ref([]);
 const notices = ref([]);
 let isLoading = ref(false);
 
+const userRoles = computed(() => {
+    const rolesString = sessionStorage.getItem('roles');
+    return rolesString ? rolesString.split(' ') : [];
+});
+
+const isAdmin = computed(() => userRoles.value.includes('ADMIN'));
+const isAnonymous = computed(() => userRoles.value.includes('ANONYMOUS'));
+
 // 날짜 yyyy-MM-dd 형식 출력
 const formatDate = (dateString) => {
   const date = new Date(dateString);
@@ -20,7 +28,11 @@ const goQuestion = function (id) {
 }
 
 const goQuestionWrite = function () {
-    router.push(`/question/write`);
+    if (isAnonymous.value) {
+        router.push(`/login`);
+    } else {
+        router.push(`/question/write`);
+    }
 };
 
 const goNoticeList = function () {
@@ -93,7 +105,7 @@ watch(() => route.query.search, (newTitle) => {
         <div class="question">
             <div class="question-write">
                 <span>지금 이 순간 게시글</span>
-                <a class="move" @click="goQuestionWrite">질문하러 가기 ></a>
+                <a class="move" @click="goQuestionWrite" v-if="!isAdmin">질문하러 가기 ></a>
             </div>
 
             <ul class="question-list" v-for="question in questions" :key="question.id">
