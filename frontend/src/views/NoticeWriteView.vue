@@ -101,7 +101,6 @@ textarea {
     color: #757575;
     line-height: 40px;
     column-count: 10;
-    overflow: hidden;
 }
 textarea:focus {
     outline: none;

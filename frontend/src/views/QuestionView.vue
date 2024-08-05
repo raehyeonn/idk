@@ -482,7 +482,6 @@ textarea {
   color: #000000;
   line-height: 40px;
   column-count: 10;
-  overflow: hidden;
 }
 
 textarea:focus {
