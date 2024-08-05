@@ -31,6 +31,13 @@ const isQuestionAuthor = computed(() => {
   return question.value && question.value.writer.id === currentUserId.value;
 });
 
+const userRoles = computed(() => {
+    const rolesString = sessionStorage.getItem('roles');
+    return rolesString ? rolesString.split(' ') : [];
+});
+
+const isAdmin = computed(() => userRoles.value.includes('ADMIN'));
+
 const openReportQuestionModal = () => {
   questionInfo.value = {
     writer: question.value.writer.nickName,
@@ -219,7 +226,7 @@ onMounted(async () => {
         </div>
       </div>
       <div class="write-wrap">
-        <div class="write-answer">
+        <div class="write-answer" v-if="!isAdmin">
         <textarea name="answer-content" v-model="content" placeholder="내용을 입력해 주세요."
                   maxlength="1000" @input="autoResize"></textarea>
           <div>
