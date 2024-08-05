@@ -107,12 +107,12 @@ onMounted(() => {
 <style scoped>
 .reported-questions-wrap {
   width: 100%;
-  margin-top: 120px;
+  margin-top: 50px;
 }
 
 h2 {
-  font-family: "Nexon Light", sans-serif;
-  font-size: 36px;
+  font-family: "Gmarket Bold", sans-serif;
+  font-size: 40px;
 }
 
 .toggle-icon {

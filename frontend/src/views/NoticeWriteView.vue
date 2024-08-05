@@ -36,10 +36,7 @@ const createNotice = async function () {
 
 <template>
     <div class="write-wrap">
-        <div class="write-title">
-            <img src="@/assets/N2.png" alt="">
-            <input type="text" class="question-title" v-model="title" placeholder="제목을 입력해 주세요." minlength="2" maxlength="50" @input="handleInput">
-        </div>
+        <input type="text" class="question-title" v-model="title" placeholder="제목을 입력해 주세요." minlength="2" maxlength="50" @input="handleInput">
         <div class="write-content">
             <textarea name="question-content" v-model="content" placeholder="내용을 입력해 주세요." @input="handleInput" maxlength="500"></textarea>
         </div>
@@ -56,31 +53,31 @@ const createNotice = async function () {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: 120px;
+    margin-top: 50px;
 }
-.write-title {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    margin-bottom: 50px;
-}
+
 .question-title {
+    display: flex;
+
     width: 100%;
+    height: 100px;
+    padding-left: 50px;
+    margin-bottom: 15px;
+
     border: 5px solid #333A73;
     border-radius: 50px;
-    padding-left: 50px;
-    height: 100px;
-    display: flex;
-    margin-left: 30px;
+
     font-family: 'Nexon Medium', sans-serif;
     font-size: 25px;
     color: #757575;
 }
+
 .question-title::placeholder {
     font-family: 'Nexon Medium', sans-serif;
     font-size: 25px;
     color: #757575;
 }
+
 .write-content {
     background-color: #EBEBEB;
     border-radius: 15px;
@@ -88,7 +85,7 @@ const createNotice = async function () {
     width: 100%;
     height: 600px;
     padding: 50px;
-    margin-bottom: 80px;
+    margin-bottom: 30px;
     display: flex;
     flex-direction: column;
     align-items: center;
