@@ -1,9 +1,16 @@
 <script setup>
 import router from "@/router";
-import {ref} from "vue";
+import {computed, ref} from "vue";
 
 const search = ref("");
 const isAuthenticated = ref(!!sessionStorage.getItem('authHeader'));
+
+const userRoles = computed(() => {
+  const rolesString = sessionStorage.getItem('roles');
+  return rolesString ? rolesString.split(' ') : [];
+});
+
+const isAdmin = computed(() => userRoles.value.includes('ADMIN'));
 
 const goHome = function () {
     router.push("/");
@@ -19,6 +26,10 @@ const goSignup = function () {
 
 const goMy = function () {
     router.push("/my");
+}
+
+const goAdmin = function () {
+  router.push("/admin")
 }
 
 const logout = function () {
@@ -48,7 +59,9 @@ const goQuestions = function () {
             <button class="go-login-button" @click = "goLogin">로그인</button>
         </div>
         <div class="header-right" v-if="isAuthenticated">
-            <button class="go-signup-button" @click = "goMy">마이페이지</button>
+          <button class="go-signup-button" @click="isAdmin ? goAdmin() : goMy()">
+            {{ isAdmin ? '관리자 페이지' : '마이페이지' }}
+          </button>
             <button class="go-login-button" @click = "logout">로그아웃</button>
         </div>
     </div>
