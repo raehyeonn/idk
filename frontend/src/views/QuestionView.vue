@@ -3,10 +3,46 @@ import {createAnswerAPI, deleteQuestionAPI, getQuestionAPI} from "@/api";
 import {useRoute} from "vue-router";
 import {computed, nextTick, onMounted, ref, watch} from "vue";
 import router from "@/router";
+import ReportQuestionModal from "@/views/ReportQuestionModal.vue";
+import ReportAnswerModal from "@/views/ReportAnswerModal.vue";
 
 const question = ref(null);
 const content = ref("");
 const route = useRoute();
+const selectedAnswer = ref(null);
+
+const isReportQuestionModalOpen = ref(false);
+const questionInfo = ref({});
+
+const isReportAnswerModalOpen = ref(false);
+const answerInfo = ref({});
+
+const openReportQuestionModal = () => {
+  questionInfo.value = {
+    writer: question.value.writer.nickName,
+    title: question.value.title,
+    content: question.value.content
+  };
+  isReportQuestionModalOpen.value = true;
+};
+
+const openReportAnswerModal = (answer) => {
+  selectedAnswer.value = answer;
+  answerInfo.value = {
+    writer: answer.writer.nickName,
+    content: answer.content
+  };
+  isReportAnswerModalOpen.value = true;
+};
+
+
+const closeQuestionReportModal = () => {
+  isReportQuestionModalOpen.value = false;
+};
+
+const closeAnswerReportModal = () => {
+  isReportAnswerModalOpen.value = false;
+}
 
 const getQuestion = async function () {
     try {
@@ -75,6 +111,7 @@ const createAnswer = async function (questionId) {
 onMounted(async () => {
     question.value = await getQuestion();
 })
+
 </script>
 
 <template>
@@ -89,7 +126,7 @@ onMounted(async () => {
           <span class="question-info">
             {{ question.writer.nickName }} | {{ formatCreatedAt }} | 조회수 {{ question.views }}
           </span>
-                        <button class="report-button" aria-label="신고하기">
+                        <button class="report-button" aria-label="신고하기" @click="openReportQuestionModal">
                             <img src="@/assets/report.png" alt="신고 아이콘">
                         </button>
                     </div>
@@ -126,7 +163,7 @@ onMounted(async () => {
               <span class="answer-info">
                 {{ answer.writer.nickName }} | {{ formatDate(answer.createdAt) }}
               </span>
-                            <button class="report-button" aria-label="신고하기">
+                            <button class="report-button" aria-label="신고하기" @click="openReportAnswerModal(answer)">
                                 <img src="@/assets/report.png" alt="신고 아이콘">
                             </button>
                         </div>
@@ -136,6 +173,18 @@ onMounted(async () => {
             </ul>
         </div>
     </div>
+  <ReportQuestionModal
+      :isOpen="isReportQuestionModalOpen"
+      :questionId="question?.id"
+      :questionInfo="questionInfo"
+      @close="closeQuestionReportModal"
+  />
+  <ReportAnswerModal
+      :isOpen="isReportAnswerModalOpen"
+      :answerId="selectedAnswer?.id"
+      :answerInfo="answerInfo"
+      @close="closeAnswerReportModal"
+  />
 </template>
 
 <style scoped>

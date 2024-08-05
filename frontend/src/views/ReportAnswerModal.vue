@@ -1,7 +1,15 @@
 <script setup>
 
-import {onMounted, ref} from "vue";
-import {getReportReasonAPI} from "@/api";
+import {defineEmits, defineProps, onMounted, ref} from "vue";
+import {getReportReasonAPI, postAnswerReportAPI} from "@/api";
+
+const props = defineProps({
+  isOpen: Boolean,
+  answerId: Number,
+  answerInfo: Object
+});
+
+const emit = defineEmits(['close']);
 
 const reportReasons = ref([]);
 const selectedReason = ref('');
@@ -17,31 +25,56 @@ const fetchReportReasons = async () => {
 onMounted(() => {
   fetchReportReasons();
  });
+
+
+const closeModal = () => {
+  emit('close');
+  selectedReason.value = null;
+};
+
+const submitReport = async () => {
+  if (!selectedReason.value) {
+    alert("신고 사유를 선택해주세요.");
+    return;
+  }
+
+  try {
+    await postAnswerReportAPI({
+      reportReasonId: selectedReason.value,
+      answerId: props.answerId
+    });
+    alert("신고가 접수되었습니다.");
+    closeModal();
+  } catch (error) {
+    console.error("신고 제출 실패:", error);
+    alert("신고 제출에 실패했습니다. 다시 시도해주세요.");
+  }
+};
 </script>
 
 <template>
-  <div class="modal-overlay">
+  <div v-if="isOpen" class="modal-overlay">
     <div class="modal-content">
       <div class="report-top">
         <img src="@/assets/report.png" alt="신고 아이콘">
         <span>신고하기</span>
       </div>
       <div class="report-info">
-        <p><strong>작성자 | </strong>짱짱맨</p>
-        <p><strong>내 용 | </strong>이건 내용입니다 여긴내용이들어가요</p>
+        <p><strong>작성자 | </strong>{{ answerInfo.writer }}</p>
+        <p><strong>내 용 | </strong>{{ answerInfo.content }}</p>
       </div>
       <div class="report-reasons-box">
         <h3>사유선택</h3>
         <div class="report-reasons">
           <div v-for="reportReason in reportReasons" :key="reportReason.id" class="reason-option">
-            <input type="radio" :id="reportReason.id" :value="reportReason.content" v-model="selectedReason">
+            <input type="radio" :id="reportReason.id" :value="reportReason.id" v-model="selectedReason">
             <label :for="reportReason.id">{{ reportReason.content }}</label>
           </div>
         </div>
       </div>
       <div class="button-group">
-        <button class="btn-cancel">뒤로가기</button>
-        <button class="btn-submit">신고하기</button>
+        <button class="btn-cancel" @click="closeModal">뒤로가기</button>
+        <button class="btn-submit" @click="submitReport">신고하기</button>
       </div>
     </div>
   </div>

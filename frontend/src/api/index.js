@@ -132,6 +132,14 @@ const getReportReasonAPI = function (){
     return authInstance.get(`/api/report-reasons`)
 }
 
+const postQuestionReportAPI = function (request){
+    return authInstance.post(`/api/questions/reports`,request)
+}
+
+const postAnswerReportAPI = function (request){
+    return authInstance.post(`/api/reports/answers`,request)
+}
+
 
 
 
@@ -163,5 +171,7 @@ export {
     getNoticesTop5API,
     getMeAPI,
     getMyQuestionsAPI,
-    getMyAnswersAPI
+    getMyAnswersAPI,
+    postQuestionReportAPI,
+    postAnswerReportAPI
 }
