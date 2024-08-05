@@ -4,6 +4,14 @@ import {useRoute} from "vue-router";
 import {computed, onMounted, ref} from "vue";
 import router from "@/router";
 
+
+const userRoles = computed(() => {
+  const rolesString = sessionStorage.getItem('roles');
+  return rolesString ? rolesString.split(' ') : [];
+});
+
+const isAdmin = computed(() => userRoles.value.includes('ADMIN'));
+
 const notice = ref(null);
 
 const getNotice = async function () {
@@ -59,7 +67,7 @@ onMounted(async () => {
         <div class="notice-content">
             <pre>{{notice.content}}</pre>
         </div>
-        <div class="notice-button">
+        <div class="notice-button" v-if="isAdmin">
             <button class="go-edit-button" @click="goEditNotice">수정하기</button>
             <button class="delete-button" @click="deleteNotice">삭제하기</button>
         </div>
