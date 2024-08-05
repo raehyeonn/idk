@@ -105,11 +105,15 @@ const getReportedAnswerAPI = function () {
 }
 
 const handleReportedAnswerAPI = function (id) {
-    return authInstance.post(`api/reports/answers/${id}`)
+    return authInstance.post(`/api/reports/answers/${id}`)
 }
 
 const deleteReportedAnswerAPI = function (id) {
-    return authInstance.delete(`api/reports/answers/${id}`)
+    return authInstance.delete(`/api/reports/answers/${id}`)
+}
+
+const getReportReasonAPI = function (){
+    return authInstance.get(`/api/report-reasons`)
 }
 
 
@@ -138,5 +142,6 @@ export {
     handleReportedQuestionAPI,
     deleteReportedQuestionAPI,
     handleReportedAnswerAPI,
-    deleteReportedAnswerAPI
+    deleteReportedAnswerAPI,
+    getReportReasonAPI,
 }

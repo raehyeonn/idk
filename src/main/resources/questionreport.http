@@ -19,3 +19,7 @@ Authorization: Basic qwer@gmail.com qweqwe123
 ### delete question reports
 DELETE localhost:8080/api/questions/reports/1
 Authorization: Basic qwer@gmail.com qweqwe123
+
+### get report reasons
+GET localhost:8080/api/report-reasons
+Authorization: Basic qwer@gmail.com qweqwe123
