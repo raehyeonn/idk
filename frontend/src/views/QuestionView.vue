@@ -27,11 +27,11 @@ const autoResize = function () {
             textarea.style.height = textarea.scrollHeight + 'px';
         }
     })
-};
+
 watch(content, () => {
-    nextTick(() => {
-        autoResize();
-    })
+  nextTick(() => {
+    autoResize();
+  })
 })
 
 const formatDate = (dateString) => {
@@ -40,18 +40,18 @@ const formatDate = (dateString) => {
 };
 
 const deleteQuestion = async function () {
-    try {
-        if (confirm("정말 삭제하시겠습니까?")) {
-            await deleteQuestionAPI(question.value.id);
-            await router.push('/');
-        }
-    } catch (error) {
-        console.log(error);
+  try {
+    if (confirm("정말 삭제하시겠습니까?")) {
+      await deleteQuestionAPI(question.value.id);
+      await router.push('/');
     }
+  } catch (error) {
+    console.log(error);
+  }
 }
 
 const goEditQuestion = function () {
-    router.push(`/question/${question.value.id}/edit`);
+  router.push(`/question/${question.value.id}/edit`);
 }
 
 const formatCreatedAt = computed(() => {
@@ -89,6 +89,9 @@ onMounted(async () => {
           <span class="question-info">
             {{ question.writer.nickName }} | {{ formatCreatedAt }} | 조회수 {{ question.views }}
           </span>
+            <button class="report-button" aria-label="신고하기">
+              <img src="@/assets/report.png" alt="신고 아이콘">
+            </button>
           </div>
         </div>
       </div>
@@ -119,9 +122,9 @@ onMounted(async () => {
         <li :class="{ 'selected-answer': answer.selected }">
           <div class="contents-text">
             <div>
-            <span class="answer-info">
-            {{ answer.writer.nickName }} | {{ formatDate(answer.createdAt) }}
-          </span>
+              <span class="answer-info">
+                {{ answer.writer.nickName }} | {{ formatDate(answer.createdAt) }}
+              </span>
               <button class="report-button" aria-label="신고하기">
                 <img src="@/assets/report.png" alt="신고 아이콘">
               </button>
@@ -170,6 +173,7 @@ h2 {
 }
 
 .contents-text {
+  width: 100%;
   display: flex;
   flex-direction: column;
   gap: 20px;
@@ -327,7 +331,7 @@ textarea {
   font-size: 25px;
   width: 100%;
   height: auto;
-    max-height: 400px;
+  max-height: 400px;
   color: #000000;
   line-height: 40px;
   column-count: 10;

@@ -1,6 +1,6 @@
 ### Create QuestionReports
 POST localhost:8080/api/questions/reports
-Authorization: Basic asdf@gmail.com qweqwe123
+Authorization: Basic gusckd57@naver.com as661899
 content-type: application/json
 
 {
@@ -18,4 +18,8 @@ Authorization: Basic qwer@gmail.com qweqwe123
 
 ### delete question reports
 DELETE localhost:8080/api/questions/reports/1
+Authorization: Basic qwer@gmail.com qweqwe123
+
+### get report reasons
+GET localhost:8080/api/report-reasons
 Authorization: Basic qwer@gmail.com qweqwe123

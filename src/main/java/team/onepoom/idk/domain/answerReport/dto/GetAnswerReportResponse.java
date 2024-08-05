@@ -13,6 +13,7 @@ import team.onepoom.idk.domain.answerReport.AnswerReport;
 public class GetAnswerReportResponse {
     private long answerReportId;
     private long answerId;
+    private String reporter;
     private Provider writer;
     private String content;
     private String reportReason;
@@ -23,6 +24,7 @@ public class GetAnswerReportResponse {
 
         dto.answerReportId = answerReport.getId();
         dto.answerId = answerReport.getAnswer().getId();
+        dto.reporter = answerReport.getReporter().getNickname();
         dto.writer = answerReport.getAnswer().getWriter().toProvider();
         dto.content = answerReport.getAnswer().getContent();
         dto.reportReason = answerReport.getReportReason().getContent();
