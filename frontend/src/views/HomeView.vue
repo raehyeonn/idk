@@ -119,8 +119,8 @@ watch(() => route.query.search, (newTitle) => {
                                 }} | 조회수 {{ question.views }}</span>
                         </div>
                         <div class="question-title" >
-                            <span class="move">{{ question.title }}</span>
-                            <span>{{ question.answerCount }}개의 답변</span>
+                            <span class="move question-title1">{{ question.title }}</span>
+                            <span class="question-title2">{{ question.answerCount }}개의 답변</span>
                         </div>
                         <hr>
                     </div>
@@ -297,5 +297,14 @@ watch(() => route.query.search, (newTitle) => {
 .pagination button.active {
   background-color: #333A73;
   color: #FFFFFF;
+}
+.question-title1 {
+    flex: 5;
+    overflow-x: hidden;
+    text-overflow: ellipsis;
+}
+.question-title2 {
+    flex: 3;
+    text-align: end;
 }
 </style>

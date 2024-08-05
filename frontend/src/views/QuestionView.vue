@@ -318,6 +318,9 @@ h2 {
   color: #333A73;
   vertical-align: bottom;
   margin-top: 20px;
+    overflow-x: hidden;
+    text-overflow: ellipsis;
+    width: 80%;
 }
 
 .question-info {
