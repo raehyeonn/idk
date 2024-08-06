@@ -43,7 +43,7 @@ public class NoticeController {
     @ResponseStatus(HttpStatus.CREATED)
     @RolesAllowed({"ADMIN"})
     public CreateNoticeResponse createNotice(@AuthenticationPrincipal Provider provider,
-        @RequestBody CreateNoticeRequest createNoticeRequest) {
+        @Valid @RequestBody CreateNoticeRequest createNoticeRequest) {
         return noticeService.create(createNoticeRequest.toEntity(provider));
     }
 
