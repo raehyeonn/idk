@@ -302,6 +302,7 @@ watch(() => route.query.search, (newTitle) => {
 .question-title1 {
     flex: 5;
     overflow-x: hidden;
+    white-space: nowrap;
     text-overflow: ellipsis;
 }
 .question-title2 {
