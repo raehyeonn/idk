@@ -32,6 +32,10 @@ const isQuestionAuthor = computed(() => {
   return question.value && question.value.writer.id === currentUserId.value;
 });
 
+const isDeniedQuestion = computed(() => {
+    return question.value.writer.nickName === '탈퇴한 사용자';
+});
+
 const userRoles = computed(() => {
     const rolesString = sessionStorage.getItem('roles');
     return rolesString ? rolesString.split(' ') : [];
@@ -238,7 +242,7 @@ onMounted(async () => {
         </div>
       </div>
       <div class="write-wrap">
-        <div class="write-answer" v-if="!isAdmin">
+        <div class="write-answer" v-if="!isAdmin && !isQuestionAuthor && !isDeniedQuestion">
         <textarea ref="contentTextarea" name="answer-content" v-model="content" placeholder="내용을 입력해 주세요."
                   maxlength="1000" @input="autoResize"></textarea>
           <div>
