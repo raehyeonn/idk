@@ -62,7 +62,7 @@ public class GlobalExceptionAdvice {
     public ResponseEntity<ErrorResponse> handleMethodArgumentNotValidException(
         MethodArgumentNotValidException e) {
         ErrorResponse errorResponse = ErrorResponse.of(e.getBindingResult());
-        log.error("Validation error: ", e);
+        log.warn("Validation error: ", e.getMessage());
         return ResponseEntity.badRequest().body(errorResponse);
     }
 
@@ -70,7 +70,7 @@ public class GlobalExceptionAdvice {
     public ResponseEntity<ErrorResponse> handleConstraintViolationException(
         ConstraintViolationException e) {
         ErrorResponse errorResponse = ErrorResponse.of(e.getConstraintViolations());
-        log.error("Constraint violation: ", e);
+        log.warn("Constraint violation: ", e.getMessage());
         return ResponseEntity.badRequest().body(errorResponse);
     }
 
@@ -79,7 +79,7 @@ public class GlobalExceptionAdvice {
         HttpRequestMethodNotSupportedException e) {
         ErrorResponse errorResponse = ErrorResponse.of(HttpStatus.METHOD_NOT_ALLOWED,
             e.getMessage());
-        log.error("Method not allowed: ", e);
+        log.warn("Method not allowed: ", e.getMessage());
         return ResponseEntity.status(HttpStatus.METHOD_NOT_ALLOWED).body(errorResponse);
     }
 
@@ -90,7 +90,7 @@ public class GlobalExceptionAdvice {
             ? "Required request body is missing"
             : e.getMessage();
         ErrorResponse errorResponse = ErrorResponse.of(HttpStatus.BAD_REQUEST, message);
-        log.error("Bad request: ", e);
+        log.warn("Bad request: ", e.getMessage());
         return ResponseEntity.badRequest().body(errorResponse);
     }
 
