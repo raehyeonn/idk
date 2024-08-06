@@ -32,7 +32,7 @@ public class UserController {
         userService.create(request.toDomain());
     }
 
-    @RolesAllowed({"USER"})
+    @RolesAllowed({"USER", "SUSPEND"})
     @DeleteMapping("me")
     public void resign(@AuthenticationPrincipal Provider provider) {
         userService.delete(provider);
