@@ -1,9 +1,10 @@
 <script setup>
 import {deleteReportReasonAPI, getReportReasonAPI, postReportReasonAPI} from "@/api";
-import {onMounted, ref} from "vue";
+import {nextTick, onMounted, ref} from "vue";
 
 const content = ref("");
 const reportReasons = ref([]);
+const reasonContent = ref(null);
 
 const createReportReasons = async function() {
   try {
@@ -15,6 +16,12 @@ const createReportReasons = async function() {
     content.value = "";
   } catch (error) {
     console.log(error)
+      if (error.response.data.status == 400) {
+          alert("신고 사유를 입력해 주세요.");
+          await nextTick(() => {
+              reasonContent.value.focus();
+          })
+      }
   }
 }
 const deleteReportReason = async function(id) {
@@ -46,7 +53,7 @@ onMounted(() => {
   <div class="wrap">
     <div class="add-wrap">
       <h2>신고 사유 추가</h2>
-      <textarea name="report-reason" placeholder="신고 사유를 입력해 주세요." maxlength="100" v-model="content"></textarea>
+      <textarea ref="reasonContent" name="report-reason" placeholder="신고 사유를 입력해 주세요." maxlength="100" v-model="content"></textarea>
       <div class="action-button">
         <button class="submit-button" @click="createReportReasons()">추가</button>
       </div>
