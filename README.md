@@ -115,5 +115,6 @@
 
 ## 🌐 아키텍쳐
 
-<img width="954" alt="스크린샷 2024-08-06 오후 1 20 21" src="https://github.com/user-attachments/assets/ac242543-8605-4691-ac57-2e02fbe4a736">
+<img width="971" alt="2024-08-06_2 54 37" src="https://github.com/user-attachments/assets/aef4891e-7f8a-4531-879d-b543714b3cb3">
+
 
