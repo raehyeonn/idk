@@ -6,6 +6,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import team.onepoom.idk.common.exception.AnswerNotFoundException;
+import team.onepoom.idk.common.exception.ForbiddenException;
+import team.onepoom.idk.common.exception.QuestionNotFoundException;
 import team.onepoom.idk.common.exception.SelectedAnswerForbiddenException;
 import team.onepoom.idk.common.exception.SelectionConflictException;
 import team.onepoom.idk.common.exception.UserNotFoundException;
@@ -15,8 +17,10 @@ import team.onepoom.idk.domain.answer.dto.AnswerDTO;
 import team.onepoom.idk.domain.answer.dto.CreateAnswerRequest;
 import team.onepoom.idk.domain.answer.dto.ModifyAnswerRequest;
 import team.onepoom.idk.domain.answer.dto.MyAnswerResponse;
+import team.onepoom.idk.domain.question.Question;
 import team.onepoom.idk.domain.user.User;
 import team.onepoom.idk.repository.AnswerRepository;
+import team.onepoom.idk.repository.QuestionRepository;
 import team.onepoom.idk.repository.UserRepository;
 
 @Service
@@ -25,11 +29,17 @@ public class AnswerService {
 
     private final AnswerRepository answerRepository;
     private final UserRepository userRepository;
+    private final QuestionRepository questionRepository;
 
     @Transactional
     public AnswerDTO create(Provider provider, CreateAnswerRequest request) {
         User user = userRepository.findById(provider.id())
             .orElseThrow(() -> new UserNotFoundException(provider.id()));
+        Question question = questionRepository.findById(request.questionId())
+            .orElseThrow(() -> new QuestionNotFoundException(request.questionId()));
+        if (provider.id() == question.getWriter().getId()) {
+            throw new ForbiddenException("질문 작성자는 답변을 작성할 수 없습니다.");
+        }
         Answer answer = Answer.builder()
             .writer(user)
             .questionId(request.questionId())
