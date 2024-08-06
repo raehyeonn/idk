@@ -22,6 +22,7 @@ const questionInfo = ref({});
 
 const isReportAnswerModalOpen = ref(false);
 const answerInfo = ref({});
+const contentTextarea = ref(null);
 
 const currentUserId = computed(() => {
   return parseInt(sessionStorage.getItem('userId') || '0');
@@ -37,6 +38,7 @@ const userRoles = computed(() => {
 });
 
 const isAdmin = computed(() => userRoles.value.includes('ADMIN'));
+const isAnonymous = computed(() => userRoles.value.includes('ANONYMOUS'));
 
 const openReportQuestionModal = () => {
   questionInfo.value = {
@@ -125,9 +127,15 @@ const createAnswer = async function (questionId) {
     content.value = '';
   } catch (error) {
     console.log(error);
-      if (error.response.data.status == 400) {
+      if (isAnonymous.value) {
+          alert("로그인이 필요한 서비스입니다.");
+          await router.push(`/login`);
+      }
+      else if (error.response.data.status == 400) {
           alert("내용을 입력해 주세요.");
-          document.querySelector('textarea').focus();
+          await nextTick(() => {
+              contentTextarea.value.focus();
+          })
       }
   }
 };
@@ -231,7 +239,7 @@ onMounted(async () => {
       </div>
       <div class="write-wrap">
         <div class="write-answer" v-if="!isAdmin">
-        <textarea name="answer-content" v-model="content" placeholder="내용을 입력해 주세요."
+        <textarea ref="contentTextarea" name="answer-content" v-model="content" placeholder="내용을 입력해 주세요."
                   maxlength="1000" @input="autoResize"></textarea>
           <div>
             <strong>저작권 등 다른 사람의 권리를 침해하거나 명예를 훼손하는 게시물은 관리자에 의해 제재를 받으실 수
