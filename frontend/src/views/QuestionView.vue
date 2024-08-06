@@ -125,6 +125,10 @@ const createAnswer = async function (questionId) {
     content.value = '';
   } catch (error) {
     console.log(error);
+      if (error.response.data.status == 400) {
+          alert("내용을 입력해 주세요.");
+          document.querySelector('textarea').focus();
+      }
   }
 };
 
