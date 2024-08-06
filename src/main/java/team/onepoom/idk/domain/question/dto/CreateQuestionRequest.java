@@ -12,9 +12,10 @@ import org.hibernate.validator.constraints.Length;
 public class CreateQuestionRequest {
 
     @NotBlank
-    @Length(min = 2)
+    @Length(min = 2, max = 50)
     private String title;
     @NotBlank
+    @Length(min = 1, max = 500)
     private String content;
 
     @Builder

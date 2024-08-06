@@ -1,10 +1,11 @@
 <script setup>
-import {ref} from "vue";
+import {nextTick, ref} from "vue";
 import router from "@/router";
 import {createQuestionAPI} from "@/api";
 
 const title = ref("");
 const content = ref("");
+const contentTextarea = ref(null);
 
 const handleInput = (event) => {
     const target = event.currentTarget;
@@ -28,8 +29,17 @@ const createQuestion = async function () {
         await router.push(`/question/${response.data.id}`);
     } catch (error) {
         console.log(error);
-        alert("로그인이 필요한 서비스입니다.");
-        await router.push('/login');
+        if (error.response.data.status == 400) {
+            if (error.response.data.errors[0].field == 'title') {
+                alert("제목을 입력해 주세요.");
+                document.querySelector('.question-title').focus();
+            } else if (error.response.data.errors[0].field == 'content') {
+                alert("내용을 입력해 주세요.");
+                await nextTick(() => {
+                    contentTextarea.value.focus();
+                })
+            }
+        }
     }
 }
 </script>
@@ -41,7 +51,7 @@ const createQuestion = async function () {
             <input type="text" class="question-title" v-model="title" placeholder="제목을 입력해 주세요." minlength="2" maxlength="50" @input="handleInput">
         </div>
         <div class="write-content">
-            <textarea name="question-content" v-model="content" placeholder="내용을 입력해 주세요." @input="handleInput" maxlength="500"></textarea>
+            <textarea ref="contentTextarea" name="question-content" v-model="content" placeholder="내용을 입력해 주세요." @input="handleInput" maxlength="500"></textarea>
             <strong>저작권 등 다른 사람의 권리를 침해하거나 명예를 훼손하는 게시물은 관리자에 의해 제재를 받으실 수 있습니다.</strong>
         </div>
         <div class="write-button">
