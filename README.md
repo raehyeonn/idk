@@ -10,9 +10,11 @@
 </defs>
 </svg>
 
-![Group 174](https://github.com/user-attachments/assets/73b81991-3044-410b-82cb-c1d16c1af090)
+
 
 # QnA 질문 답변 사이트 I DON'T KNOW 
+![Group 174](https://github.com/user-attachments/assets/73b81991-3044-410b-82cb-c1d16c1af090)
+
 
 
 ## 📌 프로젝트 소개
@@ -32,28 +34,6 @@
 3. **커뮤니티 형성**: 비슷한 관심사를 가진 사용자들 간의 네트워크 형성을 촉진합니다.
 4. **사용자 참여 증진**: 답변 채택 기능을 통해 양질의 답변 작성을 장려합니다.
 5. **건전한 온라인 문화 조성**: 신고 시스템과 관리자 기능을 통해 부적절한 콘텐츠를 관리합니다.
-
-<br>
-
-## 🛠 기술 스택
-
-### Backend
-- Java 21
-- Spring Boot 3.3.2
-- Spring Security
-- Spring Data JPA
-- QueryDSL
-- MySQL
-
-### Frontend
-- Vue.js
-- CSS
-- JavaScript
-- HTML
-
-### Deployment
-- Amazon Lightsail
-- Nginx
 
 <br>
 
@@ -84,6 +64,9 @@
 - 관리자의 신고 처리
 
 <br>
+
+## 🔗 ERD
+<img width="1425" alt="스크린샷 2024-08-07 오후 4 01 33" src="https://github.com/user-attachments/assets/59e0f277-58db-4c74-a560-81a716fddc1a">
 
 ## 📋 요구사항 정의서
 
@@ -116,5 +99,27 @@
 ## 🌐 아키텍쳐
 
 <img width="971" alt="2024-08-06_2 54 37" src="https://github.com/user-attachments/assets/aef4891e-7f8a-4531-879d-b543714b3cb3">
+
+## 🛠 기술 스택
+
+### Backend
+- Java 21
+- Spring Boot 3.3.2
+- Spring Security
+- Spring Data JPA
+- QueryDSL
+- MySQL
+
+### Frontend
+- Vue.js
+- CSS
+- JavaScript
+- HTML
+
+### Deployment
+- Amazon Lightsail
+- Nginx
+
+<br>
 
 
