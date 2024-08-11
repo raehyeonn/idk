@@ -41,7 +41,6 @@
 
 <div align="center">
 
-## Team
 |<img src="https://avatars.githubusercontent.com/u/147456219?v=4" width="150" height="150"/>|<img src="https://avatars.githubusercontent.com/u/168792930?v=4" width="150" height="150"/>|<img src="https://avatars.githubusercontent.com/u/92567159?v=4" width="150" height="150"/>|
 |:-:|:-:|:-:|
 |강혜주<br/>[@hyezuu](https://github.com/hyezuu)|김래현<br/>[@raehyeonn](https://github.com/raehyeonn)|박정균<br/>[@junggyun](https://github.com/junggyun)|
@@ -117,22 +116,23 @@
 ## 🛠 기술 스택
 
 ### Backend
-- Java 21
-- Spring Boot 3.3.2
-- Spring Security
-- Spring Data JPA
-- QueryDSL
-- MySQL
+
+![Gradle](https://img.shields.io/badge/Gradle-02303A.svg?style=for-the-badge&logo=Gradle&logoColor=white)
+<img src="https://img.shields.io/badge/Spring-6DB33F?style=for-the-badge&logo=Spring&logoColor=white"> 
+<img src="https://img.shields.io/badge/Spring Boot-6DB33F?style=for-the-badge&logo=Spring Boot&logoColor=white"> 
+<img src="https://img.shields.io/badge/java-007396?style=for-the-badge&logo=java&logoColor=white">
+<br>
+<img src="https://img.shields.io/badge/MySQL-4479A1?style=for-the-badge&logo=MySQL&logoColor=white"> 
+![SpringSecurity](https://img.shields.io/badge/SpringSecurity-6DB33F.svg?style=for-the-badge&logo=SpringSecurity&logoColor=white) 
+<img src="https://img.shields.io/badge/QueryDSL-52B0E7?style=for-the-badge&logo=QueryDSL&logoColor=white"> <img src="https://img.shields.io/badge/Spring Data JPA-6DB33F?style=for-the-badge&logo=SpringDataJPA&logoColor=white">
 
 ### Frontend
-- Vue.js
-- CSS
-- JavaScript
-- HTML
+
+<img src="https://img.shields.io/badge/html5-E34F26?style=for-the-badge&logo=html5&logoColor=white"> <img src="https://img.shields.io/badge/css-1572B6?style=for-the-badge&logo=css3&logoColor=white"> <img src="https://img.shields.io/badge/javascript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black"> <img src="https://img.shields.io/badge/vue.js-4FC08D?style=for-the-badge&logo=vue.js&logoColor=white"> 
 
 ### Deployment
-- Amazon Lightsail
-- Nginx
+
+<img src="https://img.shields.io/badge/amazonaws-232F3E?style=for-the-badge&logo=amazonaws&logoColor=white"> <img src="https://img.shields.io/badge/lightsail-ED6B21?style=for-the-badge&logo=lightsail&logoColor=white"> <img src="https://img.shields.io/badge/nginx-009639?style=for-the-badge&logo=nginx&logoColor=white"> 
 
 <br>
 
