@@ -49,6 +49,32 @@
 
 </div>
 
+------
+
+<br>
+
+## 🛠 기술 스택
+
+### Backend
+
+![Gradle](https://img.shields.io/badge/Gradle-02303A.svg?style=for-the-badge&logo=Gradle&logoColor=white)
+<img src="https://img.shields.io/badge/Spring-6DB33F?style=for-the-badge&logo=Spring&logoColor=white"> 
+<img src="https://img.shields.io/badge/Spring Boot-6DB33F?style=for-the-badge&logo=Spring Boot&logoColor=white"> 
+<img src="https://img.shields.io/badge/java-007396?style=for-the-badge&logo=java&logoColor=white">
+<br>
+<img src="https://img.shields.io/badge/MySQL-4479A1?style=for-the-badge&logo=MySQL&logoColor=white"> 
+![SpringSecurity](https://img.shields.io/badge/SpringSecurity-6DB33F.svg?style=for-the-badge&logo=SpringSecurity&logoColor=white) 
+<img src="https://img.shields.io/badge/QueryDSL-52B0E7?style=for-the-badge&logo=QueryDSL&logoColor=white"> <img src="https://img.shields.io/badge/Spring Data JPA-6DB33F?style=for-the-badge&logo=SpringDataJPA&logoColor=white">
+
+### Frontend
+
+<img src="https://img.shields.io/badge/html5-E34F26?style=for-the-badge&logo=html5&logoColor=white"> <img src="https://img.shields.io/badge/css-1572B6?style=for-the-badge&logo=css3&logoColor=white"> <img src="https://img.shields.io/badge/javascript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black"> <img src="https://img.shields.io/badge/vue.js-4FC08D?style=for-the-badge&logo=vue.js&logoColor=white"> 
+
+### Deployment
+
+<img src="https://img.shields.io/badge/amazonaws-232F3E?style=for-the-badge&logo=amazonaws&logoColor=white"> <img src="https://img.shields.io/badge/lightsail-ED6B21?style=for-the-badge&logo=lightsail&logoColor=white"> <img src="https://img.shields.io/badge/nginx-009639?style=for-the-badge&logo=nginx&logoColor=white"> 
+
+<br>
 
 ## 🚀 주요 기능
 
@@ -78,40 +104,16 @@
 
 <br>
 
-## 🔗 ERD
-<img width="1425" alt="스크린샷 2024-08-07 오후 4 01 33" src="https://github.com/user-attachments/assets/59e0f277-58db-4c74-a560-81a716fddc1a">
-
 ## 📋 요구사항 정의서
 
 ![Mind Map](https://github.com/user-attachments/assets/04655339-3e66-4b8c-8606-b69bece6cecd)
+
+## 🔗 ERD
+<img width="1425" alt="스크린샷 2024-08-07 오후 4 01 33" src="https://github.com/user-attachments/assets/59e0f277-58db-4c74-a560-81a716fddc1a">
 
 <br>
 
 ## 🌐 아키텍쳐
 
 <img width="971" alt="2024-08-06_2 54 37" src="https://github.com/user-attachments/assets/aef4891e-7f8a-4531-879d-b543714b3cb3">
-
-## 🛠 기술 스택
-
-### Backend
-
-![Gradle](https://img.shields.io/badge/Gradle-02303A.svg?style=for-the-badge&logo=Gradle&logoColor=white)
-<img src="https://img.shields.io/badge/Spring-6DB33F?style=for-the-badge&logo=Spring&logoColor=white"> 
-<img src="https://img.shields.io/badge/Spring Boot-6DB33F?style=for-the-badge&logo=Spring Boot&logoColor=white"> 
-<img src="https://img.shields.io/badge/java-007396?style=for-the-badge&logo=java&logoColor=white">
-<br>
-<img src="https://img.shields.io/badge/MySQL-4479A1?style=for-the-badge&logo=MySQL&logoColor=white"> 
-![SpringSecurity](https://img.shields.io/badge/SpringSecurity-6DB33F.svg?style=for-the-badge&logo=SpringSecurity&logoColor=white) 
-<img src="https://img.shields.io/badge/QueryDSL-52B0E7?style=for-the-badge&logo=QueryDSL&logoColor=white"> <img src="https://img.shields.io/badge/Spring Data JPA-6DB33F?style=for-the-badge&logo=SpringDataJPA&logoColor=white">
-
-### Frontend
-
-<img src="https://img.shields.io/badge/html5-E34F26?style=for-the-badge&logo=html5&logoColor=white"> <img src="https://img.shields.io/badge/css-1572B6?style=for-the-badge&logo=css3&logoColor=white"> <img src="https://img.shields.io/badge/javascript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black"> <img src="https://img.shields.io/badge/vue.js-4FC08D?style=for-the-badge&logo=vue.js&logoColor=white"> 
-
-### Deployment
-
-<img src="https://img.shields.io/badge/amazonaws-232F3E?style=for-the-badge&logo=amazonaws&logoColor=white"> <img src="https://img.shields.io/badge/lightsail-ED6B21?style=for-the-badge&logo=lightsail&logoColor=white"> <img src="https://img.shields.io/badge/nginx-009639?style=for-the-badge&logo=nginx&logoColor=white"> 
-
-<br>
-
 
