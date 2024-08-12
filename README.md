@@ -35,6 +35,8 @@
 4. **사용자 참여 증진**: 답변 채택 기능을 통해 양질의 답변 작성을 장려합니다.
 5. **건전한 온라인 문화 조성**: 신고 시스템과 관리자 기능을 통해 부적절한 콘텐츠를 관리합니다.
 
+<br>
+
 
 ## 👀 팀 소개
 
@@ -108,6 +110,78 @@
 
 ## 🔗 ERD
 <img width="1425" alt="스크린샷 2024-08-07 오후 4 01 33" src="https://github.com/user-attachments/assets/59e0f277-58db-4c74-a560-81a716fddc1a">
+
+<br>
+
+## 📜 API 명세서
+
+### Question
+
+| 메서드명 | HTTP 메서드 | 엔드포인트 | 역할 |
+|----------|-------------|------------|------|
+| createQuestion | POST | /api/questions | 질문 생성 |
+| modify | PUT | /api/questions/{id} | 질문 수정 |
+| delete | DELETE | /api/questions/{id} | 질문 삭제 |
+| getQuestion | GET | /api/questions/{id} | 단일 질문 조회 |
+| findQuestions | GET | /api/questions | 전체 질문 목록 조회 |
+| findMyQuestions | GET | /api/questions/me | 나의 질문 목록 조회 |
+
+### Answer
+
+| 메서드명 | HTTP 메서드 | 엔드포인트 | 역할 |
+|----------|-------------|------------|------|
+| create | POST | /api/answers | 답변 생성 |
+| modify | PUT | /api/answers/{id} | 답변 수정 |
+| delete | DELETE | /api/answers/{id} | 답변 삭제 |
+| select | POST | /api/answers/{id}/selections | 답변 채택 |
+| getMyAnswers | GET | /api/answers/me | 나의 답변 목록 조회 |
+
+### Notice
+
+| 메서드명 | HTTP 메서드 | 엔드포인트 | 역할 |
+|----------|-------------|------------|------|
+| createNotice | POST | /api/notices | 공지사항 생성 |
+| updateNotice | PUT | /api/notices/{id} | 공지사항 수정 |
+| deleteNotice | DELETE | /api/notices/{id} | 공지사항 삭제 |
+| detailNotice | GET | /api/notices/{id} | 단일 공지사항 조회 |
+| allNotice | GET | /api/notices | 전체 공지사항 목록 조회 |
+| fiveNotice | GET | /api/notices/five | 공지사항 5개 목록 조회 |
+
+### User
+
+| 메서드명 | HTTP 메서드 | 엔드포인트 | 역할 |
+|----------|-------------|------------|------|
+| join | POST | /api/users/join | 회원 가입 |
+| resign | DELETE | /api/users/me | 회원 탈퇴 |
+| suspend | POST | /api/users/{id}/roles | 회원 정지 |
+| unsuspend | DELETE | /api/users/{id}/roles | 회원 정지 취소 |
+| login | POST | /api/users/login | 회원 로그인 |
+
+### QuestionReport
+
+| 메서드명 | HTTP 메서드 | 엔드포인트 | 역할 |
+|----------|-------------|------------|------|
+| reportQuestion | POST | /api/questions/reports | 질문 신고 생성 |
+| deleteQusetionReport | DELETE | /api/questions/reports/{id} | 질문 신고 삭제 |
+| getAllQuestionReports | GET | /api/questions/reports | 전체 질문 신고 목록 조회 |
+| handleQuestionReport | POST | /api/questions/reports/handle/{id} | 질문 신고 처리 - 회원 정지 |
+
+### AnswerReport
+
+| 메서드명 | HTTP 메서드 | 엔드포인트 | 역할 |
+|----------|-------------|------------|------|
+| createAnswerReport | POST | /api/reports/answers | 답변 신고 생성 |
+| deleteAnswerReport | DELETE | /api/reports/answers/{id} | 답변 신고 삭제 |
+| getAllAnswerReports | GET | /api/reports/answers | 전체 답변 신고 목록 조회 |
+| suspensionReportUser | POST | /api/reports/answers/{id} | 답변 신고 처리 - 회원 정지 |
+
+### ReportReason
+
+| 메서드명 | HTTP 메서드 | 엔드포인트 | 역할 |
+|----------|-------------|------------|------|
+| createReportReason | POST | /api/report-reasons | 신고 사유 생성 |
+| deleteReportReason | DELETE | /api/report-reasons/{id} | 신고 사유 삭제 |
+| allReportReason | GET | /api/report-reasons | 전체 신고 사유 목록 조회 | 
 
 <br>
 
