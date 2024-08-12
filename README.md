@@ -41,7 +41,7 @@
 
 <div align="center">
 
-|<img src="https://github.com/user-attachments/assets/2d25ee05-f8c4-494a-b634-fe69a475f30d" width="150" height="150"/>|<img src="https://github.com/user-attachments/assets/e16035f2-ec53-4c60-8edf-8a7689b4a904" width="150" height="150"/>|<img src="https://github.com/user-attachments/assets/56725998-05ac-4389-b7b1-1f9f6cb1555b" width="150" height="150"/>|
+|<img src="https://github.com/user-attachments/assets/4b0d27fb-d666-4df8-81a3-39fef685c59d" width="150" height="150"/>|<img src="https://github.com/user-attachments/assets/e16035f2-ec53-4c60-8edf-8a7689b4a904" width="150" height="150"/>|<img src="https://github.com/user-attachments/assets/56725998-05ac-4389-b7b1-1f9f6cb1555b" width="150" height="150"/>|
 |:-:|:-:|:-:|
 |강혜주<br/>[@hyezuu](https://github.com/hyezuu)|김래현<br/>[@raehyeonn](https://github.com/raehyeonn)|박정균<br/>[@junggyun](https://github.com/junggyun)|
 | **#Frontend**<br>- 질문 글 상세 페이지<br>- 공지사항 목록 페이지<br>- 관리자 페이지<br>- 신고 모달<br><br>**#Backend**<br>- 인증/인가<br>- 답변 등록/조회/수정/삭제/채택<br>- 회원 탈퇴/권한 변경/정보 수정<br>- 답변 신고 처리<br>- 질문 신고 | **#Frontend**<br>- 메인 페이지<br>- 마이 페이지<br><br>**#Backend**<br>- 공지사항 등록/조회/수정/삭제<br>- 신고 사유 등록/조회/삭제<br>- 답변 신고<br><br>**#기타**<br>- 결과 보고서<br>- 발표 | **#Frontend**<br>- Vue.js 환경 구성 및 설계<br>- API 연동 및 데이터 바인딩<br>- 로그인/회원가입 페이지<br>- 질문 작성/수정 페이지<br>- 공지사항 작성/수정/상세 페이지<br><br>**#Backend**<br>- 인증/인가<br>- 질문 글 등록/수정/삭제/조회<br>- 질문 신고 처리<br><br>**#기타**<br>- 배포 |
