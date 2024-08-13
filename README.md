@@ -54,6 +54,59 @@
 
 </div>
 
+<br>
+
+## 🪄 Pages Preview
+
+| 회원가입 | 회원탈퇴 |
+| :---: | :---: |
+| <img src="" width="370" height="200"/> | <img src="" width="370" height="200"/> |
+
+| 로그인 : 회원 | 로그인 : 관리자 |
+| :---: | :---: |
+| <img src="" width="370" height="200"/> | <img src="" width="370" height="200"/> |
+
+| 메인 : 검색 | 메인 : 페이지네이션 |
+| :---: | :---: |
+| <img src="" width="370" height="200"/> | <img src="" width="370" height="200"/> |
+
+| 질문 작성 | 질문 수정 |
+| :---: | :---: |
+| <img src="" width="370" height="200"/> | <img src="" width="370" height="200"/> |
+
+| 질문 삭제 | 질문 신고 |
+| :---: | :---: |
+| <img src="" width="370" height="200"/> | <img src="" width="370" height="200"/> |
+
+| 답변 작성 | 답변 수정 |
+| :---: | :---: |
+| <img src="" width="370" height="200"/> | <img src="" width="370" height="200"/> |
+
+| 답변 삭제 | 답변 신고 |
+| :---: | :---: |
+| <img src="" width="370" height="200"/> | <img src="" width="370" height="200"/> |
+
+| 답변 채택 | 신고 처리 |
+| :---: | :---: |
+| <img src="" width="370" height="200"/> | <img src="" width="370" height="200"/> |
+
+| 공지사항 등록 | 공지사항 수정 |
+| :---: | :---: |
+| <img src="" width="370" height="200"/> | <img src="" width="370" height="200"/> |
+
+| 공지사항 삭제 | 신고사유 등록 |
+| :---: | :---: |
+| <img src="" width="370" height="200"/> | <img src="" width="370" height="200"/> |
+
+| 신고사유 삭제 | 신고 삭제 |
+| :---: | :---: |
+| <img src="" width="370" height="200"/> | <img src="" width="370" height="200"/> |
+
+| 신고 처리된 질문 | 신고 처리된 답변 |
+| :---: | :---: |
+| <img src="" width="370" height="200"/> | <img src="" width="370" height="200"/> |
+
+
 
 <br>
 
