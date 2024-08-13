@@ -1,8 +1,5 @@
 package team.onepoom.idk.domain.user;
 
-import static team.onepoom.idk.domain.user.Role.ADMIN;
-import static team.onepoom.idk.domain.user.Role.ANONYMOUS;
-import static team.onepoom.idk.domain.user.Role.SUSPEND;
 import static team.onepoom.idk.domain.user.Role.USER;
 
 import jakarta.persistence.CascadeType;
@@ -24,10 +21,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-import team.onepoom.idk.common.exception.ConflictException;
-import team.onepoom.idk.common.exception.UserForbiddenException;
-import team.onepoom.idk.common.exception.UserRoleConflictException;
-import team.onepoom.idk.common.exception.UserRoleNotFoundException;
 import team.onepoom.idk.domain.BaseEntity;
 import team.onepoom.idk.domain.Provider;
 
