@@ -50,7 +50,8 @@ public class CustomRepository {
         JPAQuery<Long> count = queryFactory
             .select(question.count())
             .from(question)
-            .where(titleContains(title));
+            .where(titleContains(title))
+            .where(question.reportedAt.isNull());
 
         return PageableExecutionUtils.getPage(questions, pageable, count::fetchOne);
     }
