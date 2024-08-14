@@ -56,59 +56,59 @@
 
 <br>
 
+
 ## 🪄 Pages Preview
 
 | 회원가입 | 회원탈퇴 |
 | :---: | :---: |
-| <img src="" width="370" height="200"/> | <img src="" width="370" height="200"/> |
+| <img src="https://github.com/user-attachments/assets/4a7801ed-5c6b-4de9-8512-ef6943dabc13" width="370" height="200"/> | <img src="https://github.com/user-attachments/assets/5dfef1cb-8feb-4fd9-8211-4de4c6b36117" width="370" height="200"/> |
 
 | 로그인 : 회원 | 로그인 : 관리자 |
 | :---: | :---: |
-| <img src="" width="370" height="200"/> | <img src="" width="370" height="200"/> |
+| <img src="https://github.com/user-attachments/assets/689007ca-a960-4c81-86a5-0a70123eabb6" width="370" height="200"/> | <img src="https://github.com/user-attachments/assets/c21fc719-ea60-4aad-8e48-80a22678a6fc" width="370" height="200"/> |
 
 | 메인 : 검색 | 메인 : 페이지네이션 |
 | :---: | :---: |
-| <img src="" width="370" height="200"/> | <img src="" width="370" height="200"/> |
+| <img src="https://github.com/user-attachments/assets/ae81f49f-23fd-48ec-8f3e-74603696d031" width="370" height="200"/> | <img src="https://github.com/user-attachments/assets/fe18252e-9038-400c-801f-89f0f14bf7b2" width="370" height="200"/> |
 
 | 질문 작성 | 질문 수정 |
 | :---: | :---: |
-| <img src="" width="370" height="200"/> | <img src="" width="370" height="200"/> |
+| <img src="https://github.com/user-attachments/assets/ecb3c0b2-f6fa-407a-9a90-2d8470605a0e" width="370" height="200"/> | <img src="https://github.com/user-attachments/assets/f9b06c85-8dfb-494e-a952-cd785db04027" width="370" height="200"/> |
 
 | 질문 삭제 | 질문 신고 |
 | :---: | :---: |
-| <img src="" width="370" height="200"/> | <img src="" width="370" height="200"/> |
+| <img src="https://github.com/user-attachments/assets/deed23f5-28be-4759-a97d-c333e9385b03" width="370" height="200"/> | <img src="https://github.com/user-attachments/assets/eae6f9cf-00b2-4745-82ad-0ebea54f0e97" width="370" height="200"/> |
 
 | 답변 작성 | 답변 수정 |
 | :---: | :---: |
-| <img src="" width="370" height="200"/> | <img src="" width="370" height="200"/> |
+| <img src="https://github.com/user-attachments/assets/5f605eef-5758-4342-9b04-f1d1b37f1748" width="370" height="200"/> | <img src="https://github.com/user-attachments/assets/dc269a96-eb09-45eb-be9a-d14c760094c0" width="370" height="200"/> |
 
 | 답변 삭제 | 답변 신고 |
 | :---: | :---: |
-| <img src="" width="370" height="200"/> | <img src="" width="370" height="200"/> |
+| <img src="https://github.com/user-attachments/assets/93edebe7-3bfd-416b-8763-f42abecb8b8a" width="370" height="200"/> | <img src="https://github.com/user-attachments/assets/a01991a5-8066-479f-93fc-0c352ff6834a" width="370" height="200"/> |
 
 | 답변 채택 | 신고 처리 |
 | :---: | :---: |
-| <img src="" width="370" height="200"/> | <img src="" width="370" height="200"/> |
+| <img src="https://github.com/user-attachments/assets/6cf8dafd-f48a-48f7-9ca8-dc469b054673" width="370" height="200"/> | <img src="https://github.com/user-attachments/assets/488af29b-dd27-4e03-a35f-83bb266cdc99" width="370" height="200"/> |
 
 | 공지사항 등록 | 공지사항 수정 |
 | :---: | :---: |
-| <img src="" width="370" height="200"/> | <img src="" width="370" height="200"/> |
+| <img src="https://github.com/user-attachments/assets/b14cc72a-0288-4b52-bb97-826aa60f3f41" width="370" height="200"/> | <img src="https://github.com/user-attachments/assets/92cb8a92-b4d3-489c-9630-2efabe7dbd82" width="370" height="200"/> |
 
 | 공지사항 삭제 | 신고사유 등록 |
 | :---: | :---: |
-| <img src="" width="370" height="200"/> | <img src="" width="370" height="200"/> |
+| <img src="https://github.com/user-attachments/assets/48f146d4-ec2b-4ddc-82db-39965b7f3f9b" width="370" height="200"/> | <img src="https://github.com/user-attachments/assets/4d5981f6-50f1-4f84-b1a2-a148eea9977f" width="370" height="200"/> |
 
 | 신고사유 삭제 | 신고 삭제 |
 | :---: | :---: |
-| <img src="" width="370" height="200"/> | <img src="" width="370" height="200"/> |
+| <img src="https://github.com/user-attachments/assets/808995a3-8e56-438a-a142-cb91700327bd" width="370" height="200"/> | <img src="https://github.com/user-attachments/assets/1fc7044a-f21c-4127-a8ae-31550a1003e7" width="370" height="200"/> |
 
 | 신고 처리된 질문 | 신고 처리된 답변 |
 | :---: | :---: |
-| <img src="" width="370" height="200"/> | <img src="" width="370" height="200"/> |
-
-
+| <img src="https://github.com/user-attachments/assets/1dbb0cff-6e9f-4c7f-8d80-2394f776c6e2" width="370" height="200"/> | <img src="https://github.com/user-attachments/assets/e222988e-d226-42ad-a798-e949cd5c49a5" width="370" height="200"/> |
 
 <br>
+
 
 ## 🛠 기술 스택
 
