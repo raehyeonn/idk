@@ -54,8 +54,61 @@
 
 </div>
 
+<br>
+
+## 🪄 Pages Preview
+
+| 회원가입 | 회원탈퇴 |
+| :---: | :---: |
+| <img src="https://github.com/user-attachments/assets/ba572589-9e25-4fe0-ba3d-64be68ec7401" width="380" height="220"/> | <img src="https://github.com/user-attachments/assets/f813cc28-c7db-47a5-b276-ffd8923497ba" width="380" height="220"/> |
+
+| 로그인 : 회원 | 로그인 : 관리자 |
+| :---: | :---: |
+| <img src="https://github.com/user-attachments/assets/9beef418-d5d9-4a62-8fdb-bf8f47a0200a" width="380" height="220"/> | <img src="https://github.com/user-attachments/assets/85196ab0-57b2-454c-86eb-21bcbb64606e" width="380" height="220"/> |
+
+| 메인 : 검색 | 메인 : 페이지네이션 |
+| :---: | :---: |
+| <img src="https://github.com/user-attachments/assets/43a48b08-8e1c-4918-a75c-9d3d1c2d1841" width="380" height="220"/> | <img src="https://github.com/user-attachments/assets/a9d9ef30-e24b-41be-8892-4a50a3bb78ed" width="380" height="220"/> |
+
+| 질문 작성 | 질문 수정 |
+| :---: | :---: |
+| <img src="https://github.com/user-attachments/assets/21ccf277-89d7-43cd-94f5-dc491c43ac14" width="380" height="220"/> | <img src="https://github.com/user-attachments/assets/6d53c580-36ae-47b9-a972-a4bc2e17d83a" width="380" height="220"/> |
+
+| 질문 삭제 | 질문 신고 |
+| :---: | :---: |
+| <img src="https://github.com/user-attachments/assets/76e82cc3-46c2-4e0b-a29e-757714a60c43" width="380" height="220"/> | <img src="https://github.com/user-attachments/assets/63cce228-2f91-4e6b-8b37-2c0f48344edb" width="380" height="220"/> |
+
+| 답변 작성 | 답변 수정 |
+| :---: | :---: |
+| <img src="https://github.com/user-attachments/assets/46cb7ef0-d777-49e7-a29b-60e168ab0250" width="380" height="220"/> | <img src="https://github.com/user-attachments/assets/762f3e49-03c3-4f2e-b595-1e4c363e4d62" width="380" height="220"/> |
+
+| 답변 삭제 | 답변 신고 |
+| :---: | :---: |
+| <img src="https://github.com/user-attachments/assets/8f6200bb-e5be-4f48-8531-5a8a9453eb51" width="380" height="220"/> | <img src="https://github.com/user-attachments/assets/0a7d60ee-1d1e-4a35-9f41-9c13d4bb99c1" width="380" height="220"/> |
+
+| 답변 채택 | 신고 처리 |
+| :---: | :---: |
+| <img src="https://github.com/user-attachments/assets/a04f2412-bc68-4775-a63c-b3994d1f47de" width="380" height="220"/> | <img src="https://github.com/user-attachments/assets/06178163-5ded-44cf-bfc0-dad178c1a012" width="380" height="220"/> |
+
+| 공지사항 등록 | 공지사항 수정 |
+| :---: | :---: |
+| <img src="https://github.com/user-attachments/assets/556601af-14a3-4c93-8f8f-42ba086367aa" width="380" height="220"/> | <img src="https://github.com/user-attachments/assets/3fc5dffe-9762-430a-b552-d35df392813c" width="380" height="220"/> |
+
+| 공지사항 삭제 | 신고사유 등록 |
+| :---: | :---: |
+| <img src="https://github.com/user-attachments/assets/81bbee5a-2de3-46ca-8757-7ca95e7f4cd7" width="380" height="220"/> | <img src="https://github.com/user-attachments/assets/b398f739-565b-4c24-9c24-e4d58efa271e" width="380" height="220"/> |
+
+| 신고사유 삭제 | 신고 삭제 |
+| :---: | :---: |
+| <img src="https://github.com/user-attachments/assets/70f7497f-04ed-441a-ad3c-f3d73fc3d0d4" width="380" height="220"/> | <img src="https://github.com/user-attachments/assets/8cdb2499-2cba-473c-96c5-0b109bf731cd" width="380" height="220"/> |
+
+| 신고 처리된 질문 | 신고 처리된 답변 |
+| :---: | :---: |
+| <img src="https://github.com/user-attachments/assets/1dbb0cff-6e9f-4c7f-8d80-2394f776c6e2" width="380" height="220"/> | <img src="https://github.com/user-attachments/assets/e222988e-d226-42ad-a798-e949cd5c49a5" width="380" height="220"/> |
+
 
 <br>
+
 
 ## 🛠 기술 스택
 
@@ -78,39 +131,10 @@
 
 <img src="https://img.shields.io/badge/amazonaws-232F3E?style=for-the-badge&logo=amazonaws&logoColor=white"> <img src="https://img.shields.io/badge/lightsail-ED6B21?style=for-the-badge&logo=lightsail&logoColor=white"> <img src="https://img.shields.io/badge/nginx-009639?style=for-the-badge&logo=nginx&logoColor=white"> 
 
-<br>
-
-## 🚀 주요 기능
-
-### 👥 회원 관리
-- 회원 가입: 이메일, 비밀번호, 닉네임으로 가입
-- 회원 탈퇴: Soft delete 방식
-- 회원 권한 변경: 관리자가 회원 권한 조정 가능 (e.g., 정지)
-
-### ❓ 질문
-- 질문 등록, 조회, 수정, 삭제
-- 질문 목록 조회 (채택 여부, 답변 개수 포함)
-- 내 질문 목록 조회
-
-### 💬 답변
-- 답변 등록, 조회, 수정, 삭제
-- 답변 채택
-- 내 답변 목록 조회
-
-### 📢 공지사항
-- 공지사항 등록, 조회, 수정, 삭제
-- 공지사항 목록 조회 (상위 5개)
-
-### 🚨 신고 시스템
-- 질문 및 답변 신고
-- 신고 사유 조회
-- 관리자의 신고 처리
-
-<br>
-
 ## 📋 요구사항 정의서
 
 ![Mind Map](https://github.com/user-attachments/assets/04655339-3e66-4b8c-8606-b69bece6cecd)
+
 
 ## 🔗 ERD
 <img width="1425" alt="스크린샷 2024-08-07 오후 4 01 33" src="https://github.com/user-attachments/assets/59e0f277-58db-4c74-a560-81a716fddc1a">
