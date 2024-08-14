@@ -26,9 +26,9 @@ jobs:
           cache: gradle
 
       - name: Create application.yml from GitHub Secrets
-        run:
+        run: |
           mkdir -p src/main/resources/
-          echo "${{ secrets.APPLICATION_YML }}" > src/main/resources/application.yml
+          echo "${{ secrets.APPLICATION_YML }}" | tee src/main/resources/application.yml
 
       - name: Build with Gradle
         run: ./gradlew clean build -x test
