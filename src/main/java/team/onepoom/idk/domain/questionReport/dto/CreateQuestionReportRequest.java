@@ -9,9 +9,4 @@ import team.onepoom.idk.domain.user.User;
 
 public record CreateQuestionReportRequest(@Positive long questionId,
                                           @Positive long reportReasonId) {
-
-    public QuestionReport toEntity(Provider provider) {
-        return new QuestionReport(new User(provider.id()), new ReportReason(reportReasonId),
-            new Question(questionId));
-    }
 }
