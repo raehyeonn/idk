@@ -33,7 +33,7 @@ public class AnswerReportController {
     @ResponseStatus(HttpStatus.CREATED)
     @RolesAllowed({"USER"})
     public void createAnswerReport(@AuthenticationPrincipal Provider provider, @RequestBody CreateAnswerReportRequest request) {
-        answerReportService.create(request.toEntity(provider));
+        answerReportService.create(provider, request);
     }
 
     @DeleteMapping("/{id}")
