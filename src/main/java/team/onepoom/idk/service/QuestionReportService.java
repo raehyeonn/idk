@@ -8,11 +8,16 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import team.onepoom.idk.common.exception.CompletedReportException;
 import team.onepoom.idk.common.exception.QuestionReportNotFoundException;
+import team.onepoom.idk.common.exception.ReportReasonNotFoundException;
 import team.onepoom.idk.domain.Provider;
+import team.onepoom.idk.domain.question.Question;
 import team.onepoom.idk.domain.questionReport.QuestionReport;
 import team.onepoom.idk.domain.questionReport.dto.CreateQuestionReportRequest;
 import team.onepoom.idk.domain.questionReport.dto.GetQuestionReportResponse;
+import team.onepoom.idk.domain.reportReason.ReportReason;
+import team.onepoom.idk.domain.user.User;
 import team.onepoom.idk.repository.QuestionReportRepository;
+import team.onepoom.idk.repository.ReportReasonRepository;
 
 @Service
 @RequiredArgsConstructor
@@ -21,11 +26,16 @@ public class QuestionReportService {
     private final QuestionReportRepository questionReportRepository;
     private final QuestionService questionService;
     private final UserService userService;
+    private final ReportReasonRepository reportReasonRepository;
 
     @Transactional
     public void create(Provider provider, CreateQuestionReportRequest request) {
+        ReportReason reportReason = reportReasonRepository.findById(request.reportReasonId())
+            .orElseThrow(ReportReasonNotFoundException::new);
         questionService.findQuestion(request.questionId());
-        questionReportRepository.save(request.toEntity(provider));
+
+        questionReportRepository.save(new QuestionReport(new User(provider.id()), reportReason,
+            new Question(request.questionId())));
     }
 
     @Transactional(readOnly = true)

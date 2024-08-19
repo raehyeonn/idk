@@ -23,3 +23,7 @@ Authorization: Basic qwer@gmail.com qweqwe123
 ### get report reasons
 GET localhost:8080/api/report-reasons
 Authorization: Basic qwer@gmail.com qweqwe123
+
+### delete report reasons
+DELETE localhost:8080/api/report-reasons/1
+Authorization: Basic qwer@gmail.com qweqwe123

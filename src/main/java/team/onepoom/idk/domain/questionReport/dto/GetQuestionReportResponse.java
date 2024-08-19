@@ -25,7 +25,7 @@ public record GetQuestionReportResponse(
             questionReport.getReporter().getNickname(),
             question.getContent(),
             new WriterDTO(question.getWriter()),
-            questionReport.getCreatedAt(), questionReport.getReportReason().getContent()
+            questionReport.getCreatedAt(), questionReport.getReportReason()
         );
     }
 }

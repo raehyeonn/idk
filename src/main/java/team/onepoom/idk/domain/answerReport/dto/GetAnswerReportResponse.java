@@ -27,7 +27,7 @@ public class GetAnswerReportResponse {
         dto.reporter = answerReport.getReporter().getNickname();
         dto.writer = answerReport.getAnswer().getWriter().toProvider();
         dto.content = answerReport.getAnswer().getContent();
-        dto.reportReason = answerReport.getReportReason().getContent();
+        dto.reportReason = answerReport.getReportReason();
         dto.createdAt = answerReport.getCreatedAt();
 
         return dto;

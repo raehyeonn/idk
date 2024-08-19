@@ -32,9 +32,7 @@ public class QuestionReport extends BaseEntity {
     @JoinColumn(name = "reporter_id")
     private User reporter;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "report_reason_id")
-    private ReportReason reportReason;
+    private String reportReason;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "question_id")
@@ -47,7 +45,7 @@ public class QuestionReport extends BaseEntity {
     public QuestionReport(User reporter, ReportReason reportReason,
         Question question) {
         this.reporter = reporter;
-        this.reportReason = reportReason;
+        this.reportReason = reportReason.getContent();
         this.question = question;
     }
 

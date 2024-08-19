@@ -10,6 +10,7 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import java.time.ZonedDateTime;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import team.onepoom.idk.common.exception.CompletedReportException;
@@ -33,9 +34,7 @@ public class AnswerReport extends BaseEntity {
     @JoinColumn(name = "reporter_id")
     private User reporter;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "report_reason_id")
-    private ReportReason reportReason;
+    private String reportReason;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "answer_id")
@@ -44,9 +43,10 @@ public class AnswerReport extends BaseEntity {
     private ZonedDateTime completedAt; // 처리 일자
 
     //생성 메서드
+    @Builder
     public AnswerReport(Provider provider, ReportReason reportReason, Answer answer) {
         this.reporter = new User(provider.id());
-        this.reportReason = reportReason;
+        this.reportReason = reportReason.getContent();
         this.answer = answer;
     }
 
