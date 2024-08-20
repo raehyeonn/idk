@@ -50,4 +50,5 @@ jobs:
           script: |
             docker pull ${{ secrets.SERVER_IMAGE_TAG }}
             docker pull ${{ secrets.CLIENT_IMAGE_TAG }}
+            docker compose down
             docker compose up --build -d
