@@ -18,7 +18,7 @@ public record AnswerResponse(
         return new AnswerResponse(
             answer.getId(),
             new WriterDTO(answer.getWriter()),
-            answer.getContent(),
+            answer.getContent()+"테스트",
             answer.isSelected(),
             answer.getCreatedAt(),
             answer.getUpdatedAt()
