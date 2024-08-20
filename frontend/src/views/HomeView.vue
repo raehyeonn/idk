@@ -30,7 +30,7 @@ const goQuestion = function (id) {
 
 const goQuestionWrite = function () {
     if (isAnonymous.value) {
-        alert("로그인이 필요한 서비스입니다요.");
+        alert("로그인이 필요한 서비스입니다.");
         router.push(`/login`);
     } else {
         router.push(`/question/write`);
