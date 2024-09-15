@@ -20,7 +20,7 @@
 [![프로젝트 개요](https://img.shields.io/badge/🚩-프로젝트_개요-FFA06B?logoColor=white)](#-프로젝트-개요) 
 [![기대효과](https://img.shields.io/badge/🎯-기대효과-FFD93D?logoColor=black)](#-기대효과) 
 [![팀 소개](https://img.shields.io/badge/👀-팀_소개-6BCB77?logoColor=white)](#-팀-소개) 
-[![Pages Preview](https://img.shields.io/badge/🪄-Pages_Preview-4D96FF?logoColor=white)](#-pages-preview) 
+[![화면 구성](https://img.shields.io/badge/🪄-화면구성-4D96FF?logoColor=white)](#-화면-구성) 
 [![기술 스택](https://img.shields.io/badge/🛠-기술_스택-002B5B?logoColor=white)](#-기술-스택) 
 [![요구사항 정의서](https://img.shields.io/badge/📋-요구사항_정의서-1363DF?logoColor=white)](#-요구사항-정의서) 
 [![ERD](https://img.shields.io/badge/🔗-ERD-47B5FF?logoColor=white)](#-erd) 
@@ -66,7 +66,7 @@
 
 <br>
 
-## 🪄 Pages Preview
+## 🪄 화면 구성
 
 | 회원가입 | 회원탈퇴 |
 | :---: | :---: |
