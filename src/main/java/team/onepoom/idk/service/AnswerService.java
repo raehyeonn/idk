@@ -45,9 +45,9 @@ public class AnswerService {
             .questionId(request.questionId())
             .content(request.content())
             .build();
-        answerRepository.save(answer);
+        Answer savedAnswer = answerRepository.save(answer);
 
-        return new AnswerDTO(answer);
+        return new AnswerDTO(savedAnswer);
     }
 
     @Transactional
