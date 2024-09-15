@@ -22,7 +22,7 @@
 [![팀 소개](https://img.shields.io/badge/👀-팀_소개-6BCB77?logoColor=white)](#-팀-소개) 
 [![화면 구성](https://img.shields.io/badge/🪄-화면구성-4D96FF?logoColor=white)](#-화면-구성) 
 [![기술 스택](https://img.shields.io/badge/🛠-기술_스택-002B5B?logoColor=white)](#-기술-스택) 
-[![요구사항 정의서](https://img.shields.io/badge/📋-요구사항_정의서-1363DF?logoColor=white)](#-요구사항-정의서) 
+[![요구사항 정의서](https://img.shields.io/badge/📋-요구사항-1363DF?logoColor=white)](#-요구사항-정의서) 
 [![ERD](https://img.shields.io/badge/🔗-ERD-47B5FF?logoColor=white)](#-erd) 
 [![API 명세서](https://img.shields.io/badge/📜-API_명세서-9384D1?logoColor=white)](#-api-명세서) 
 [![아키텍처](https://img.shields.io/badge/🌐-아키텍처-5C2E7E?logoColor=white)](#-아키텍처)
