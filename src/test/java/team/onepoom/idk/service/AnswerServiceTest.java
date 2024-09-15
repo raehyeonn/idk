@@ -24,6 +24,7 @@ import team.onepoom.idk.common.exception.AnswerForbiddenException;
 import team.onepoom.idk.common.exception.AnswerNotFoundException;
 import team.onepoom.idk.common.exception.ForbiddenException;
 import team.onepoom.idk.common.exception.QuestionNotFoundException;
+import team.onepoom.idk.common.exception.SelectedAnswerForbiddenException;
 import team.onepoom.idk.common.exception.SelectionConflictException;
 import team.onepoom.idk.common.exception.UserNotFoundException;
 import team.onepoom.idk.domain.Provider;
@@ -149,6 +150,17 @@ class AnswerServiceTest {
         assertThatThrownBy(() -> answerService.modify(provider, 1L, request))
             .isInstanceOf(AnswerForbiddenException.class)
             .hasMessageContaining(String.valueOf(provider.id()));
+    }
+
+    @Test
+    void modify_는_이미_채택된_답변일_시_SelectedAnswerForbiddenException을_던진다() {
+        //given
+        ModifyAnswerRequest request = new ModifyAnswerRequest("Modified Answer");
+        when(answerRepository.findById(1L)).thenReturn(Optional.of(answer));
+        when(answer.isSelected()).thenReturn(true);
+        //when & then
+        assertThatThrownBy(() -> answerService.modify(provider, 1L, request))
+            .isInstanceOf(SelectedAnswerForbiddenException.class);
     }
 
     @Test
