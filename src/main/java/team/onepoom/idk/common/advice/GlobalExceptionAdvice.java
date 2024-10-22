@@ -51,7 +51,8 @@ public class GlobalExceptionAdvice {
     }
 
     @ExceptionHandler(AuthorizationDeniedException.class)
-    public ResponseEntity<ErrorResponse> handleAuthorizationDeniedException(AuthorizationDeniedException e, WebRequest request) {
+    public ResponseEntity<ErrorResponse> handleAuthorizationDeniedException(
+        AuthorizationDeniedException e, WebRequest request) {
         String error = "접근 권한이 없습니다.";
         ErrorResponse errorResponse = ErrorResponse.of(HttpStatus.UNAUTHORIZED, error);
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(errorResponse);
