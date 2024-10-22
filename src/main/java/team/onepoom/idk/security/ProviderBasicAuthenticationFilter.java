@@ -10,8 +10,6 @@ import org.springframework.security.web.authentication.www.BasicAuthenticationFi
 import team.onepoom.idk.domain.user.User;
 
 class ProviderBasicAuthenticationFilter extends BasicAuthenticationFilter {
-
-
     public ProviderBasicAuthenticationFilter(
         AuthenticationManager authenticationManager) {
         super(authenticationManager);
