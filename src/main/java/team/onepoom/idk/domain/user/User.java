@@ -93,16 +93,12 @@ public class User extends BaseEntity implements UserDetails {
     }
 
     private void addRole(Role role) {
-        // if(hasRole(role)) throw new UserRoleConflictException(role);
-        // this.roles.add(new UserRole(this, role));
-
         if (!hasRole(role)) {
             this.roles.add(new UserRole(this, role));
         }
     }
 
     private void removeRole(Role role) {
-        // if(!hasRole(role)) throw new UserRoleNotFoundException(role);
         this.roles.removeIf(userRole -> userRole.toRole() == role);
     }
 
