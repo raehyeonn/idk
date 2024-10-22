@@ -22,6 +22,7 @@ import team.onepoom.idk.domain.user.User;
 @Getter
 @AllArgsConstructor
 public class Notice extends BaseEntity {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

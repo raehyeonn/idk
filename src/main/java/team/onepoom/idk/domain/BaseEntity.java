@@ -10,6 +10,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 @MappedSuperclass
 @Getter
 public abstract class BaseEntity {
+
     @CreationTimestamp(source = SourceType.DB)
     private ZonedDateTime createdAt;
     @UpdateTimestamp(source = SourceType.DB)
