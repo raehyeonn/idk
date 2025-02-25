@@ -2,17 +2,34 @@
 import router from "@/router";
 import {computed, ref, watch} from "vue";
 import {useRoute} from "vue-router";
+import {jwtDecode} from "jwt-decode";
+import axios from "axios";
 
 const route = useRoute();
 const search = ref("");
-const isAuthenticated = ref(!!sessionStorage.getItem('authHeader'));
+const isAuthenticated = ref(localStorage.getItem('Authorization'));
 
-const userRoles = computed(() => {
-  const rolesString = sessionStorage.getItem('roles');
-  return rolesString ? rolesString.split(' ') : [];
+function decodeJwtToken(token) {
+    try {
+        return jwtDecode(token);
+    } catch (error) {
+        console.error("유효하지 않은 토큰입니다.", error);
+        return null;
+    }
+}
+
+const role = computed(() => {
+    const token = localStorage.getItem('Authorization');
+    const decodedToken = decodeJwtToken(token);
+
+    if(decodedToken && decodedToken.authorities) {
+        return decodedToken.authorities;
+    }
+
+    return [];
 });
 
-const isAdmin = computed(() => userRoles.value.includes('ADMIN'));
+const isAdmin = computed(() => role.value.includes('ADMIN'));
 
 const goHome = function () {
   router.push({name: 'Home', query: {}}); // 쿼리 파라미터 제거
@@ -42,13 +59,18 @@ const goQuestions = function () {
   }
 }
 
-const logout = function () {
-    sessionStorage.removeItem('authHeader');
-    sessionStorage.removeItem('userId');
-    sessionStorage.setItem('roles', 'ANONYMOUS');
+const logout = async function () {
+
+    await axios.post('/api/auth/logout');
+
+    localStorage.removeItem('Authorization');
+    document.cookie = "refresh_token=; expires=Thu, 01 Jan 1970 00:00:00 GMT";
+
     isAuthenticated.value = false;
+
     router.push('/');
     location.reload();
+
 }
 
 watch(() => route.query.search, (newSearch) => {
@@ -90,9 +112,11 @@ watch(() => route.query.search, (newSearch) => {
 .header-left {
     display: flex;
     align-items: center;
-    width: 850px;
+    width: 65%;
     margin-right: 20px;
 }
+
+
 
 
 .header-left a{
@@ -121,7 +145,7 @@ h1 {
 .header-left input {
     max-width: 525px;
     width: 100%;
-    height: 45px;
+    height: 40px;
     border: 3px solid #333A73;
     border-radius: 20px;
     padding-left: 50px;
@@ -137,33 +161,34 @@ h1 {
 }
 
 .header-right {
+    width: 30%;
     display: flex;
     flex: 1;
     justify-content: end;
 }
 
 .go-signup-button {
-    width: 120px;
-    height: 45px;
+    width: 100px;
+    height: 40px;
     border-radius: 50px;
     border: 1px solid #333A73;
     box-shadow: 0 0 5px #000000;
     background-color: #333A73;
     color: #FFFFFF;
     font-family: 'Nexon Medium', sans-serif;
-    font-size: 16px;
+    font-size: 15px;
 }
 
 .go-login-button {
-    width: 120px;
-    height: 45px;
+    width: 80px;
+    height: 40px;
     border-radius: 50px;
     border: 1px solid #FFFFFF;
     box-shadow: 0 0 5px #000000;
     background-color: #FFFFFF;
     color: #000000;
     font-family: 'Nexon Medium', sans-serif;
-    font-size: 16px;
+    font-size: 15px;
     margin-left: 20px;
 }
 @media (max-width: 1024px) {

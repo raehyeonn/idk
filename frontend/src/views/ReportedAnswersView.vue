@@ -90,7 +90,7 @@ onMounted(() => {
             </div>
             <div class="report-bottom">
               <p class="reported-contents">신고 대상</p>
-              <p class="answer-content">{{ reportedAnswer.writer.nickname }}</p>
+              <p class="answer-content">{{ reportedAnswer.writer }}</p>
             </div>
             <div class="action-buttons">
               <button @click.stop="handleReportedAnswers(reportedAnswer.answerReportId)"

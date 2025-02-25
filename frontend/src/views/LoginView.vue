@@ -3,7 +3,7 @@ import router from "@/router";
 import {onMounted, ref} from "vue";
 import axios from "axios";
 
-const username = ref("");
+const email = ref("");
 const password = ref("");
 
 const goSignup = function () {
@@ -16,18 +16,19 @@ const goHome = function () {
 
 const login = async function () {
     try {
-        const credentials = btoa(`${username.value}:${password.value}`);
-        const authHeader = `Basic ${credentials}`;
-
-        const response = await axios.post('/api/users/login', null, {
-            headers: {
-                'Authorization': authHeader
-            }
+        const response = await axios.post('/api/auth/login', {
+          email: email.value,
+          password: password.value
         });
-        console.log('Login successful: ', response.data);
-        sessionStorage.setItem('authHeader', authHeader);
-        sessionStorage.setItem('roles', response.data.roles);
-        sessionStorage.setItem('userId', response.data.id);
+
+        const token = response.headers['authorization'];
+
+        if(token) {
+          localStorage.setItem('Authorization', token);
+        } else {
+          throw new Error("token 생성 오류");
+        }
+
         await router.replace('/');
     } catch (error) {
         alert("회원정보가 올바르지 않습니다.");
@@ -64,7 +65,7 @@ onMounted(() => {
             <h2>I DON'T KNOW</h2>
         </div>
         <div class="login-form" @keyup.enter="login">
-            <input type="email" class="login-email" placeholder="이메일" v-model="username">
+            <input type="email" class="login-email" placeholder="이메일" v-model="email">
             <input type="password" class="login-password" placeholder="비밀번호" v-model="password">
             <button @click="login">로그인</button>
 

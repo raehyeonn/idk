@@ -1,6 +1,6 @@
 package team.onepoom.idk.common.exception;
 
-import team.onepoom.idk.domain.user.Role;
+import team.onepoom.idk.member.domain.Role;
 
 public class UserRoleConflictException extends ConflictException{
 

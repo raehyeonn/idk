@@ -18,7 +18,7 @@
 }
 .footer-wrap b {
     font-family: 'Gmarket Bold', sans-serif;
-    font-size: 48px;
+    font-size: 25px;
     color: #788D9F;
 }
 @media (max-width: 1024px) {

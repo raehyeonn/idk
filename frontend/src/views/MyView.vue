@@ -4,8 +4,8 @@ import {deleteMeAPI, getMeAPI, getMyAnswersAPI, getMyQuestionsAPI} from "@/api";
 import router from "@/router";
 
 const me = ref({});
-const questions = ref([]);
-const answers = ref([]);
+const questions = ref({});
+const answers = ref({});
 const page = ref(0);
 const isQuestions = ref(true);
 const isAnswers = ref(false);
@@ -28,6 +28,7 @@ const formatDate = (dateString) => {
 const goQuestions = function () {
     isQuestions.value = true;
     isAnswers.value = false;
+
     document.querySelector('.my-questions').style.color = '#000000';
     document.querySelector('.my-answers').style.color = '#C5CCD2';
 };
@@ -35,6 +36,7 @@ const goQuestions = function () {
 const goAnswers = function () {
     isQuestions.value = false;
     isAnswers.value = true;
+
     document.querySelector('.my-answers').style.color = '#000000';
     document.querySelector('.my-questions').style.color = '#C5CCD2';
 };
@@ -68,14 +70,11 @@ const getMyAnswers = async function () {
 const confirmDeleteAccount = async () => {
   if (confirm("정말로 탈퇴하시겠습니까? 이 작업은 취소할 수 없습니다.")) {
     try {
-      await deleteMeAPI(); // API 호출
-      // 로그아웃 처리
-      sessionStorage.removeItem('authHeader');
-      sessionStorage.removeItem('userId');
-      sessionStorage.setItem('roles', 'ANONYMOUS');
-      // 홈페이지로 리다이렉트
-      await router.push('/')
-      location.reload();
+        await deleteMeAPI();
+        localStorage.removeItem('Authorization');
+        document.cookie = "refresh_token=; expires=Thu, 01 Jan 1970 00:00:00 GMT";
+        router.push('/');
+        location.reload();
     } catch (error) {
       console.error("계정 삭제 실패:", error);
       alert("계정 삭제에 실패했습니다. 다시 시도해주세요.");
@@ -95,7 +94,7 @@ onMounted(async () => {
     await getMe();
     await getMyQuestions();
     await getMyAnswers();
-})
+});
 </script>
 
 <template>
@@ -119,9 +118,9 @@ onMounted(async () => {
 
         </div>
 
-        <ul>
-          <li class="my-questions" @click="goQuestions">나의 질문</li>
-          <li class="my-answers" @click="goAnswers">나의 답변</li>
+        <ul class = "menu">
+          <li class="my-questions" @click="goQuestions">내가 작성한 질문</li>
+          <li class="my-answers" @click="goAnswers">내가 작성한 답변</li>
         </ul>
       </div>
 
@@ -130,29 +129,29 @@ onMounted(async () => {
 
 
     <div class="my-page-right" v-show="isQuestions">
-      <p class="my-question-list">나의 질문 목록({{questions.totalElements}})</p>
+        <h2 class="my-question-list">나의 질문 목록({{questions.totalElements}})</h2>
 
-      <ul class="question-list" v-for="question in questions.content" :key="question.id">
-        <li>
-          <div class="question-wrap" @click="goQuestion(question.id)">
-            <div class="question-information-top">
-                <b class="move">{{question.title}}</b>
-            </div>
-            <div class="question-information-bottom">
-                <span>{{ formatDate(question.createdAt) }} | 조회수 {{ question.views }}</span>
-              <span>{{ question.answerCount }}개의 답변</span>
-            </div>
-          </div>
-        </li>
-      </ul>
-
+        <ul v-for="question in questions.content" :key="question.id">
+            <li>
+                <div class="question-wrap" @click="goQuestion(question.id)">
+                    <div class="question-information-top">
+                        <b>{{question.title}}</b>
+                    </div>
+                    <div class="question-information-bottom">
+                        <span>{{ formatDate(question.createdAt) }} | 조회수 {{ question.viewCount }}</span>
+                        <span>{{ question.answerCount }}개의 답변</span>
+                    </div>
+                </div>
+            </li>
+        </ul>
     </div>
+
     <div class="my-page-right" v-show="isAnswers">
         <p class="my-question-list">나의 답변 목록({{answers.totalElements}})</p>
 
-        <ul class="answer-list" v-for="answer in answers.content" :key="answer.id">
+        <ul v-for="answer in answers.content" :key="answer.id">
             <li>
-                <div class="answer-wrap" @click="goQuestionByAnswer(answer.questionId)">
+                <div class="answer-wrap" @click="goQuestionByAnswer(answer.id)">
                     <div class="question-information">
                         <p class="answer-question">질문</p>
                         <p class="answer-question-content">{{answer.title}}</p>
@@ -160,14 +159,13 @@ onMounted(async () => {
                     <div class="answer-information">
                         <div class="answer-information-left">
                             <p class="answer">나의 답변</p>
-                            <p class="answer-content">{{answer.myAnswer.content}}</p>
+                            <p class="answer-content">{{answer.answerDetail.content}}</p>
                         </div>
-                        <div class="answer-selected" v-if="answer.myAnswer.isSelected"><span>채택</span></div>
+                        <div class="answer-selected" v-if="answer.answerDetail.selected"><span>채택</span></div>
                     </div>
                 </div>
             </li>
         </ul>
-
     </div>
 </div>
 </template>
@@ -189,17 +187,17 @@ onMounted(async () => {
 
 .my-nickname {
   font-family: 'Nexon Bold', sans-serif;
-  font-size: 40px;
+  font-size: 15px;
+ text-align: center;
+    border-bottom: 1px solid #C5CCD2;
+    padding-bottom: 15px;
 }
 
 .my-count {
   display: flex;
   width: 100%;
-
-  border-top: 1px solid #C5CCD2;
   border-bottom: 1px solid #C5CCD2;
 
-  margin: 30px 0 30px 0;
   padding: 15px 0 15px 0;
 }
 
@@ -209,33 +207,36 @@ onMounted(async () => {
 
 .count-questions, .count-answers {
   font-family: 'Nexon Medium', sans-serif;
-  font-size: 20px;
+  font-size: 15px;
   margin-bottom: 10px;
 }
 
 .count {
   font-family: 'Nexon Bold', sans-serif;
-  font-size: 20px;
+  font-size: 15px;
+}
+
+.menu {
+    padding-top: 15px
 }
 
 .my-questions {
-  cursor: pointer;
+    cursor: pointer;
+    list-style-position: inside;
 
-  margin-bottom: 15px;
-  list-style-position: inside;
+    margin-bottom: 15px;
 
-  font-family: 'Nexon Medium', sans-serif;
-  font-size: 20px;
+    font-family: 'Nexon Medium', sans-serif;
+    font-size: 15px;
 }
 
 .my-answers {
-  cursor: pointer;
+    cursor: pointer;
+    list-style-position: inside;
 
-  list-style-position: inside;
-
-  font-family: 'Nexon Medium', sans-serif;
-  font-size: 20px;
-  color: #C5CCD2;
+    font-family: 'Nexon Medium', sans-serif;
+    font-size: 15px;
+    color: #C5CCD2;
 }
 
 .my-page-right {
@@ -243,30 +244,31 @@ onMounted(async () => {
   padding-left: 15px;
 }
 
-.my-question-list {
-  margin-bottom: 15px;
-  padding: 0 15px 30px 15px;
-  border-bottom: 3px solid #000000;
-
-  font-family: 'Nexon Bold', sans-serif;
-  font-size: 40px;
+.my-page-right ul {
+    list-style-type: none;
+    padding: 15px;
+    border: 1px solid #C5CCD2;
+    border-radius: 5px;
+    margin-bottom: 15px;
 }
 
-.question-list {
-  padding: 0 15px;
-  list-style: none;
-  border-bottom: 1px solid #C5CCD2;
-  margin-bottom: 15px;
+.my-question-list {
+    padding-bottom: 15px;
+
+    font-family: 'Nexon Bold', sans-serif;
+    font-size: 30px;
 }
 
 .question-list li {
-  margin-bottom: 15px;
+    list-style-type: none;
+    margin-bottom: 15px;
 }
 
 .question-information-top {
   display: flex;
   justify-content: start;
-  margin-bottom: 10px;
+
+  padding-bottom: 7px;
 }
 
 .question-information-bottom {
@@ -274,19 +276,21 @@ onMounted(async () => {
   justify-content: space-between;
 }
 
-.question-information-top p {
-  font-family: 'Nexon Light', sans-serif;
-  font-size: 15px;
+.question-information-top b {
+    cursor: pointer;
+
+    font-family: 'Nexon Light', sans-serif;
+    font-size: 15px;
 }
 
-.question-information-bottom p {
-  font-family: 'Nexon Medium', sans-serif;
-  font-size: 20px;
+.question-information-bottom span {
+    cursor: pointer;
+
+    font-family: 'Nexon Medium', sans-serif;
+    font-size: 10px;
 }
 
-.move {
-  cursor: pointer;
-}
+
 
 .answer-list {
     list-style: none;
@@ -300,22 +304,11 @@ onMounted(async () => {
 }
 
 .question-information {
-    margin-bottom: 20px;
+    margin-bottom: 15px;
 }
 
-.question-information-top b {
-    margin-bottom: 10px;
 
-    font-family: 'Nexon Medium', sans-serif;
-    font-size: 15px;
-}
 
-.question-information-bottom span {
-    cursor: pointer;
-
-    font-family: 'Nexon Light', sans-serif;
-    font-size: 15px;
-}
 
 .answer-information {
     display: flex;
@@ -324,16 +317,16 @@ onMounted(async () => {
 }
 
 .answer, .answer-question {
-    margin-bottom: 10px;
+    padding-bottom: 7px;
 
     font-family: 'Nexon Light', sans-serif;
-    font-size: 15px;
+    font-size: 10px;
 }
 
 .answer-content, .answer-question-content {
     cursor: pointer;
     font-family: 'Nexon Medium', sans-serif;
-    font-size: 20px;
+    font-size: 15px;
 }
 
 .answer-selected {
@@ -341,15 +334,15 @@ onMounted(async () => {
     justify-content: center;
     align-items: center;
 
-    width: 70px;
-    height: 45px;
+    width: 50px;
+    height: 30px;
     border-radius: 50px;
     background-color: #FBA834;
 }
 
 .answer-selected span {
     font-family: 'Nexon Medium', sans-serif;
-    font-size: 20px;
+    font-size: 15px;
 }
 .question-wrap {
     cursor: pointer;
@@ -359,18 +352,19 @@ onMounted(async () => {
 }
 
 .delete-account {
-  margin-top: auto;
-  padding: 5px 20px;
-  border-radius: 5px;
-  font-family: 'Nexon Medium', sans-serif;
-  font-size: 16px;
-  cursor: pointer;
-  transition: background-color 0.3s;
-  align-self: end;
-  border: 1px solid #bd200b;
-  box-shadow: 0 0 1px #000000;
-  background-color: #bd200b;
-  color: #FFFFFF;
-  width: 35%;
+    cursor: pointer;
+    align-self: end;
+
+    width: 80px;
+    height: 40px;
+    color: #FFFFFF;
+    background-color: #bd200b;
+    transition: background-color 0.3s;
+    border: none;
+    border-radius: 5px;
+    box-shadow: 0 0 1px #000000;
+
+    font-family: 'Nexon Medium', sans-serif;
+    font-size: 15px;
 }
 </style>

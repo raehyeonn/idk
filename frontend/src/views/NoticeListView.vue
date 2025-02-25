@@ -29,15 +29,17 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="notice-wrap">
+  <div class="wrap">
     <h2>공지사항</h2>
     <div class="notice-top">
       <ul v-if="notices.length">
         <li v-for="notice in notices" :key="notice.id" @click="goNotice(notice.id)">
-          <p class="notice-title">{{ notice.title }}</p>
-          <div class="notice-info">
-            {{notice.writer.nickname}}  |  {{formatDate(notice.createdAt)}}
-          </div>
+          <p class="notice-title">
+              {{ notice.title }}
+          </p>
+          <span class="notice-info">
+            {{notice.writer.nickname}}&ensp;|&ensp;{{formatDate(notice.createdAt)}}
+          </span>
         </li>
       </ul>
       <p class="notice-title" v-else>공지사항이 없습니다.</p>
@@ -47,21 +49,21 @@ onMounted(() => {
 
 <style scoped>
 
-.notice-wrap {
-  width: 100%;
-  margin-top: 100px;
+.wrap {
+    width: 100%;
 }
 
 h2 {
-  font-family: 'Gmarket Bold', sans-serif;
-  font-size: 47px;
-  color: #000000;
-  margin-bottom: 35px;
-  padding-left: 35px;
+    padding: 15px;
+    border-bottom: 3px solid #000000;
+
+    font-family: 'Gmarket Bold', sans-serif;
+    font-size: 30px;
+    color: #000000;
 }
+
 .notice-top {
-  display: flex;
-  border-top: 3px solid #000000;
+    display: flex;
 }
 
 ul {
@@ -75,21 +77,18 @@ li {
   width: 100%;
   list-style-type: none;
   border-bottom: 1px solid #000000;
-  padding-block: 20px;
+  padding: 15px;
   cursor: pointer;
 }
 
 .notice-title {
   font-family: "NEXON Lv1 Gothic OTF", sans-serif;
-  font-size: 24px;
-  margin-bottom: 10px;
-  margin-left: 10px;
+  font-size: 15px;
 }
 
 .notice-info {
   font-family: "Gmarket Light", sans-serif;
-  font-size: 15px;
-  margin-left: 10px;
+  font-size: 10px;
 }
 
 </style>

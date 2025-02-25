@@ -1,4 +1,5 @@
 <script setup>
+import { jwtDecode } from 'jwt-decode';
 import router from "@/router";
 import {getNoticesTop5API, getQuestionsAPI} from "@/api";
 import {computed, onMounted, ref, watch} from "vue";
@@ -9,14 +10,32 @@ const questions = ref([]);
 const notices = ref([]);
 let isLoading = ref(false);
 
-const userRoles = computed(() => {
-    const rolesString = sessionStorage.getItem('roles');
-    return rolesString ? rolesString.split(' ') : [];
+function decodeJwtToken(token) {
+  try {
+    return jwtDecode(token);
+  } catch (error) {
+    console.error("유효하지 않은 토큰입니다.", error);
+    return null;
+  }
+}
+
+const role = computed(() => {
+    const token = localStorage.getItem('Authorization');
+    const decodedToken = decodeJwtToken(token);
+
+    if(decodedToken && decodedToken.authorities) {
+        return decodedToken.authorities;
+    }
+
+    return ['GUEST'];
 });
 
-const isAdmin = computed(() => userRoles.value.includes('ADMIN'));
-const isAnonymous = computed(() => userRoles.value.includes('ANONYMOUS'));
-const isSuspend = computed(() => userRoles.value.includes('SUSPEND'));
+const isAdmin = computed(() => role.value.includes('ADMIN'));
+const isMember = computed(() => role.value.includes('MEMBER'));
+const isUnverified = computed(() => role.value.includes('UNVERIFIED'));
+const isSuspended = computed(() => role.value.includes('SUSPENDED'));
+const isDeleted = computed(() => role.value.includes('DELETED'));
+const isGuest = computed(() => role.value.includes('GUEST'));
 
 // 날짜 yyyy-MM-dd 형식 출력
 const formatDate = (dateString) => {
@@ -29,7 +48,7 @@ const goQuestion = function (id) {
 }
 
 const goQuestionWrite = function () {
-    if (isAnonymous.value) {
+    if (!isMember.value) {
         alert("로그인이 필요한 서비스입니다.");
         router.push(`/login`);
     } else {
@@ -59,6 +78,8 @@ const getQuestions = async function (query = '', page = 0) {
       page: page
     }
     const response = await getQuestionsAPI(getQuestionsRequest);
+    console.log(response);  // 응답 전체를 찍어보세요
+      console.log(response.data.content);  // 실제 content가 제대로 있는지 확인
     questions.value = response.data.content;
     totalPages.value = response.data.totalPages;
     currentPage.value = page;
@@ -104,42 +125,39 @@ watch(() => route.query.search, (newTitle) => {
 
     <div class="wrap">
 
-        <div class="question">
+        <section class="question">
             <div class="question-write">
-                <span>지금 이 순간 게시글</span>
-                <a class="move" @click="goQuestionWrite" v-if="!isAdmin && !isSuspend">질문하러 가기 ></a>
+                <span>
+                    지금 이 순간 게시글
+                </span>
+                <a class="move" @click="goQuestionWrite" v-if="!isGuest && !isAdmin && !isUnverified && !isSuspended && !isDeleted">
+                    질문하러 가기 >
+                </a>
             </div>
 
             <ul class="question-list" v-for="question in questions" :key="question.id">
                 <li>
                     <div class="question-wrap" @click="goQuestion(question.id)">
                         <div class="question-writer">
-                            <span>{{ question.writer.nickName }}</span>
-                            <span>{{
-                                    formatDate(question.createdAt)
-                                }} | 조회수 {{ question.views }}</span>
+                            <span>{{ question.writer.nickname }}</span>
+                            <span>{{ formatDate(question.createdAt) }} | 조회수 {{ question.viewCount }}</span>
                         </div>
                         <div class="question-title" >
                             <span class="move question-title1">{{ question.title }}</span>
                             <span class="question-title2">{{ question.answerCount }}개의 답변</span>
                         </div>
-                        <hr>
                     </div>
                 </li>
             </ul>
-          <div class="pagination">
-            <button
-                v-for="page in pageNumbers"
-                :key="page"
-                @click="changePage(page)"
-                :class="{ active: currentPage === page }"
-            >
-              {{ page + 1 }}
-            </button>
-          </div>
-        </div>
 
-        <div class="notice">
+            <div class="pagination">
+                <button v-for="page in pageNumbers" :key="page" @click="changePage(page)" :class="{ active: currentPage === page }">
+                    {{ page + 1 }}
+                </button>
+            </div>
+        </section>
+
+        <section class="notice">
             <div class="notice-more">
                 <p>공지사항</p>
                 <a class="move" @click="goNoticeList()">더보기 ></a>
@@ -151,13 +169,16 @@ watch(() => route.query.search, (newTitle) => {
                         <img src="@/assets/yellow-dot.svg" alt="" class="dot">
                         <div class="go-notice" @click="goNoticeDetail(notice.id)">
                             <p class="notice-title" >
-                                {{ notice.title }}</p>
-                            <p class="notice-date">{{ formatDate(notice.createdAt) }}</p>
+                                {{ notice.title }}
+                            </p>
+                            <p class="notice-date">
+                                {{ formatDate(notice.createdAt) }}
+                            </p>
                         </div>
                     </div>
                 </li>
             </ul>
-        </div>
+        </section>
 
     </div>
 
@@ -190,33 +211,34 @@ watch(() => route.query.search, (newTitle) => {
     justify-content: space-between;
     align-items: center;
 
-    height: 50px;
+    height: 35px;
     margin-bottom: 15px;
     padding: 0 15px;
     background-color: #333A73;
     border: none;
-    border-radius: 15px;
+    border-radius: 5px;
 
     font-family: 'Nexon Bold', sans-serif;
     color: #FFFFFF;
-    font-size: 20px;
+    font-size: 15px;
 }
 
 .question-list {
     list-style: none;
     margin-bottom: 15px;
+    border-bottom: 1px solid #C5CCD2;
 }
 
 .question-writer {
     display: flex;
     justify-content: space-between;
 
-    padding: 0 15px 10px 15px;
+    padding: 0 15px 7px 15px;
 }
 
 .question-writer span {
     font-family: 'Nexon Light', sans-serif;
-    font-size: 15px;
+    font-size: 10px;
 }
 
 .question-title {
@@ -227,7 +249,7 @@ watch(() => route.query.search, (newTitle) => {
 
 .question-title span {
     font-family: 'Nexon Medium', sans-serif;
-    font-size: 20px;
+    font-size: 15px;
 }
 
 .notice-more {
@@ -235,16 +257,16 @@ watch(() => route.query.search, (newTitle) => {
     justify-content: space-between;
     align-items: center;
 
-    height: 50px;
+    height: 35px;
     margin-bottom: 15px;
     padding: 0 15px;
     background-color: #FBA834;
     border: none;
-    border-radius: 15px;
+    border-radius: 5px;
 
     font-family: 'Nexon Bold', sans-serif;
     color: #000000;
-    font-size: 20px;
+    font-size: 15px;
 }
 
 .notice-list {
@@ -260,19 +282,20 @@ watch(() => route.query.search, (newTitle) => {
 .dot {
     width: 10px;
     height: 10px;
-    margin: 10px 10px 0 0;
+    margin-top: 4px;
+    margin-right: 7px;
 }
 
 .notice-title {
     cursor: pointer;
-    margin: 0 0 10px 0;
+    padding-bottom: 7px;
     font-family: 'Nexon Medium', sans-serif;
-    font-size: 20px;
+    font-size: 15px;
 }
 
 .notice-date {
     font-family: 'Nexon Light', sans-serif;
-    font-size: 15px;
+    font-size: 10px;
 }
 
 .go-notice {

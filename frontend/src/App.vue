@@ -75,7 +75,7 @@ button {
     display: flex;
     justify-content: center;
     width: 100vw;
-    height: 100px;
+    height: 50px;
     flex-shrink: 0;
     background-color: #C5CCD2;
     margin-top: 100px;

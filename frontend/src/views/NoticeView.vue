@@ -1,16 +1,32 @@
 <script setup>
-import {deleteNoticeAPI, getNoticeAPI} from "@/api";
+import { deleteNoticeAPI, getNoticeAPI } from "@/api";
 import {useRoute} from "vue-router";
 import {computed, onMounted, ref} from "vue";
 import router from "@/router";
+import {jwtDecode} from "jwt-decode";
 
+function decodeJwtToken(token) {
+    try {
+        return jwtDecode(token);
+    } catch (error) {
+        console.error("유효하지 않은 토큰입니다.", error);
+        return null;
+    }
+}
 
-const userRoles = computed(() => {
-  const rolesString = sessionStorage.getItem('roles');
-  return rolesString ? rolesString.split(' ') : [];
+const currentMemberRole = computed(() => {
+    const token = localStorage.getItem('Authorization');
+    const decodedToken = decodeJwtToken(token);
+
+    if(decodedToken && decodedToken.authorities) {
+        return decodedToken.authorities;
+    }
+
+    return ['GUEST'];
 });
 
-const isAdmin = computed(() => userRoles.value.includes('ADMIN'));
+
+const isAdmin = computed(() => currentMemberRole.value.includes('ADMIN'));
 
 const notice = ref(null);
 
@@ -43,24 +59,21 @@ const formatCreatedAt = computed(() => {
     const createdAt = new Date(notice.value.createdAt);
     return createdAt.toISOString().split('T')[0];
 });
+
 onMounted(async () => {
     notice.value = await getNotice();
-
-
 })
 </script>
 
 <template>
     <div class="notice-wrap" v-if="notice">
-        <div>
-            <h2>공지사항</h2>
-        </div>
+        <h2>공지사항</h2>
         <div class="notice-top">
             <img src="@/assets/N.png" alt="">
             <div class="notice-text">
                 <span class="notice-title">{{notice.title}}</span>
                 <div>
-                    <span class="notice-info">{{notice.writer.nickname}} | {{formatCreatedAt}} | 조회수 {{notice.views}}</span>
+                    <span class="notice-info">{{notice.writer.nickname}}&ensp;|&ensp;{{formatCreatedAt}}&ensp;|&ensp;조회수 {{notice.viewCount}}</span>
                 </div>
             </div>
         </div>
@@ -68,8 +81,8 @@ onMounted(async () => {
             <pre>{{notice.content}}</pre>
         </div>
         <div class="notice-button" v-if="isAdmin">
-            <button class="go-edit-button" @click="goEditNotice">수정하기</button>
-            <button class="delete-button" @click="deleteNotice">삭제하기</button>
+            <button class="go-edit-button" @click="goEditNotice">수정</button>
+            <button class="delete-button" @click="deleteNotice">삭제</button>
         </div>
     </div>
 </template>
@@ -77,45 +90,48 @@ onMounted(async () => {
 <style scoped>
 .notice-wrap {
     width: 100%;
-    margin-top: 100px;
 }
+
 h2 {
+    padding: 15px;
+    border-bottom: 3px solid #000000;
+
     font-family: 'Gmarket Bold', sans-serif;
-    font-size: 47px;
+    font-size: 30px;
     color: #000000;
-    margin-bottom: 35px;
-    padding-left: 35px;
 }
+
 .notice-top {
     display: flex;
-    border-top: 3px solid #000000;
-    border-bottom: 1px solid #000000;
-    padding: 35px;
+    border-bottom: 1px dashed #000000;
+    padding: 15px;
 }
+
 .notice-title {
     font-family: 'Nexon Medium', sans-serif;
-    font-size: 45px;
+    font-size: 25px;
     color: #000000;
 }
 .notice-info {
     font-family: 'Gmarket Regular', sans-serif;
-    font-size: 20px;
+    font-size: 10px;
     color: #000000;
 }
 .notice-text {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    gap: 20px;
+
 }
 img {
-    margin-right: 30px;
+    width: 50px;
+    height: 50px;
+    margin-right: 15px;
 }
 pre {
-    margin-top: 60px;
-    padding-left: 35px;
+    padding: 15px;
     font-family: 'Nexon Medium', sans-serif;
-    font-size: 25px;
+    font-size: 15px;
     color: #000000;
     min-height: 400px;
     white-space: pre-wrap;
@@ -123,28 +139,29 @@ pre {
 .notice-button {
     display: flex;
     justify-content: end;
+    padding-right: 15px;
 }
 .go-edit-button {
-    width: 160px;
-    height: 60px;
+    width: 50px;
+    height: 30px;
     border-radius: 50px;
     border: 1px solid #FFFFFF;
     box-shadow: 0 0 5px #000000;
     background-color: #FFFFFF;
     color: #000000;
     font-family: 'Nexon Medium', sans-serif;
-    font-size: 25px;
-    margin-right: 25px;
+    font-size: 15px;
+    margin-right: 15px;
 }
 .delete-button {
-    width: 160px;
-    height: 60px;
+    width: 50px;
+    height: 30px;
     border-radius: 50px;
     border: 1px solid #333A73;
     box-shadow: 0 0 5px #000000;
     background-color: #333A73;
     color: #FFFFFF;
     font-family: 'Nexon Medium', sans-serif;
-    font-size: 25px;
+    font-size: 15px;
 }
 </style>

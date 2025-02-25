@@ -1,3 +1,4 @@
+/*
 package team.onepoom.idk.common.advice;
 
 import org.aspectj.lang.annotation.Aspect;
@@ -7,7 +8,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 import team.onepoom.idk.common.exception.UserForbiddenException;
 import team.onepoom.idk.domain.Provider;
-import team.onepoom.idk.domain.user.Role;
+import team.onepoom.idk.member.domain.Role;
 
 @Aspect
 @Component
@@ -27,3 +28,5 @@ public class SuspendDeniedAdvice {
         return null;
     }
 }
+
+*/
